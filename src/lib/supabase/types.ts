@@ -43,6 +43,7 @@ export type Database = {
           currency: string;
           invite_code: string;
           created_by: string;
+          initial_balance: number;
           created_at: string;
           updated_at: string;
         };
@@ -52,6 +53,7 @@ export type Database = {
           currency: string;
           invite_code: string;
           created_by: string;
+          initial_balance?: number;
           created_at?: string;
           updated_at?: string;
         };
@@ -61,6 +63,7 @@ export type Database = {
           currency?: string;
           invite_code?: string;
           created_by?: string;
+          initial_balance?: number;
           created_at?: string;
           updated_at?: string;
         };

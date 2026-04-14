@@ -13,8 +13,11 @@ export type TopCategory = {
 export type MonthData = {
   year: number;
   month: number;
+  income: number;
   spent: number;
   budgeted: number;
+  opening_balance: number;
+  closing_balance: number;
   status: MonthStatus;
   topCategories: TopCategory[];
 };
@@ -22,6 +25,8 @@ export type MonthData = {
 export type HistoricalData = {
   lifetimeSavings: number;
   efficiencyScore: number;
+  currentBalance: number;
+  initialBalance: number;
   months: MonthData[];
   currency: string;
   error?: string;
@@ -45,6 +50,8 @@ export async function getHistoricalData(params: {
     return {
       lifetimeSavings: 0,
       efficiencyScore: 0,
+      currentBalance: 0,
+      initialBalance: 0,
       months: [],
       currency: "USD",
       error: result.error,
@@ -54,16 +61,17 @@ export async function getHistoricalData(params: {
   const { budgetId } = result;
   const supabase = await createClient();
 
-  // Get budget currency
+  // Get budget currency and initial_balance
   const { data: budget } = await supabase
     .from("budgets")
-    .select("currency")
+    .select("currency, initial_balance")
     .eq("id", budgetId)
     .single();
 
   const currency = budget?.currency ?? "USD";
+  const initialBalance = Number(budget?.initial_balance ?? 0);
 
-  // Get ALL transactions for this budget (lifetime savings calculation)
+  // Get ALL transactions for this budget (lifetime savings + rolling balance)
   const { data: allTransactions, error: txError } = await supabase
     .from("transactions")
     .select("type, amount, date")
@@ -73,6 +81,8 @@ export async function getHistoricalData(params: {
     return {
       lifetimeSavings: 0,
       efficiencyScore: 0,
+      currentBalance: initialBalance,
+      initialBalance,
       months: [],
       currency,
       error: txError?.message ?? "Failed to load transactions.",
@@ -108,30 +118,35 @@ export async function getHistoricalData(params: {
     0
   );
 
-  // Group all transactions by year-month for efficiency score
-  const monthlyData = new Map<
+  // Build ALL monthly data from all transactions (for rolling balance)
+  const allMonthlyData = new Map<
     string,
-    { spent: number; year: number; month: number }
+    { spent: number; income: number; year: number; month: number }
   >();
 
   for (const tx of allTransactions) {
-    if (tx.type !== "expense") continue;
     const parts = tx.date.split("-");
     const y = parseInt(parts[0], 10);
     const m = parseInt(parts[1], 10);
     const key = `${y}-${m}`;
-    const existing = monthlyData.get(key);
+    const existing = allMonthlyData.get(key);
     if (existing) {
-      existing.spent += Number(tx.amount);
+      if (tx.type === "expense") existing.spent += Number(tx.amount);
+      if (tx.type === "income") existing.income += Number(tx.amount);
     } else {
-      monthlyData.set(key, { spent: Number(tx.amount), year: y, month: m });
+      allMonthlyData.set(key, {
+        spent: tx.type === "expense" ? Number(tx.amount) : 0,
+        income: tx.type === "income" ? Number(tx.amount) : 0,
+        year: y,
+        month: m,
+      });
     }
   }
 
   // Calculate efficiency score: months under budget / total months
-  const totalMonths = monthlyData.size;
+  const totalMonths = allMonthlyData.size;
   let monthsUnderBudget = 0;
-  for (const data of monthlyData.values()) {
+  for (const data of allMonthlyData.values()) {
     if (data.spent <= totalMonthlyBudget) {
       monthsUnderBudget++;
     }
@@ -139,25 +154,42 @@ export async function getHistoricalData(params: {
   const efficiencyScore =
     totalMonths > 0 ? Math.round((monthsUnderBudget / totalMonths) * 100) : 0;
 
+  // Compute rolling balance across ALL months chronologically
+  const sortedAllMonths = Array.from(allMonthlyData.entries()).sort(([a], [b]) =>
+    a.localeCompare(b)
+  );
+
+  let rollingBalance = initialBalance;
+  const balanceByMonth = new Map<string, { opening: number; closing: number }>();
+
+  for (const [key, data] of sortedAllMonths) {
+    const opening = rollingBalance;
+    const closing = opening + data.income - data.spent;
+    balanceByMonth.set(key, { opening, closing });
+    rollingBalance = closing;
+  }
+
+  const currentBalance = rollingBalance;
+
   // Fetch year's transactions with category_id for monthly breakdown
   const startDate = `${params.year}-01-01`;
   const endDate = `${params.year + 1}-01-01`;
 
   const { data: yearTxDetailed } = await supabase
     .from("transactions")
-    .select("amount, date, category_id")
+    .select("amount, date, category_id, type")
     .eq("budget_id", budgetId)
-    .eq("type", "expense")
     .gte("date", startDate)
     .lt("date", endDate);
 
-  // Build proper monthly breakdown with category detail
+  // Build proper monthly breakdown with category detail (expenses only for categories)
   const detailedMonthMap = new Map<
     number,
     { spent: number; categorySpending: Map<string, number> }
   >();
 
   for (const tx of yearTxDetailed ?? []) {
+    if (tx.type !== "expense") continue;
     const m = parseInt(tx.date.split("-")[1], 10);
     const existing = detailedMonthMap.get(m);
     const amount = Number(tx.amount);
@@ -173,16 +205,32 @@ export async function getHistoricalData(params: {
     }
   }
 
+  // Also track income per month for the selected year
+  const yearIncomeByMonth = new Map<number, number>();
+  for (const tx of yearTxDetailed ?? []) {
+    if (tx.type !== "income") continue;
+    const m = parseInt(tx.date.split("-")[1], 10);
+    yearIncomeByMonth.set(m, (yearIncomeByMonth.get(m) ?? 0) + Number(tx.amount));
+  }
+
+  // Merge months that only have income (no expenses) into detailedMonthMap
+  for (const [m, income] of yearIncomeByMonth.entries()) {
+    if (!detailedMonthMap.has(m)) {
+      detailedMonthMap.set(m, { spent: 0, categorySpending: new Map() });
+    }
+  }
+
   // Build months array (reverse chronological)
   const months: MonthData[] = [];
-  // Include all months that have data for the selected year
-  const sortedMonths = Array.from(detailedMonthMap.keys()).sort(
-    (a, b) => b - a
-  );
+  const sortedMonths = Array.from(detailedMonthMap.keys()).sort((a, b) => b - a);
 
   for (const m of sortedMonths) {
     const data = detailedMonthMap.get(m);
     if (!data) continue;
+
+    const monthKey = `${params.year}-${m}`;
+    const balances = balanceByMonth.get(monthKey) ?? { opening: 0, closing: 0 };
+    const income = yearIncomeByMonth.get(m) ?? 0;
 
     // Top 3 categories by spending
     const categoryEntries = Array.from(data.categorySpending.entries())
@@ -203,8 +251,11 @@ export async function getHistoricalData(params: {
     months.push({
       year: params.year,
       month: m,
+      income,
       spent: data.spent,
       budgeted: totalMonthlyBudget,
+      opening_balance: balances.opening,
+      closing_balance: balances.closing,
       status: computeStatus(data.spent, totalMonthlyBudget),
       topCategories,
     });
@@ -213,6 +264,8 @@ export async function getHistoricalData(params: {
   return {
     lifetimeSavings,
     efficiencyScore,
+    currentBalance,
+    initialBalance,
     months,
     currency,
   };

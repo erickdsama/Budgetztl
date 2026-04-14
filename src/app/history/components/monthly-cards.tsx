@@ -124,6 +124,36 @@ function ExpandedMonthCard({
         </div>
       </div>
 
+      {/* Balance breakdown */}
+      <div className="px-10 pb-6 pointer-events-none">
+        <div className="space-y-2 rounded-2xl bg-surface-container-low p-4">
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-outline/60">Opened with</span>
+            <span className="font-medium text-on-surface">
+              {formatCurrency(month.opening_balance, currency)}
+            </span>
+          </div>
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-outline/60">+ Income</span>
+            <span className="font-medium text-primary">
+              + {formatCurrency(month.income, currency)}
+            </span>
+          </div>
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-outline/60">- Spent</span>
+            <span className="font-medium text-error">
+              - {formatCurrency(month.spent, currency)}
+            </span>
+          </div>
+          <div className="flex items-center justify-between pt-2 border-t border-outline-variant/10">
+            <span className="text-xs font-bold uppercase tracking-wider text-outline/60">Closed at</span>
+            <span className={`text-sm font-bold ${month.closing_balance >= 0 ? "text-primary" : "text-error"}`}>
+              {formatCurrency(month.closing_balance, currency)}
+            </span>
+          </div>
+        </div>
+      </div>
+
       {/* Top Categories */}
       {month.topCategories.length > 0 && (
         <div className="px-10 pb-10 pointer-events-none">

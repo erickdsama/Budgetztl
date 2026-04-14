@@ -1,13 +1,9 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getAuthSession } from "@/lib/supabase/server";
-import { getSettingsData } from "@/app/settings/actions";
 import { signOut } from "@/app/(auth)/actions";
-import { ProfileSection } from "@/app/settings/components/profile-section";
-import { BudgetSettings } from "@/app/settings/components/budget-settings";
-import { PreferencesSection } from "@/app/settings/components/preferences-section";
+import { SettingsContent } from "@/app/settings/components/settings-content";
 import { BottomNav } from "@/components/bottom-nav";
 
 export const metadata: Metadata = {
@@ -55,10 +51,8 @@ export default async function SettingsPage() {
       </header>
 
       <main className="mx-auto w-full max-w-2xl space-y-10 px-6 pt-8">
-        {/* Data-dependent sections stream in */}
-        <Suspense fallback={<SettingsDataSkeleton />}>
-          <SettingsData />
-        </Suspense>
+        {/* Data-dependent sections load client-side via SWR */}
+        <SettingsContent />
 
         {/* Account & Support — static, no data needed */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -225,87 +219,3 @@ export default async function SettingsPage() {
   );
 }
 
-// Async data component — fetches profile + budget + members
-async function SettingsData() {
-  const result = await getSettingsData();
-
-  if (!result.ok) {
-    if (result.redirect) {
-      redirect(result.redirect);
-    }
-    return (
-      <p className="text-sm text-error">{result.error}</p>
-    );
-  }
-
-  const { profile, budget, members, isOwner } = result.data;
-
-  return (
-    <>
-      {/* Profile Section */}
-      <ProfileSection
-        fullName={profile.fullName}
-        email={profile.email}
-        avatarUrl={profile.avatarUrl}
-      />
-
-      {/* Budget Settings */}
-      <section className="space-y-4">
-        <div className="flex items-end justify-between px-1">
-          <h3 className="text-lg font-bold tracking-tight text-on-surface">
-            Budget Settings
-          </h3>
-          <span className="text-[10px] font-bold uppercase tracking-widest text-secondary">
-            Shared with{" "}
-            {members
-              .filter((m) => m.userId !== profile.id)
-              .map((m) => m.fullName.split(" ")[0])
-              .join(", ") || "No partner yet"}
-          </span>
-        </div>
-        <BudgetSettings
-          budgetId={budget.id}
-          budgetName={budget.name}
-          currency={budget.currency}
-          members={members}
-          isOwner={isOwner}
-          currentUserId={profile.id}
-        />
-      </section>
-
-      {/* Preferences */}
-      <section className="space-y-4">
-        <h3 className="px-1 text-lg font-bold tracking-tight text-on-surface">
-          Preferences
-        </h3>
-        <PreferencesSection preferences={profile.preferences} />
-      </section>
-    </>
-  );
-}
-
-// Inline skeleton for Suspense fallback
-function SettingsDataSkeleton() {
-  return (
-    <div className="space-y-10">
-      {/* Profile skeleton */}
-      <div className="flex items-center gap-4">
-        <div className="h-16 w-16 rounded-full bg-surface-container animate-pulse" />
-        <div className="space-y-2">
-          <div className="h-5 w-32 rounded-full bg-surface-container animate-pulse" />
-          <div className="h-4 w-48 rounded-full bg-surface-container animate-pulse" />
-        </div>
-      </div>
-      {/* Budget settings skeleton */}
-      <div className="space-y-4">
-        <div className="h-5 w-36 rounded-full bg-surface-container animate-pulse" />
-        <div className="h-40 rounded-3xl bg-surface-container animate-pulse" />
-      </div>
-      {/* Preferences skeleton */}
-      <div className="space-y-4">
-        <div className="h-5 w-28 rounded-full bg-surface-container animate-pulse" />
-        <div className="h-32 rounded-3xl bg-surface-container animate-pulse" />
-      </div>
-    </div>
-  );
-}

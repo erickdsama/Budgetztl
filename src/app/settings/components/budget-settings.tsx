@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import {
   updateBudgetName,
+  updateInitialBalance,
   getInviteCode,
   regenerateInviteCode,
   removeMember,
@@ -14,6 +15,7 @@ type BudgetSettingsProps = {
   budgetId: string;
   budgetName: string;
   currency: string;
+  initialBalance: number;
   members: SettingsMember[];
   isOwner: boolean;
   currentUserId: string;
@@ -31,6 +33,7 @@ export function BudgetSettings({
   budgetId,
   budgetName,
   currency,
+  initialBalance,
   members,
   isOwner,
   currentUserId,
@@ -39,6 +42,12 @@ export function BudgetSettings({
   const [name, setName] = useState(budgetName);
   const [saving, setSaving] = useState(false);
   const [nameError, setNameError] = useState<string | null>(null);
+
+  const [isEditingBalance, setIsEditingBalance] = useState(false);
+  const [balanceValue, setBalanceValue] = useState(String(initialBalance));
+  const [savingBalance, setSavingBalance] = useState(false);
+  const [balanceError, setBalanceError] = useState<string | null>(null);
+  const balanceInputRef = useRef<HTMLInputElement>(null);
 
   const [inviteCode, setInviteCode] = useState<string | null>(null);
   const [showInvite, setShowInvite] = useState(false);
@@ -118,6 +127,38 @@ export function BudgetSettings({
     }
   }
 
+  async function handleSaveBalance() {
+    const amount = parseFloat(balanceValue);
+    if (isNaN(amount) || amount < 0) {
+      setBalanceError("Please enter a valid non-negative amount.");
+      return;
+    }
+    if (amount === initialBalance) {
+      setIsEditingBalance(false);
+      return;
+    }
+    setSavingBalance(true);
+    setBalanceError(null);
+    const result = await updateInitialBalance(amount);
+    setSavingBalance(false);
+    if (result.success) {
+      setIsEditingBalance(false);
+    } else {
+      setBalanceError(result.error ?? "Failed to update.");
+    }
+  }
+
+  function handleStartEditBalance() {
+    setIsEditingBalance(true);
+    setTimeout(() => balanceInputRef.current?.focus(), 0);
+  }
+
+  function handleCancelEditBalance() {
+    setBalanceValue(String(initialBalance));
+    setIsEditingBalance(false);
+    setBalanceError(null);
+  }
+
   async function handleRemoveMember(userId: string) {
     setRemovingUserId(userId);
     const result = await removeMember({ budgetId, userId });
@@ -191,6 +232,66 @@ export function BudgetSettings({
           <span className="text-xs font-bold uppercase tracking-wider">Currency</span>
         </div>
         <p className="text-lg font-semibold text-on-surface">{currency}</p>
+      </div>
+
+      {/* Initial Balance */}
+      <div className="space-y-3 rounded-3xl bg-surface-container-lowest p-6 transition-all hover:bg-surface-container">
+        <div className="flex items-center gap-3 text-primary">
+          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span className="text-xs font-bold uppercase tracking-wider">Initial Balance</span>
+        </div>
+        {isEditingBalance ? (
+          <div className="flex items-center gap-2">
+            <input
+              ref={balanceInputRef}
+              type="number"
+              min="0"
+              step="0.01"
+              value={balanceValue}
+              onChange={(e) => setBalanceValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleSaveBalance();
+                if (e.key === "Escape") handleCancelEditBalance();
+              }}
+              className="min-w-0 flex-1 rounded-xl bg-surface-container-low px-3 py-1.5 text-sm text-on-surface focus:bg-primary-container/10 focus:outline-none transition-colors"
+              disabled={savingBalance}
+            />
+            <button
+              onClick={handleSaveBalance}
+              disabled={savingBalance}
+              className="rounded-xl bg-primary px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-primary-hover disabled:opacity-50"
+            >
+              {savingBalance ? "..." : "Save"}
+            </button>
+            <button
+              onClick={handleCancelEditBalance}
+              disabled={savingBalance}
+              className="rounded-xl bg-surface-container px-3 py-1.5 text-xs font-semibold text-outline transition-colors hover:text-on-surface disabled:opacity-50"
+            >
+              Cancel
+            </button>
+          </div>
+        ) : (
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-lg font-semibold text-on-surface">
+                {currency} {initialBalance.toFixed(2)}
+              </p>
+              <p className="text-xs text-outline mt-0.5">Starting savings before this app</p>
+            </div>
+            {isOwner && (
+              <button
+                onClick={handleStartEditBalance}
+                className="text-xs font-medium text-primary transition-colors hover:text-primary-hover"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        )}
+        {balanceError && <p className="text-xs text-error">{balanceError}</p>}
       </div>
 
       {/* Shared Members — full width */}

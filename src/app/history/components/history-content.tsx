@@ -4,6 +4,7 @@ import { useHistory } from "@/lib/hooks/use-history";
 import { LifetimeMetrics } from "./lifetime-metrics";
 import { MonthlyCards } from "./monthly-cards";
 import { SpendingBarChart } from "./spending-bar-chart";
+import { MonthlyBalanceChart } from "./monthly-balance-chart";
 
 function Skeleton() {
   return (
@@ -29,10 +30,15 @@ export function HistoryContent({ year }: { year: number }) {
       <LifetimeMetrics
         lifetimeSavings={data.lifetimeSavings}
         efficiencyScore={data.efficiencyScore}
+        currentBalance={data.currentBalance}
+        initialBalance={data.initialBalance}
         currency={data.currency}
       />
       {data.months.length > 0 && (
-        <SpendingBarChart months={data.months} currency={data.currency} />
+        <>
+          <MonthlyBalanceChart months={data.months} currency={data.currency} />
+          <SpendingBarChart months={data.months} currency={data.currency} />
+        </>
       )}
       <MonthlyCards months={data.months} currency={data.currency} />
     </div>

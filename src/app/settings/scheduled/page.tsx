@@ -1,10 +1,8 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { createClient, getAuthSession, getAuthUserBudget } from "@/lib/supabase/server";
+import { getAuthSession } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import { getScheduledTransactions } from "@/app/settings/scheduled/actions";
-import { ScheduledList } from "@/app/settings/scheduled/components/scheduled-list";
+import { ScheduledContent } from "@/app/settings/scheduled/components/scheduled-content";
 
 export const metadata: Metadata = {
   title: "Scheduled Transactions | Our Sanctuary",
@@ -15,11 +13,6 @@ export default async function ScheduledTransactionsPage() {
   // Fast cookie check for shell
   const { user } = await getAuthSession();
   if (!user) redirect("/login");
-
-  // Budget check inside async component via getScheduledTransactions
-  const authResult = await getAuthUserBudget();
-  if (!authResult.ok) redirect("/onboarding");
-  const { budgetId } = authResult;
 
   return (
     <div className="flex min-h-dvh flex-col bg-background pb-12">
@@ -68,46 +61,10 @@ export default async function ScheduledTransactionsPage() {
         </p>
       </div>
 
-      {/* Data streams in */}
+      {/* Data loads client-side via SWR */}
       <main className="flex-1 px-6">
-        <Suspense fallback={<ScheduledSkeleton />}>
-          <ScheduledData budgetId={budgetId} />
-        </Suspense>
+        <ScheduledContent />
       </main>
-    </div>
-  );
-}
-
-// Async data component — fetches currency + scheduled list
-async function ScheduledData({ budgetId }: { budgetId: string }) {
-  const supabase = await createClient();
-
-  const [budgetResult, scheduledResult] = await Promise.all([
-    supabase.from("budgets").select("currency").eq("id", budgetId).single(),
-    getScheduledTransactions(),
-  ]);
-
-  const currency = budgetResult.data?.currency ?? "USD";
-  const { scheduled, error } = scheduledResult;
-
-  if (error) {
-    return (
-      <div className="rounded-xl bg-error-container px-4 py-3 text-sm text-error">
-        {error}
-      </div>
-    );
-  }
-
-  return <ScheduledList scheduled={scheduled} currency={currency} />;
-}
-
-// Inline skeleton for Suspense fallback
-function ScheduledSkeleton() {
-  return (
-    <div className="space-y-4">
-      {[1, 2, 3].map((i) => (
-        <div key={i} className="h-20 rounded-2xl bg-surface-container animate-pulse" />
-      ))}
     </div>
   );
 }

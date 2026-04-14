@@ -1,7 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
-import type { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import type { Database } from "@/lib/supabase/types";
+
+type CookieToSet = { name: string; value: string; options: Record<string, unknown> };
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -16,12 +17,14 @@ export async function GET(request: NextRequest) {
       : null) ??
     new URL(request.url).origin;
 
+  console.log("[auth/callback] siteUrl:", siteUrl, "code:", !!code);
+
   if (!code) {
     return NextResponse.redirect(`${siteUrl}/login?error=auth_callback_failed`);
   }
 
-  // Collect cookies emitted by Supabase during the code exchange
-  const pendingCookies: ResponseCookie[] = [];
+  // Collect cookies set by Supabase so we can apply them to the final response
+  const pendingCookies: CookieToSet[] = [];
 
   const supabase = createServerClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -32,9 +35,8 @@ export async function GET(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          // Collect — applied to the final response below
           cookiesToSet.forEach(({ name, value, options }) =>
-            pendingCookies.push({ name, value, ...options })
+            pendingCookies.push({ name, value, options: options as Record<string, unknown> })
           );
         },
       },
@@ -43,17 +45,19 @@ export async function GET(request: NextRequest) {
 
   const { error } = await supabase.auth.exchangeCodeForSession(code);
 
+  console.log("[auth/callback] exchangeCodeForSession error:", error?.message ?? "none", "cookies set:", pendingCookies.length);
+
   if (error) {
     return NextResponse.redirect(`${siteUrl}/login?error=auth_callback_failed`);
   }
 
-  // Determine where to send the user
   let redirectPath = nextParam ?? "/onboarding";
 
   const { data: { user } } = await supabase.auth.getUser();
 
+  console.log("[auth/callback] user:", user?.id ?? "none");
+
   if (user) {
-    // Create profile for first-time OAuth users
     const { data: existingProfile } = await supabase
       .from("profiles").select("id").eq("id", user.id).single();
 
@@ -76,9 +80,14 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  // Build final response and apply all collected session cookies
+  console.log("[auth/callback] redirecting to:", `${siteUrl}${redirectPath}`);
+
   const response = NextResponse.redirect(`${siteUrl}${redirectPath}`);
-  pendingCookies.forEach((cookie) => response.cookies.set(cookie));
+
+  // Apply collected session cookies to the response
+  pendingCookies.forEach(({ name, value, options }) => {
+    response.cookies.set(name, value, options as Parameters<typeof response.cookies.set>[2]);
+  });
 
   return response;
 }

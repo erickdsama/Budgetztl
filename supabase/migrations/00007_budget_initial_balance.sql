@@ -1,0 +1,2 @@
+ALTER TABLE public.budgets
+  ADD COLUMN IF NOT EXISTS initial_balance NUMERIC(12,2) NOT NULL DEFAULT 0;

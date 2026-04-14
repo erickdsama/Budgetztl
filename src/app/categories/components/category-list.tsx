@@ -85,6 +85,15 @@ export function CategoryList({ categories, transactionType = "expense" }: Catego
         </div>
       )}
 
+      {/* Projected Monthly Total — compact banner at top */}
+      <div className="mx-6 mb-4 flex items-center justify-between rounded-2xl bg-primary px-5 py-3">
+        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/60">Monthly Total</span>
+        <div className="flex items-baseline gap-1.5">
+          <span className="font-heading text-xl font-black text-white">{formatCurrency(projectedTotal)}</span>
+          <span className="text-xs text-white/60">/ mo</span>
+        </div>
+      </div>
+
       <div className="px-6 space-y-6">
         {categories.length === 0 ? (
           <div className="rounded-2xl bg-surface-container-low px-6 py-12 text-center shadow-[0px_12px_32px_rgba(52,47,43,0.04)]">
@@ -184,20 +193,6 @@ export function CategoryList({ categories, transactionType = "expense" }: Catego
           </div>
         </div>
 
-        {/* Projected Monthly Total — compact gradient card matching reference */}
-        <div className="mt-12 mb-6 relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-primary to-primary-hover p-8 shadow-2xl shadow-primary/30">
-          <div className="relative z-10">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 mb-2 block">
-              Projected Monthly Total
-            </span>
-            <div className="flex items-baseline gap-2">
-              <span className="font-heading text-5xl font-black text-white">{formatCurrency(projectedTotal)}</span>
-              <span className="text-base text-white/70">/ month</span>
-            </div>
-          </div>
-          <div className="absolute -right-10 -bottom-10 w-48 h-48 rounded-full bg-primary-container opacity-20 blur-3xl" />
-          <div className="absolute -left-10 -top-10 w-32 h-32 rounded-full bg-white opacity-5 blur-2xl" />
-        </div>
       </div>
 
       <CategoryModal

@@ -37,6 +37,7 @@ export type SettingsData = {
     name: string;
     currency: string;
     createdBy: string;
+    initialBalance: number;
   };
   members: SettingsMember[];
   isOwner: boolean;
@@ -98,7 +99,7 @@ export async function getSettingsData(): Promise<SettingsResult> {
       .single(),
     supabase
       .from("budgets")
-      .select("id, name, currency, created_by")
+      .select("id, name, currency, created_by, initial_balance")
       .eq("id", budgetId)
       .single(),
     supabase
@@ -169,6 +170,7 @@ export async function getSettingsData(): Promise<SettingsResult> {
         name: budget.name,
         currency: budget.currency,
         createdBy: budget.created_by,
+        initialBalance: Number(budget.initial_balance ?? 0),
       },
       members,
       isOwner,
@@ -555,4 +557,23 @@ export async function changePassword(
   }
 
   return { success: true, message: "Password updated successfully." };
+}
+
+// ------------------------------------------------------------------
+// updateInitialBalance
+// ------------------------------------------------------------------
+
+export async function updateInitialBalance(amount: number): Promise<ActionResult> {
+  if (isNaN(amount) || amount < 0) return { success: false, error: "Invalid amount." };
+  const result = await getAuthUserBudget();
+  if (!result.ok) return { success: false, error: result.error };
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("budgets")
+    .update({ initial_balance: amount })
+    .eq("id", result.budgetId);
+  if (error) return { success: false, error: error.message };
+  revalidatePath("/settings");
+  revalidatePath("/history");
+  return { success: true };
 }
