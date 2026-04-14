@@ -52,6 +52,12 @@ export async function GET(request: NextRequest) {
 
   for (const sched of due) {
     try {
+      // Skip if category_id is null — transaction requires a valid category
+      if (!sched.category_id) {
+        skipped++;
+        continue;
+      }
+
       // 1. Create the real transaction
       const { error: txError } = await supabase.from("transactions").insert({
         budget_id: sched.budget_id,
@@ -60,7 +66,7 @@ export async function GET(request: NextRequest) {
         type: sched.type,
         amount: sched.amount,
         description: sched.description ?? `Scheduled: ${sched.frequency}`,
-        date: sched.next_due_date, // use the scheduled date, not today
+        date: sched.next_due_date,
       });
 
       if (txError) {
@@ -69,7 +75,10 @@ export async function GET(request: NextRequest) {
       }
 
       // 2. Calculate the next due date
-      const nextDue = advanceDate(sched.next_due_date, sched.frequency);
+      const nextDue = advanceDate(
+        sched.next_due_date,
+        sched.frequency as "weekly" | "monthly" | "yearly"
+      );
 
       // 3. Check if we should deactivate (end_date reached)
       const shouldDeactivate =
