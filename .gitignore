@@ -30,8 +30,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -39,3 +40,20 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# MCP config — contains API keys, never commit
+.mcp.json
+
+# Claude Code local files — settings may contain tokens
+.claude/settings.local.json
+
+# Playwright MCP output
+.playwright-mcp/
+
+# Dev/testing screenshots
+*.png
+*.jpeg
+*.jpg
+!public/**/*.png
+!public/**/*.jpg
+!public/**/*.jpeg

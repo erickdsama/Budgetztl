@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Category Configuration | Our Shared Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        outline: "#777a84",
+                        "on-surface": "#2f323a",
+                        "error-container": "#fa746f",
+                        "secondary-fixed-dim": "#ccd4ea",
+                        "secondary-container": "#dae2f9",
+                        "primary-fixed-dim": "#a6bfef",
+                        "inverse-on-surface": "#9c9ca2",
+                        "surface-container-highest": "#e0e2ec",
+                        "on-error-container": "#6e0a12",
+                        tertiary: "#675882",
+                        "on-secondary": "#f8f8ff",
+                        "surface-container-low": "#f3f3fa",
+                        background: "#f9f9fe",
+                        "on-tertiary-fixed": "#3d2f56",
+                        "inverse-primary": "#b3cdfe",
+                        "on-secondary-fixed": "#373f51",
+                        "on-tertiary-fixed-variant": "#5a4b74",
+                        "on-primary": "#f8f8ff",
+                        "tertiary-fixed-dim": "#d1beee",
+                        "on-secondary-fixed-variant": "#535c6e",
+                        "on-secondary-container": "#495264",
+                        "on-background": "#2f323a",
+                        primary: "#475f8a",
+                        "primary-container": "#b3cdfe",
+                        surface: "#f9f9fe",
+                        "on-surface-variant": "#5c5f68",
+                        "on-primary-fixed-variant": "#344d77",
+                        "on-primary-container": "#2a446d",
+                        "surface-tint": "#475f8a",
+                        "surface-container-high": "#e6e8f1",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#dfccfd",
+                        "on-primary-fixed": "#143058",
+                        "surface-dim": "#d7dae4",
+                        error: "#a83836",
+                        "primary-fixed": "#b3cdfe",
+                        secondary: "#565f72",
+                        "outline-variant": "#afb2bc",
+                        "surface-bright": "#f9f9fe",
+                        "inverse-surface": "#0c0e12",
+                        "surface-container": "#ecedf6",
+                        "on-tertiary": "#fef7ff",
+                        "secondary-fixed": "#dae2f9",
+                        "tertiary-fixed": "#dfccfd",
+                        "surface-variant": "#e0e2ec",
+                        "on-tertiary-container": "#50426a",
+                        "on-error": "#fff7f6",
+                        "tertiary-dim": "#5b4c75",
+                        "secondary-dim": "#4a5365",
+                        "primary-dim": "#3a537e",
+                        "error-dim": "#67040d"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Inter"],
+                        body: ["Inter"],
+                        label: ["Inter"],
+                        display: "Inter"
+                    }
+                }
+            }
+        };
+    </script>
+<style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: theme('colors.inverse-surface');
+            color: theme('colors.surface-bright');
+        }
+        #add-category-modal {
+            display: none;
+        }
+        #add-category-modal.active {
+            display: flex;
+        }
+        .vibrant-card {
+            background-color: theme('colors.on-background');
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-40">
+<header class="bg-inverse-surface/80 backdrop-blur-md flex justify-between items-center w-full px-6 pt-10 pb-4 max-w-xl mx-auto fixed top-0 left-0 right-0 z-50">
+<div class="flex items-center gap-3">
+<img alt="Couple portrait" class="w-10 h-10 rounded-full object-cover border-2 border-primary-fixed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGdUA30hIOoBtEB5Jko0sxij9VERj9CD1WnBADsrWE3kTSINtxpK1p0JVPIGwhTKZPojBqjHFH1KiLYZ6ghXeDuho8-_UxxWRZEDbaWa3jjLPIcBox9lC_MAxmWD0ml5lwSUkSHe6deu-mlyHsmuNKWEqQIhtNn7kR_gx3F5h3YP0NWTj-55tEaLBWPqfYn322kzxNUTKRoShn9-vuorxrNTCT8tNTGMNKuiaE78Z6fKjHpma-ezGwegNKb7FQN2XBCzagRV8KNsE"/>
+<h1 class="text-primary-fixed font-manrope font-black tracking-tight text-2xl">Our Shared Sanctuary</h1>
+</div>
+<button class="text-surface-bright/80 hover:text-surface-bright transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="pt-32 px-6 max-w-xl mx-auto">
+<header class="mb-10 flex justify-between items-start">
+<div>
+<h2 class="font-headline font-extrabold text-3xl text-surface-bright tracking-tight mb-2">Category Setup</h2>
+<p class="text-outline text-sm font-body max-w-[90%] leading-relaxed">Define the monthly boundaries for our shared life.</p>
+</div>
+<button class="bg-primary-fixed text-on-primary-fixed p-3 rounded-2xl shadow-lg shadow-primary-fixed/20 hover:opacity-90 transition-all active:scale-95" onclick="document.getElementById('add-category-modal').classList.add('active')">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</header>
+<div class="space-y-6">
+<div class="bg-on-background p-6 rounded-2xl border-l-4 border-primary-fixed vibrant-card transition-all duration-300">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-4">
+<button class="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container" title="Change Icon">
+<span class="material-symbols-outlined text-2xl" data-icon="shopping_basket">shopping_basket</span>
+</button>
+<div>
+<h3 class="font-headline font-bold text-lg text-surface-bright">Groceries</h3>
+<span class="text-[10px] font-label font-bold uppercase tracking-widest text-primary-fixed">Household</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-[10px] font-label font-bold uppercase tracking-widest text-outline block mb-1">Monthly Plan</span>
+<div class="relative flex items-center">
+<span class="absolute left-4 text-primary-fixed font-bold">$</span>
+<input class="bg-inverse-surface border-none focus:ring-2 focus:ring-primary-fixed/20 rounded-lg py-2 pl-8 pr-4 text-primary-fixed font-headline font-bold w-32 text-right" type="number" value="800"/>
+</div>
+</div>
+</div>
+<div class="w-full bg-primary-container/20 h-2 rounded-full overflow-hidden">
+<div class="bg-primary-fixed h-full rounded-full w-[65%] shadow-[0_0_8px_rgba(166,191,239,0.5)]"></div>
+</div>
+</div>
+<div class="bg-on-background p-6 rounded-2xl border-l-4 border-secondary-fixed-dim vibrant-card transition-all duration-300">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-4">
+<button class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container" title="Change Icon">
+<span class="material-symbols-outlined text-2xl" data-icon="restaurant">restaurant</span>
+</button>
+<div>
+<h3 class="font-headline font-bold text-lg text-surface-bright">Dining Out</h3>
+<span class="text-[10px] font-label font-bold uppercase tracking-widest text-secondary-fixed-dim">Lifestyle</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-[10px] font-label font-bold uppercase tracking-widest text-outline block mb-1">Monthly Plan</span>
+<div class="relative flex items-center">
+<span class="absolute left-4 text-secondary-fixed-dim font-bold">$</span>
+<input class="bg-inverse-surface border-none focus:ring-2 focus:ring-secondary-fixed-dim/20 rounded-lg py-2 pl-8 pr-4 text-secondary-fixed-dim font-headline font-bold w-32 text-right" type="number" value="350"/>
+</div>
+</div>
+</div>
+<div class="w-full bg-secondary-container/20 h-2 rounded-full overflow-hidden">
+<div class="bg-secondary-fixed-dim h-full rounded-full w-[40%] shadow-[0_0_8px_rgba(204,212,234,0.5)]"></div>
+</div>
+</div>
+<div class="bg-on-background p-6 rounded-2xl border-l-4 border-tertiary-fixed-dim vibrant-card transition-all duration-300">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-4">
+<button class="w-12 h-12 rounded-xl bg-tertiary-container flex items-center justify-center text-on-tertiary-container" title="Change Icon">
+<span class="material-symbols-outlined text-2xl" data-icon="bolt">bolt</span>
+</button>
+<div>
+<h3 class="font-headline font-bold text-lg text-surface-bright">Utilities</h3>
+<span class="text-[10px] font-label font-bold uppercase tracking-widest text-tertiary-fixed-dim">Fixed Costs</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-[10px] font-label font-bold uppercase tracking-widest text-outline block mb-1">Monthly Plan</span>
+<div class="relative flex items-center">
+<span class="absolute left-4 text-tertiary-fixed-dim font-bold">$</span>
+<input class="bg-inverse-surface border-none focus:ring-2 focus:ring-tertiary-fixed-dim/20 rounded-lg py-2 pl-8 pr-4 text-tertiary-fixed-dim font-headline font-bold w-32 text-right" type="number" value="220"/>
+</div>
+</div>
+</div>
+<div class="w-full bg-tertiary-container/20 h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary-fixed-dim h-full rounded-full w-[90%] shadow-[0_0_8px_rgba(209,190,238,0.5)]"></div>
+</div>
+</div>
+<button class="w-full py-8 border-2 border-dashed border-surface-bright/20 rounded-2xl flex flex-col items-center justify-center gap-2 text-surface-bright/60 hover:text-surface-bright hover:border-surface-bright/40 hover:bg-surface-bright/5 transition-all group" onclick="document.getElementById('add-category-modal').classList.add('active')">
+<span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform" data-icon="add_circle">add_circle</span>
+<span class="font-headline font-bold">Add New Category</span>
+</button>
+</div>
+<div class="mt-12 bg-gradient-to-br from-primary-fixed via-primary to-primary-dim text-on-primary-fixed p-8 rounded-[2.5rem] relative overflow-hidden shadow-2xl shadow-black/50">
+<div class="relative z-10">
+<span class="text-[10px] font-label font-bold uppercase tracking-[0.2em] text-on-primary-fixed/60 mb-2 block">Projected Monthly Total</span>
+<div class="flex items-baseline gap-2">
+<span class="text-5xl font-headline font-black text-on-primary-fixed">$1,890</span>
+<span class="text-base font-body opacity-70 text-on-primary-fixed">/ month</span>
+</div>
+</div>
+<div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
+<div class="absolute -left-10 -top-10 w-32 h-32 bg-primary-container/20 rounded-full blur-2xl"></div>
+</div>
+</main>
+<div class="fixed inset-0 z-[100] items-end justify-center bg-black/80 backdrop-blur-md p-4 sm:items-center" id="add-category-modal">
+<div class="bg-on-background w-full max-w-lg rounded-[2.5rem] p-8 border border-surface-bright/10 relative shadow-2xl shadow-black">
+<button class="absolute top-6 right-6 text-outline hover:text-surface-bright" onclick="document.getElementById('add-category-modal').classList.remove('active')">
+<span class="material-symbols-outlined">close</span>
+</button>
+<h4 class="font-headline font-bold text-2xl text-primary-fixed mb-6">Create Category</h4>
+<div class="mb-8">
+<span class="text-[11px] font-label font-bold uppercase tracking-widest text-outline block mb-4">Select Icon</span>
+<div class="grid grid-cols-5 gap-3">
+<button class="aspect-square rounded-2xl bg-inverse-surface flex items-center justify-center text-surface-bright/60 hover:text-primary-fixed hover:bg-primary-container/20 transition-all active:scale-95 border-2 border-transparent focus:border-primary-fixed">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+</button>
+<button class="aspect-square rounded-2xl bg-primary-container flex items-center justify-center text-on-primary-container transition-all active:scale-95 border-2 border-primary-fixed ring-2 ring-primary-fixed/20">
+<span class="material-symbols-outlined" data-icon="movie" style="font-variation-settings: 'FILL' 1;">movie</span>
+</button>
+<button class="aspect-square rounded-2xl bg-inverse-surface flex items-center justify-center text-surface-bright/60 transition-all border-2 border-transparent">
+<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+</button>
+<button class="aspect-square rounded-2xl bg-inverse-surface flex items-center justify-center text-surface-bright/60 transition-all border-2 border-transparent">
+<span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
+</button>
+<button class="aspect-square rounded-2xl bg-inverse-surface flex items-center justify-center text-surface-bright/60 transition-all border-2 border-transparent">
+<span class="material-symbols-outlined" data-icon="pets">pets</span>
+</button>
+<button class="aspect-square rounded-2xl bg-inverse-surface flex items-center justify-center text-surface-bright/60 transition-all border-2 border-transparent">
+<span class="material-symbols-outlined" data-icon="education">school</span>
+</button>
+<button class="aspect-square rounded-2xl bg-inverse-surface flex items-center justify-center text-surface-bright/60 transition-all border-2 border-transparent">
+<span class="material-symbols-outlined" data-icon="local_gas_station">local_gas_station</span>
+</button>
+<button class="aspect-square rounded-2xl bg-inverse-surface flex items-center justify-center text-surface-bright/60 transition-all border-2 border-transparent">
+<span class="material-symbols-outlined" data-icon="style">style</span>
+</button>
+<button class="aspect-square rounded-2xl bg-inverse-surface flex items-center justify-center text-surface-bright/60 transition-all border-2 border-transparent">
+<span class="material-symbols-outlined" data-icon="celebration">celebration</span>
+</button>
+<button class="aspect-square rounded-2xl bg-inverse-surface flex items-center justify-center text-surface-bright/60 transition-all border-2 border-transparent">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex flex-col">
+<label class="text-[11px] font-label font-bold uppercase tracking-widest text-outline mb-2">Category Name</label>
+<input class="w-full bg-inverse-surface border-none focus:ring-2 focus:ring-primary-fixed/20 rounded-xl py-4 px-6 font-body text-surface-bright placeholder-outline" placeholder="e.g. Entertainment" type="text"/>
+</div>
+<div class="flex flex-col">
+<label class="text-[11px] font-label font-bold uppercase tracking-widest text-outline mb-2">Monthly Budget</label>
+<div class="relative flex items-center">
+<span class="absolute left-6 text-primary-fixed font-bold">$</span>
+<input class="w-full bg-inverse-surface border-none focus:ring-2 focus:ring-primary-fixed/20 rounded-xl py-4 pl-12 pr-6 font-headline font-bold text-primary-fixed text-xl" placeholder="0.00" type="number"/>
+</div>
+</div>
+<button class="w-full py-4 bg-primary-fixed text-on-primary-fixed rounded-xl font-headline font-bold text-lg hover:opacity-90 transition-all mt-4 shadow-lg shadow-primary-fixed/20" onclick="document.getElementById('add-category-modal').classList.remove('active')">
+                Create Category
+            </button>
+</div>
+</div>
+</div>
+<nav class="bg-inverse-surface/90 backdrop-blur-xl border-t border-surface-bright/5 fixed bottom-0 left-0 w-full flex justify-around items-end px-4 pb-8 pt-4 z-50 rounded-t-[2.5rem] shadow-2xl shadow-black">
+<a class="flex flex-col items-center justify-center text-outline hover:text-primary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline hover:text-primary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase mt-1">History</span>
+</a>
+<button class="bg-primary-fixed rounded-full p-4 shadow-xl shadow-primary-fixed/30 scale-110 -translate-y-4 transition-all hover:brightness-110 active:scale-100" onclick="document.getElementById('add-category-modal').classList.add('active')">
+<span class="material-symbols-outlined text-on-primary-fixed text-3xl" data-icon="add">add</span>
+</button>
+<a class="flex flex-col items-center justify-center text-primary-fixed" href="#">
+<span class="material-symbols-outlined" data-icon="category" style="font-variation-settings: 'FILL' 1;">category</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase mt-1">Categories</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline hover:text-primary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase mt-1">Settings</span>
+</a>
+</nav>
+
+</body></html>

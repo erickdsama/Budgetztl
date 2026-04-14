@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Financial Harmony Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#6e7979",
+                      "on-surface": "#1f1b17",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed-dim": "#bfc8c8",
+                      "secondary-container": "#dbe4e4",
+                      "primary-fixed-dim": "#79d5d7",
+                      "inverse-on-surface": "#f9efe8",
+                      "surface-container-highest": "#eae1da",
+                      "on-error-container": "#93000a",
+                      "tertiary": "#a13a0f",
+                      "on-secondary": "#ffffff",
+                      "surface-container-low": "#fcf2eb",
+                      "background": "#fff8f5",
+                      "on-tertiary-fixed": "#380c00",
+                      "inverse-primary": "#79d5d7",
+                      "on-secondary-fixed": "#151d1d",
+                      "on-tertiary-fixed-variant": "#822800",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed-dim": "#ffb59c",
+                      "on-secondary-fixed-variant": "#404848",
+                      "on-secondary-container": "#5d6666",
+                      "on-background": "#1f1b17",
+                      "primary": "#006769",
+                      "primary-container": "#118184",
+                      "surface": "#fff8f5",
+                      "on-surface-variant": "#3e4949",
+                      "on-primary-fixed-variant": "#004f51",
+                      "on-primary-container": "#f3ffff",
+                      "surface-tint": "#00696b",
+                      "surface-container-high": "#f0e6e0",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-container": "#c25227",
+                      "on-primary-fixed": "#002020",
+                      "surface-dim": "#e2d8d2",
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#95f2f4",
+                      "secondary": "#576060",
+                      "outline-variant": "#bdc9c8",
+                      "surface-bright": "#fff8f5",
+                      "inverse-surface": "#342f2b",
+                      "surface-container": "#f6ece6",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed": "#dbe4e4",
+                      "tertiary-fixed": "#ffdbcf",
+                      "surface-variant": "#eae1da",
+                      "on-tertiary-container": "#fffbff",
+                      "on-error": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Manrope"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- Top Navigation -->
+<header class="bg-[#fff8f5] dark:bg-[#121212] flex justify-between items-center w-full px-6 pt-10 pb-4 max-w-xl mx-auto fixed top-0 left-0 right-0 z-40">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest">
+<img alt="Couple portrait" class="w-full h-full object-cover" data-alt="high-end warm portrait of a smiling couple in a cozy sunlit room with soft editorial aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz0yCPY92JW6WAVKogY8e9pKJ_gKO8BrTKPoDQdqyK2UL82BMJsSGhVRZor_vFrK9300XHSaCDL7_05P2SU8oFa0Rra3ShO6uJu6Oo_BLCIgCiPqpL1g3KJFFWVoBClZ_JUKHBOLSxhQTFft4cR_9Q0wDiQkoW19wD_t7oavF1ey4MorFcnaGowSTuaLN3Z8gCJmp-LHiHZgyi8hiwZsV9A4XTY8mvQNGQ2m47Pfpn9b6Bf0qz2mobii_skU0OT2nsfACNaiS9d_k"/>
+</div>
+<span class="font-manrope font-black tracking-tight text-[#006769] dark:text-[#79d5d7] text-xl">Our Shared Sanctuary</span>
+</div>
+<button class="text-[#006769] dark:text-[#79d5d7] hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="max-w-xl mx-auto px-6 pt-28 space-y-10">
+<!-- Hero: Expected vs Actual -->
+<section class="relative">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="text-secondary font-label text-[11px] font-semibold tracking-widest uppercase mb-1">Monthly Spending</h2>
+<p class="text-4xl font-headline font-extrabold tracking-tighter text-on-surface">Budget Health</p>
+</div>
+<div class="text-right">
+<p class="text-primary font-headline font-bold text-2xl">$4,250.00</p>
+<p class="text-secondary font-label text-[10px] uppercase tracking-wider">Remaining</p>
+</div>
+</div>
+<!-- Bento Card for Donut Chart -->
+<div class="bg-surface-container-low rounded-[2.5rem] p-8 flex items-center justify-center relative overflow-hidden">
+<div class="relative w-64 h-64">
+<!-- SVG Donut Chart -->
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle class="text-secondary-container opacity-30" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-primary-container" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="160 251.2" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<!-- Inner Content -->
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="text-secondary font-label text-[10px] uppercase tracking-[0.2em] mb-1">Spent</span>
+<span class="text-3xl font-headline font-black text-on-surface-variant">64%</span>
+<span class="text-secondary font-label text-[10px] uppercase tracking-wider mt-1">of $6,800</span>
+</div>
+</div>
+<!-- Asymmetric Floating Data Points -->
+<div class="absolute top-6 right-6 flex flex-col items-end">
+<div class="w-2 h-2 rounded-full bg-primary mb-1"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">Actual</span>
+</div>
+<div class="absolute bottom-6 left-6 flex flex-col items-start">
+<div class="w-2 h-2 rounded-full bg-secondary-container mb-1"></div>
+<span class="text-[10px] font-bold text-on-surface-variant opacity-60">Expected</span>
+</div>
+</div>
+</section>
+<!-- Categories Section -->
+<section class="space-y-6">
+<div class="flex justify-between items-center">
+<h3 class="text-2xl font-headline font-bold tracking-tight text-on-surface">By Category</h3>
+<button class="text-primary font-label text-xs font-bold hover:opacity-70">View All</button>
+</div>
+<div class="space-y-8">
+<!-- Groceries -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-xl">shopping_cart</span>
+<span class="font-headline font-bold text-on-surface-variant">Groceries</span>
+</div>
+<span class="text-secondary font-label text-xs font-semibold">$840 / $1,200</span>
+</div>
+<div class="h-3 bg-secondary-container/40 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] w-[70%]"></div>
+</div>
+</div>
+<!-- Rent & Bills -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-xl">home</span>
+<span class="font-headline font-bold text-on-surface-variant">Rent &amp; Bills</span>
+</div>
+<span class="text-secondary font-label text-xs font-semibold">$2,400 / $2,400</span>
+</div>
+<div class="h-3 bg-secondary-container/40 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] w-full"></div>
+</div>
+</div>
+<!-- Entertainment -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-xl">movie</span>
+<span class="font-headline font-bold text-on-surface-variant">Entertainment</span>
+</div>
+<span class="text-secondary font-label text-xs font-semibold">$312 / $500</span>
+</div>
+<div class="h-3 bg-secondary-container/40 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] w-[62%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Last Expenses -->
+<section class="space-y-6">
+<h3 class="text-2xl font-headline font-bold tracking-tight text-on-surface">Last Expenses</h3>
+<div class="space-y-4">
+<!-- Transaction 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-2xl flex items-center justify-between group hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-xl overflow-hidden shadow-sm">
+<img alt="Partner 1" class="w-full h-full object-cover" data-alt="portrait of a woman with soft lighting and professional editorial feel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRvghjfSSJ4Vf90I2p0V4rcP8O4fKUZ9VFCyMzUKGscQp_xETz2MeUed57vF3TuOo_Gmc-s-rCqTecqs3Atff56JzIjFo3chG1vPhOj70FdgIoQ-xO5Dt_RHFyP5S749yxDK43D4LV7rnnblW9waiuCnqNnxsxu6h0zQPlgism8-FlP5dMR4WayFL-1UbkAZ6u6ZJGo2TelHRWIe_KGCZXAeomTKzxuBJxFObANxDZjnm8Qvmtpjfm0Ew2Ieiz12ozJ_zADxeSEzA"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-surface-container-lowest p-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px] text-tertiary" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+</div>
+<div>
+<p class="font-headline font-bold text-on-surface">Artisan Bakery</p>
+<p class="text-secondary font-label text-xs">Today, 09:12 AM</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline font-extrabold text-on-surface">-$24.50</p>
+<p class="text-secondary font-label text-[10px] uppercase">Groceries</p>
+</div>
+</div>
+<!-- Transaction 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-2xl flex items-center justify-between group hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-xl overflow-hidden shadow-sm">
+<img alt="Partner 2" class="w-full h-full object-cover" data-alt="portrait of a man with warm lighting and high-end editorial feel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwpFbaL4pgu03vw2qy9bzVYaxWqcn2ubn4LZr6l2Z3yQoWKz74eRSR33qb4P3i0BPMFFbE0ezjRPnYdF9Hr9tq0OGjas307kaFIudY3by_CgUW5YrwR1bdCW1Va6Rhtry5F7avuJvITD3lK5nGLnMQ52LoGSzKieRoB2AvcUa6a8BOQahgWivxPqbSuiYv4pvzKbY7Lkvwfm7DUah1rqvVC7qkFsC5tn2hG7K46lQsYCBx4MRmAzuP1WoPK8As46lSD7Ywleeu7EA"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-surface-container-lowest p-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px] text-tertiary" style="font-variation-settings: 'FILL' 1;">subscriptions</span>
+</div>
+</div>
+<div>
+<p class="font-headline font-bold text-on-surface">Streaming Service</p>
+<p class="text-secondary font-label text-xs">Yesterday</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline font-extrabold text-on-surface">-$15.99</p>
+<p class="text-secondary font-label text-[10px] uppercase">Entertainment</p>
+</div>
+</div>
+<!-- Transaction 3 -->
+<div class="bg-surface-container-lowest p-5 rounded-2xl flex items-center justify-between group hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-xl overflow-hidden shadow-sm">
+<img alt="Joint" class="w-full h-full object-cover" data-alt="blurred romantic aesthetic image of two hands holding coffee cups" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPkp9LNLYShfAV8DjAUbuKf2tOtot0yBZZYT1GmBIiT84RhikwW3I4T3EbbArcxoADlmi65VHUO72eSzvwVU2pF_0zagVpLF1e5SN2HGG_UfnmPxJ_xTWeeHelhn3tVAGwt0cixhDZKxbl4W7qcQ27xAf-YNL6k1znalxsNpOnr7IvnpjvNQLxVdbMgRkkok4y2yhNaOpb_sve6067_t2TkRVvL4-WxbeFIJ2EymN5gXMZXUhjyCOALazTdef5XhEwQ87MVa6Vm_I"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-surface-container-lowest p-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px] text-tertiary" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+</div>
+</div>
+<div>
+<p class="font-headline font-bold text-on-surface">City Power &amp; Water</p>
+<p class="text-secondary font-label text-xs">Oct 12, 2023</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline font-extrabold text-on-surface">-$142.00</p>
+<p class="text-secondary font-label text-[10px] uppercase">Rent &amp; Bills</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Shared BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-[#fff8f5]/80 dark:bg-[#1a1a1a]/80 backdrop-blur-xl shadow-[0px_-4px_24px_rgba(52,47,43,0.04)] rounded-t-[2.5rem] pb-8 pt-4 px-4 flex justify-around items-end">
+<!-- Dashboard (Active) -->
+<a class="flex flex-col items-center justify-center text-[#006769] dark:text-[#79d5d7] hover:text-[#006769] transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">grid_view</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase">Dashboard</span>
+</a>
+<!-- History -->
+<a class="flex flex-col items-center justify-center text-[#576060] dark:text-[#a1a1a1] hover:text-[#006769] transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">history</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase">History</span>
+</a>
+<!-- Add Button (Signature Central FAB) -->
+<button class="bg-[#a13a0f] text-white rounded-full p-4 shadow-[0px_12px_32px_rgba(52,47,43,0.1)] scale-110 -translate-y-4 transition-all hover:scale-115 active:scale-95">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<!-- Categories -->
+<a class="flex flex-col items-center justify-center text-[#576060] dark:text-[#a1a1a1] hover:text-[#006769] transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">category</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase">Categories</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-[#576060] dark:text-[#a1a1a1] hover:text-[#006769] transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase">Settings</span>
+</a>
+</nav>
+</body></html>

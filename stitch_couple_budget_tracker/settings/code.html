@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"surface-container-high": "#e6e8f1", "inverse-surface": "#0c0e12", "secondary-fixed-dim": "#ccd4ea", "on-surface": "#2f323a", "inverse-primary": "#b3cdfe", "secondary-fixed": "#dae2f9", tertiary: "#675882", "surface-container-lowest": "#ffffff", "on-secondary": "#f8f8ff", "primary-fixed-dim": "#a6bfef", outline: "#777a84", "on-primary-fixed-variant": "#344d77", "tertiary-fixed-dim": "#d1beee", "tertiary-fixed": "#dfccfd", "on-tertiary": "#fef7ff", secondary: "#565f72", "on-primary": "#f8f8ff", "surface-container-highest": "#e0e2ec", "error-container": "#fa746f", "on-tertiary-fixed": "#3d2f56", "on-secondary-fixed-variant": "#535c6e", surface: "#f9f9fe", "primary-container": "#b3cdfe", "secondary-container": "#dae2f9", "on-secondary-fixed": "#373f51", "outline-variant": "#afb2bc", "inverse-on-surface": "#9c9ca2", "surface-tint": "#475f8a", "primary-fixed": "#b3cdfe", primary: "#475f8a", "on-primary-container": "#2a446d", background: "#f9f9fe", "on-primary-fixed": "#143058", "surface-dim": "#d7dae4", "tertiary-container": "#dfccfd", "on-surface-variant": "#5c5f68", "on-background": "#2f323a", "surface-container-low": "#f3f3fa", "on-error-container": "#6e0a12", "on-error": "#fff7f6", "on-tertiary-container": "#50426a", "surface-container": "#ecedf6", "on-secondary-container": "#495264", "surface-variant": "#e0e2ec", "on-tertiary-fixed-variant": "#5a4b74", error: "#a83836", "surface-bright": "#f9f9fe", "tertiary-dim": "#5b4c75", "secondary-dim": "#4a5365", "primary-dim": "#3a537e", "error-dim": "#67040d"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, fontFamily: {headline: ["Inter"], body: ["Inter"], label: ["Inter"], display: "Inter"}}}};</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#fff8f5]/80 dark:bg-[#1a1c1c]/80 backdrop-blur-md">
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity scale-95 active:duration-150 text-[#006769] dark:text-[#79d5d7]">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-manrope tracking-tight text-xl font-semibold text-[#006769] dark:text-[#79d5d7]">Settings</h1>
+</div>
+<div class="font-manrope font-bold text-[#006769] dark:text-[#79d5d7]">Harmonize</div>
+</header>
+<main class="max-w-2xl mx-auto px-6 pt-8 space-y-10">
+<!-- User Profile Section -->
+<section class="flex items-center gap-6 p-6 rounded-3xl bg-surface-container-low">
+<div class="relative">
+<img alt="Profile" class="w-20 h-20 rounded-full object-cover border-4 border-surface-container-lowest" data-alt="Modern minimalist portrait of a young professional man with soft natural lighting and a warm beige background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLo21Q9kZefoRM1Ndm3uLFEFBr8bzpEep-9cFLCj3NZtKBHzA4hNTRoQAjJqKZSDqzQnJg7ZD_nRzl7TwG7GiMnO5Au76DYJYBjfNzJTj92YCLUlKCdw_arJc4l2N6gGYArwkVRwaBzDELr-NkeQmHh2bfUcJJ2S8M01M9rnLiCzLcJJ45XFPH8ITV7fflZSAkDRSQtZEGSDejfQHIftzNPWjX4VyP59gQPCIjyxlr1jgzIIn8B45juNiXtYyPWuElJG6AYxpj-nw"/>
+<div class="absolute bottom-0 right-0 bg-primary p-1.5 rounded-full border-2 border-surface-container-low">
+<span class="material-symbols-outlined text-white text-xs" data-icon="edit">edit</span>
+</div>
+</div>
+<div class="flex-1">
+<h2 class="text-2xl font-bold tracking-tight text-on-surface">Julian Walters</h2>
+<p class="text-sm text-secondary font-medium">julian.walters@harmony.app</p>
+</div>
+</section>
+<!-- Budget Settings (Editorial Grid) -->
+<section class="space-y-4">
+<div class="flex justify-between items-end mb-6">
+<h3 class="text-lg font-bold tracking-tight text-on-surface px-1">Budget Settings</h3>
+<span class="text-[10px] uppercase tracking-widest text-secondary font-bold">Shared with Chloe</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-6 rounded-3xl bg-surface-container-lowest space-y-3 transition-all hover:bg-surface-container">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined" data-icon="home_storage">home_storage</span>
+<span class="text-xs font-bold uppercase tracking-wider font-label">Budget Name</span>
+</div>
+<p class="text-lg font-semibold">Our New Home Fund</p>
+</div>
+<div class="p-6 rounded-3xl bg-surface-container-lowest space-y-3 transition-all hover:bg-surface-container">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="text-xs font-bold uppercase tracking-wider font-label">Currency</span>
+</div>
+<p class="text-lg font-semibold">USD ($)</p>
+</div>
+<div class="md:col-span-2 p-6 rounded-3xl bg-surface-container-lowest">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-xs font-bold uppercase tracking-wider font-label">Shared Members</span>
+</div>
+<button class="text-xs font-bold text-tertiary hover:opacity-70">+ Add Partner</button>
+</div>
+<div class="flex flex-wrap gap-4">
+<div class="flex items-center gap-3 bg-surface-container-low py-2 px-4 rounded-full">
+<img alt="Me" class="w-6 h-6 rounded-full" data-alt="Small circular profile avatar icon for current user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCOB0x00Fw2zujsO0LbnCq5kKiRu7PjGGLaFwRo8Fjg9ACc7NK1u9xk1UlZOhheV_Kwsr-r9GB7UeuskfIc476P2OXn36iL3TRshzZClIp9ufwqp9HFl9DzGWt2G3OCFOwta_qakSlsCmnXc_bAEyKJNsB-TASTn986ArTOcKfVlNj34woZt1iupmzqHskNLRhArVSnykgJeXuLMNkYybWJBLzyk4uuGiuHzJBIHb2KdnsnxnpZTXpd7qnO7YfneHqzQistct1YXg"/>
+<span class="text-sm font-medium">You</span>
+<span class="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold">OWNER</span>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-low py-2 px-4 rounded-full">
+<img alt="Chloe" class="w-6 h-6 rounded-full" data-alt="Small circular profile avatar icon for a female partner with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2SH881aagnq0mDDP1Ua6o_hhj_5P4Qj4t_apCzGaD3O5EouazAbiqHbAdYzyXvvYjkqGnSy6W1IYWr3P1AZ-PV4aDLEYJdKEK13iLLX-p-lhqi8uyuK6ggfSxjz0rZhkYTznN8guYTfc7rHZnYJTuMO7ERei_DRKTdHmzcIy4ArGBj-SAN52GldLBzfjEOrt8eK-akMOSKB0kjU68HZwS__BM9NkBbfhhrjD5qhoIc48cEGVAZ7LEAIVao8T2dELNAFlumLnimBc"/>
+<span class="text-sm font-medium">Chloe Watkins</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Preferences -->
+<section class="space-y-4">
+<h3 class="text-lg font-bold tracking-tight text-on-surface px-1">Preferences</h3>
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden">
+<div class="flex items-center justify-between p-6 hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<div class="p-2 rounded-xl bg-secondary-container text-on-secondary-container group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</div>
+<div>
+<p class="font-semibold">Dark Mode</p>
+<p class="text-xs text-secondary">Switch between light and dark themes</p>
+</div>
+</div>
+<div class="w-12 h-6 bg-secondary-fixed rounded-full relative flex items-center px-1">
+<div class="w-4 h-4 bg-white rounded-full shadow-sm"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-6 hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<div class="p-2 rounded-xl bg-secondary-container text-on-secondary-container group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</div>
+<div>
+<p class="font-semibold">Notifications</p>
+<p class="text-xs text-secondary">Manage budget alerts and updates</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Account & Support (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<section class="space-y-4">
+<h3 class="text-lg font-bold tracking-tight text-on-surface px-1">Account</h3>
+<div class="bg-surface-container-lowest rounded-3xl p-2 space-y-1">
+<button class="w-full flex items-center justify-between p-4 hover:bg-surface-container rounded-2xl transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="security">security</span>
+<span class="font-medium text-sm">Security</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-sm" data-icon="open_in_new">open_in_new</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 hover:bg-surface-container rounded-2xl transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="lock_reset">lock_reset</span>
+<span class="font-medium text-sm">Change Password</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</section>
+<section class="space-y-4">
+<h3 class="text-lg font-bold tracking-tight text-on-surface px-1">Support</h3>
+<div class="bg-surface-container-lowest rounded-3xl p-2 space-y-1">
+<button class="w-full flex items-center justify-between p-4 hover:bg-surface-container rounded-2xl transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="help_center">help_center</span>
+<span class="font-medium text-sm">Help Center</span>
+</div>
+</button>
+<button class="w-full flex items-center justify-between p-4 hover:bg-surface-container rounded-2xl transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="verified_user">verified_user</span>
+<span class="font-medium text-sm">Privacy Policy</span>
+</div>
+</button>
+</div>
+</section>
+</div>
+<!-- Sign Out -->
+<div class="pt-8 pb-12">
+<button class="w-full flex items-center justify-center gap-3 py-5 rounded-3xl bg-error-container text-on-error-container font-bold tracking-wide hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Sign Out
+            </button>
+<p class="text-center mt-6 text-[10px] text-outline-variant font-bold tracking-widest uppercase">Version 2.4.1 • Built with Love</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#fff8f5]/80 dark:bg-[#1a1c1c]/80 backdrop-blur-md rounded-t-3xl shadow-[0px_-4px_20px_rgba(52,47,43,0.04)]">
+<a class="flex flex-col items-center justify-center text-[#576060] dark:text-[#bfc8c8] px-3 py-1.5 hover:bg-[#576060]/5 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-inter text-[11px] font-medium tracking-wide uppercase">Wealth</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#576060] dark:text-[#bfc8c8] px-3 py-1.5 hover:bg-[#576060]/5 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="receipt_long">receipt_long</span>
+<span class="font-inter text-[11px] font-medium tracking-wide uppercase">Budgets</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#576060] dark:text-[#bfc8c8] px-3 py-1.5 hover:bg-[#576060]/5 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="calendar_today">calendar_today</span>
+<span class="font-inter text-[11px] font-medium tracking-wide uppercase">Plans</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#006769]/10 dark:bg-[#79d5d7]/10 text-[#006769] dark:text-[#79d5d7] rounded-xl px-3 py-1.5 transition-transform duration-200 Active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-inter text-[11px] font-medium tracking-wide uppercase">Settings</span>
+</a>
+</nav>
+</body></html>

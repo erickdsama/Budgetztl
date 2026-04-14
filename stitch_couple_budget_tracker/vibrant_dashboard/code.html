@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Financial Harmony Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {outline: "#777a84", "on-surface": "#2f323a", "error-container": "#fa746f", "secondary-fixed-dim": "#ccd4ea", "secondary-container": "#dae2f9", "primary-fixed-dim": "#a6bfef", "inverse-on-surface": "#9c9ca2", "surface-container-highest": "#e0e2ec", "on-error-container": "#6e0a12", tertiary: "#675882", "on-secondary": "#f8f8ff", "surface-container-low": "#f3f3fa", background: "#f9f9fe", "on-tertiary-fixed": "#3d2f56", "inverse-primary": "#b3cdfe", "on-surface-variant": "#5c5f68", "on-primary-fixed-variant": "#344d77", "on-primary-container": "#2a446d", "surface-tint": "#475f8a", "surface-container-high": "#e6e8f1", "surface-container-lowest": "#ffffff", "tertiary-container": "#dfccfd", "on-primary-fixed": "#143058", "surface-dim": "#d7dae4", error: "#a83836", "primary-fixed": "#b3cdfe", secondary: "#565f72", "outline-variant": "#afb2bc", "surface-bright": "#f9f9fe", "inverse-surface": "#0c0e12", "surface-container": "#ecedf6", "on-tertiary": "#fef7ff", "secondary-fixed": "#dae2f9", "tertiary-fixed": "#dfccfd", "surface-variant": "#e0e2ec", "on-tertiary-container": "#50426a", "on-error": "#fff7f6", "vibrant-purple": "#8B5CF6", "vibrant-pink": "#EC4899", "vibrant-orange": "#F97316", "vibrant-teal": "#14B8A6", "vibrant-blue": "#3B82F6", primary: "#475f8a", "primary-container": "#b3cdfe", "on-secondary-fixed-variant": "#535c6e", "on-primary": "#f8f8ff", "tertiary-dim": "#5b4c75", "secondary-dim": "#4a5365", "on-secondary-fixed": "#373f51", "primary-dim": "#3a537e", "on-tertiary-fixed-variant": "#5a4b74", "on-background": "#2f323a", surface: "#f9f9fe", "on-secondary-container": "#495264", "tertiary-fixed-dim": "#d1beee", "error-dim": "#67040d"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, fontFamily: {headline: ["Inter"], body: ["Inter"], label: ["Inter"], display: "Inter"}}}};</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .tab-active { background-color: #006769; color: white; }
+        
+        /* Smooth transitions for toggle */
+        .chart-value { transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; }
+        .hidden-value { opacity: 0; transform: translateY(10px); pointer-events: none; position: absolute; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- Top Navigation -->
+<header class="bg-[#fff8f5]/80 backdrop-blur-md dark:bg-[#121212]/80 flex justify-between items-center w-full px-6 pt-10 pb-4 max-w-xl mx-auto fixed top-0 left-0 right-0 z-40">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/20">
+<img alt="Couple portrait" class="w-full h-full object-cover" data-alt="high-end warm portrait of a smiling couple in a cozy sunlit room with soft editorial aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz0yCPY92JW6WAVKogY8e9pKJ_gKO8BrTKPoDQdqyK2UL82BMJsSGhVRZor_vFrK9300XHSaCDL7_05P2SU8oFa0Rra3ShO6uJu6Oo_BLCIgCiPqpL1g3KJFFWVoBClZ_JUKHBOLSxhQTFft4cR_9Q0wDiQkoW19wD_t7oavF1ey4MorFcnaGowSTuaLN3Z8gCJmp-LHiHZgyi8hiwZsV9A4XTY8mvQNGQ2m47Pfpn9b6Bf0qz2mobii_skU0OT2nsfACNaiS9d_k"/>
+</div>
+<span class="font-manrope font-black tracking-tight text-[#006769] dark:text-[#79d5d7] text-xl">Our Shared Sanctuary</span>
+</div>
+<button class="relative text-[#006769] dark:text-[#79d5d7] hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 block h-2.5 w-2.5 rounded-full bg-vibrant-orange ring-2 ring-white"></span>
+</button>
+</header>
+<main class="max-w-xl mx-auto px-6 pt-28 space-y-10">
+<!-- Hero: Expected vs Actual with Toggle -->
+<section class="relative">
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="text-secondary font-label text-[11px] font-bold tracking-widest uppercase mb-1 opacity-70">Monthly Spending</h2>
+<p class="text-4xl font-headline font-extrabold tracking-tighter text-on-surface">Budget Health</p>
+</div>
+<div class="text-right">
+<p class="text-vibrant-teal font-headline font-bold text-2xl">$4,250.00</p>
+<p class="text-secondary font-label text-[10px] uppercase tracking-wider font-bold">Remaining</p>
+</div>
+</div>
+<!-- Bento Card for Donut Chart -->
+<div class="bg-gradient-to-br from-surface-container-low to-white rounded-[2.5rem] p-8 shadow-sm border border-white/50 relative overflow-hidden group">
+<!-- Toggle Switches -->
+<div class="absolute top-6 left-1/2 -translate-x-1/2 flex bg-secondary-container/30 p-1 rounded-full z-10">
+<button class="px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all tab-active" id="btn-percent" onclick="toggleView('percent')">Percent</button>
+<button class="px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all text-secondary" id="btn-amount" onclick="toggleView('amount')">Amount</button>
+</div>
+<div class="relative w-64 h-64 mx-auto mt-8">
+<!-- SVG Donut Chart with Gradient -->
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<defs>
+<lineargradient id="gradient-chart" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#14B8A6"></stop>
+<stop offset="100%" stop-color="#006769"></stop>
+</lineargradient>
+</defs>
+<circle class="text-secondary-container opacity-20" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="12"></circle>
+<circle class="drop-shadow-sm" cx="50" cy="50" fill="transparent" r="40" stroke="url(#gradient-chart)" stroke-dasharray="160 251.2" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<!-- Inner Content -->
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="text-secondary font-label text-[10px] uppercase tracking-[0.2em] mb-1 font-bold">Spent</span>
+<div class="chart-value" id="view-percent">
+<span class="text-4xl font-headline font-black text-on-surface-variant">64%</span>
+</div>
+<div class="chart-value hidden-value" id="view-amount">
+<span class="text-3xl font-headline font-black text-on-surface-variant">$4,352</span>
+</div>
+<span class="text-secondary font-label text-[10px] uppercase tracking-wider mt-1 opacity-70">of $6,800</span>
+</div>
+</div>
+<!-- Asymmetric Floating Data Points -->
+<div class="absolute top-6 right-6 flex flex-col items-end">
+<div class="w-2.5 h-2.5 rounded-full bg-vibrant-teal mb-1 shadow-[0_0_8px_rgba(20,184,166,0.5)]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Actual</span>
+</div>
+<div class="absolute bottom-6 left-6 flex flex-col items-start">
+<div class="w-2.5 h-2.5 rounded-full bg-secondary-container mb-1"></div>
+<span class="text-[10px] font-bold text-on-surface-variant opacity-40 uppercase tracking-tighter">Budgeted</span>
+</div>
+</div>
+</section>
+<!-- Dynamic Categories Section -->
+<section class="space-y-6">
+<div class="flex justify-between items-center">
+<h3 class="text-2xl font-headline font-bold tracking-tight text-on-surface">By Category</h3>
+<button class="text-primary font-label text-xs font-bold hover:opacity-70 bg-primary/5 px-4 py-2 rounded-full transition-colors">View Analysis</button>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<!-- Groceries - Vibrant Purple -->
+<div class="bg-white rounded-3xl p-5 shadow-sm border border-vibrant-purple/5 hover:border-vibrant-purple/20 transition-all group overflow-hidden relative">
+<div class="absolute top-0 right-0 w-24 h-24 bg-vibrant-purple/5 rounded-full -mr-12 -mt-12 transition-transform group-hover:scale-150"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-2xl bg-vibrant-purple/10 flex items-center justify-center text-vibrant-purple group-hover:bg-vibrant-purple group-hover:text-white transition-all">
+<span class="material-symbols-outlined">shopping_cart</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-surface text-lg">Groceries</h4>
+<p class="text-[10px] font-bold text-vibrant-purple uppercase tracking-widest">70% Utilized</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline font-black text-on-surface">$840</p>
+<p class="text-secondary font-label text-[10px] font-semibold opacity-60">of $1,200</p>
+</div>
+</div>
+<div class="h-2.5 bg-vibrant-purple/10 rounded-full overflow-hidden relative z-10">
+<div class="h-full bg-vibrant-purple rounded-full w-[70%] shadow-[0_0_12px_rgba(139,92,246,0.3)]"></div>
+</div>
+</div>
+<!-- Rent & Bills - Vibrant Blue -->
+<div class="bg-white rounded-3xl p-5 shadow-sm border border-vibrant-blue/5 hover:border-vibrant-blue/20 transition-all group overflow-hidden relative">
+<div class="absolute top-0 right-0 w-24 h-24 bg-vibrant-blue/5 rounded-full -mr-12 -mt-12 transition-transform group-hover:scale-150"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-2xl bg-vibrant-blue/10 flex items-center justify-center text-vibrant-blue group-hover:bg-vibrant-blue group-hover:text-white transition-all">
+<span class="material-symbols-outlined">home</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-surface text-lg">Rent &amp; Bills</h4>
+<p class="text-[10px] font-bold text-vibrant-blue uppercase tracking-widest text-vibrant-blue">Paid</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline font-black text-on-surface">$2,400</p>
+<p class="text-secondary font-label text-[10px] font-semibold opacity-60">of $2,400</p>
+</div>
+</div>
+<div class="h-2.5 bg-vibrant-blue/10 rounded-full overflow-hidden relative z-10">
+<div class="h-full bg-vibrant-blue rounded-full w-full shadow-[0_0_12px_rgba(59,130,246,0.3)]"></div>
+</div>
+</div>
+<!-- Entertainment - Vibrant Orange -->
+<div class="bg-white rounded-3xl p-5 shadow-sm border border-vibrant-orange/5 hover:border-vibrant-orange/20 transition-all group overflow-hidden relative">
+<div class="absolute top-0 right-0 w-24 h-24 bg-vibrant-orange/5 rounded-full -mr-12 -mt-12 transition-transform group-hover:scale-150"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-2xl bg-vibrant-orange/10 flex items-center justify-center text-vibrant-orange group-hover:bg-vibrant-orange group-hover:text-white transition-all">
+<span class="material-symbols-outlined">movie</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-surface text-lg">Fun &amp; Style</h4>
+<p class="text-[10px] font-bold text-vibrant-orange uppercase tracking-widest">62% Utilized</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline font-black text-on-surface">$312</p>
+<p class="text-secondary font-label text-[10px] font-semibold opacity-60">of $500</p>
+</div>
+</div>
+<div class="h-2.5 bg-vibrant-orange/10 rounded-full overflow-hidden relative z-10">
+<div class="h-full bg-vibrant-orange rounded-full w-[62%] shadow-[0_0_12px_rgba(249,115,22,0.3)]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Last Expenses -->
+<section class="space-y-6">
+<h3 class="text-2xl font-headline font-bold tracking-tight text-on-surface">Recent Activity</h3>
+<div class="space-y-3">
+<!-- Transaction 1 -->
+<div class="bg-white p-4 rounded-2xl flex items-center justify-between group hover:shadow-md transition-all border border-transparent hover:border-primary/10">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-xl overflow-hidden shadow-sm ring-1 ring-black/5">
+<img alt="Partner 1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRvghjfSSJ4Vf90I2p0V4rcP8O4fKUZ9VFCyMzUKGscQp_xETz2MeUed57vF3TuOo_Gmc-s-rCqTecqs3Atff56JzIjFo3chG1vPhOj70FdgIoQ-xO5Dt_RHFyP5S749yxDK43D4LV7rnnblW9waiuCnqNnxsxu6h0zQPlgism8-FlP5dMR4WayFL-1UbkAZ6u6ZJGo2TelHRWIe_KGCZXAeomTKzxuBJxFObANxDZjnm8Qvmtpjfm0Ew2Ieiz12ozJ_zADxeSEzA"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-vibrant-purple p-1 rounded-full text-white shadow-sm">
+<span class="material-symbols-outlined text-[10px] block" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+</div>
+<div>
+<p class="font-headline font-bold text-on-surface">Artisan Bakery</p>
+<p class="text-secondary font-label text-[10px] font-medium opacity-60">TODAY, 09:12 AM</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline font-extrabold text-on-surface text-lg">-$24.50</p>
+</div>
+</div>
+<!-- Transaction 2 -->
+<div class="bg-white p-4 rounded-2xl flex items-center justify-between group hover:shadow-md transition-all border border-transparent hover:border-primary/10">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-xl overflow-hidden shadow-sm ring-1 ring-black/5">
+<img alt="Partner 2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwpFbaL4pgu03vw2qy9bzVYaxWqcn2ubn4LZr6l2Z3yQoWKz74eRSR33qb4P3i0BPMFFbE0ezjRPnYdF9Hr9tq0OGjas307kaFIudY3by_CgUW5YrwR1bdCW1Va6Rhtry5F7avuJvITD3lK5nGLnMQ52LoGSzKieRoB2AvcUa6a8BOQahgWivxPqbSuiYv4pvzKbY7Lkvwfm7DUah1rqvVC7qkFsC5tn2hG7K46lQsYCBx4MRmAzuP1WoPK8As46lSD7Ywleeu7EA"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-vibrant-orange p-1 rounded-full text-white shadow-sm">
+<span class="material-symbols-outlined text-[10px] block" style="font-variation-settings: 'FILL' 1;">subscriptions</span>
+</div>
+</div>
+<div>
+<p class="font-headline font-bold text-on-surface">Streaming Service</p>
+<p class="text-secondary font-label text-[10px] font-medium opacity-60">YESTERDAY</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline font-extrabold text-on-surface text-lg">-$15.99</p>
+</div>
+</div>
+<!-- Transaction 3 -->
+<div class="bg-white p-4 rounded-2xl flex items-center justify-between group hover:shadow-md transition-all border border-transparent hover:border-primary/10">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-xl overflow-hidden shadow-sm ring-1 ring-black/5">
+<img alt="Joint" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPkp9LNLYShfAV8DjAUbuKf2tOtot0yBZZYT1GmBIiT84RhikwW3I4T3EbbArcxoADlmi65VHUO72eSzvwVU2pF_0zagVpLF1e5SN2HGG_UfnmPxJ_xTWeeHelhn3tVAGwt0cixhDZKxbl4W7qcQ27xAf-YNL6k1znalxsNpOnr7IvnpjvNQLxVdbMgRkkok4y2yhNaOpb_sve6067_t2TkRVvL4-WxbeFIJ2EymN5gXMZXUhjyCOALazTdef5XhEwQ87MVa6Vm_I"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-vibrant-blue p-1 rounded-full text-white shadow-sm">
+<span class="material-symbols-outlined text-[10px] block" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+</div>
+</div>
+<div>
+<p class="font-headline font-bold text-on-surface">City Power &amp; Water</p>
+<p class="text-secondary font-label text-[10px] font-medium opacity-60">OCT 12, 2023</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline font-extrabold text-on-surface text-lg">-$142.00</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Shared BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-[#fff8f5]/80 dark:bg-[#1a1a1a]/80 backdrop-blur-xl shadow-[0px_-4px_24px_rgba(52,47,43,0.08)] rounded-t-[2.5rem] pb-8 pt-4 px-4 flex justify-around items-end">
+<!-- Dashboard (Active) -->
+<a class="flex flex-col items-center justify-center text-[#006769] dark:text-[#79d5d7] transition-all scale-105" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-inter text-[10px] font-bold tracking-wide uppercase">Dashboard</span>
+</a>
+<!-- History -->
+<a class="flex flex-col items-center justify-center text-[#576060] dark:text-[#a1a1a1] hover:text-[#006769] transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">history</span>
+<span class="font-inter text-[10px] font-bold tracking-wide uppercase">History</span>
+</a>
+<!-- Add Button (Signature Central FAB) -->
+<button class="bg-[#a13a0f] text-white rounded-full p-4 shadow-[0px_12px_32px_rgba(161,58,15,0.3)] scale-110 -translate-y-4 transition-all hover:scale-115 active:scale-95 ring-4 ring-white">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<!-- Categories -->
+<a class="flex flex-col items-center justify-center text-[#576060] dark:text-[#a1a1a1] hover:text-[#006769] transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">category</span>
+<span class="font-inter text-[10px] font-bold tracking-wide uppercase">Categories</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-[#576060] dark:text-[#a1a1a1] hover:text-[#006769] transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-inter text-[10px] font-bold tracking-wide uppercase">Settings</span>
+</a>
+</nav>
+<script>
+        function toggleView(view) {
+            const percentView = document.getElementById('view-percent');
+            const amountView = document.getElementById('view-amount');
+            const btnPercent = document.getElementById('btn-percent');
+            const btnAmount = document.getElementById('btn-amount');
+
+            if (view === 'percent') {
+                percentView.classList.remove('hidden-value');
+                amountView.classList.add('hidden-value');
+                btnPercent.classList.add('tab-active');
+                btnPercent.classList.remove('text-secondary');
+                btnAmount.classList.remove('tab-active');
+                btnAmount.classList.add('text-secondary');
+            } else {
+                percentView.classList.add('hidden-value');
+                amountView.classList.remove('hidden-value');
+                btnPercent.classList.remove('tab-active');
+                btnPercent.classList.add('text-secondary');
+                btnAmount.classList.add('tab-active');
+                btnAmount.classList.remove('text-secondary');
+            }
+        }
+    </script>
+</body></html>

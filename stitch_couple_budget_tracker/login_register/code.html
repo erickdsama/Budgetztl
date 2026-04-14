@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Our Sanctuary - Login &amp; Registration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"tertiary-fixed": "#dfccfd", "secondary-fixed-dim": "#ccd4ea", "surface-tint": "#475f8a", "surface-container-lowest": "#ffffff", "surface-container-high": "#e6e8f1", "secondary-container": "#dae2f9", tertiary: "#675882", "inverse-on-surface": "#9c9ca2", "tertiary-container": "#dfccfd", "outline-variant": "#afb2bc", "error-container": "#fa746f", "surface-container-low": "#f3f3fa", "on-primary": "#f8f8ff", "on-primary-container": "#2a446d", "secondary-fixed": "#dae2f9", "inverse-primary": "#b3cdfe", "primary-container": "#b3cdfe", "on-tertiary-container": "#50426a", "on-surface": "#2f323a", secondary: "#565f72", background: "#f9f9fe", "surface-variant": "#e0e2ec", "on-secondary": "#f8f8ff", "inverse-surface": "#0c0e12", "surface-container": "#ecedf6", "on-tertiary-fixed-variant": "#5a4b74", "on-primary-fixed": "#143058", primary: "#475f8a", outline: "#777a84", "tertiary-fixed-dim": "#d1beee", "on-secondary-container": "#495264", "primary-fixed": "#b3cdfe", "on-secondary-fixed": "#373f51", "on-error": "#fff7f6", error: "#a83836", "on-background": "#2f323a", "surface-container-highest": "#e0e2ec", "on-tertiary-fixed": "#3d2f56", "on-surface-variant": "#5c5f68", "surface-dim": "#d7dae4", "primary-fixed-dim": "#a6bfef", "on-error-container": "#6e0a12", surface: "#f9f9fe", "on-primary-fixed-variant": "#344d77", "on-secondary-fixed-variant": "#535c6e", "surface-bright": "#f9f9fe", "on-tertiary": "#fef7ff", "tertiary-dim": "#5b4c75", "secondary-dim": "#4a5365", "primary-dim": "#3a537e", "error-dim": "#67040d"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, fontFamily: {headline: ["Inter"], body: ["Inter"], label: ["Inter"], display: "Inter"}}}};</script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #fff8f5; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface flex min-h-screen overflow-x-hidden">
+<!-- Editorial Sidebar / Visual Anchor (Hidden on Mobile) -->
+<aside class="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-primary-container items-center justify-center p-12">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40 mix-blend-overlay" data-alt="Interior of a modern, warm home office with mid-century furniture, soft sunlight filtering through linen curtains, and a couple's shared workspace aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdmv7AJs-2HXt1hc6UzG2MWhCxUqp50lIMjGY33bfsz-mbkKF72jRqFFCUWFj0pOXzp-WkaW8PhQ6V9qKknjLszCieu7RkdK_CglX93l29CuCyFkZScYpFwED7ILi3bVerN2SoW8IVItz4-WTB-mXfdmU8l2TO3K3PbyP8HmpQUHet8I6wQ4cTMD3zg1EMsMY64wMWa4Fkq3uxcyGk7qMWG-x8J90ZujfMUuSJrHHPhvgZaFmxkl-N_a6lQC7dGgNkRj-dIWOxPcw"/>
+</div>
+<div class="relative z-10 max-w-lg">
+<h1 class="font-headline text-5xl font-extrabold text-on-primary-container tracking-tighter mb-6 leading-tight">
+                Our Sanctuary
+            </h1>
+<p class="font-headline text-xl text-primary-fixed leading-relaxed opacity-90 mb-12">
+                A shared digital space designed for the two of you. Coordinate your dreams, manage your wealth, and build your future together.
+            </p>
+<div class="flex flex-col gap-8">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-fixed text-3xl">favorite</span>
+<div>
+<h3 class="font-headline font-semibold text-on-primary-container">Shared Vision</h3>
+<p class="text-primary-fixed/80 text-sm">Synchronize budgets and goals in real-time.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-fixed text-3xl">security</span>
+<div>
+<h3 class="font-headline font-semibold text-on-primary-container">Encrypted Peace</h3>
+<p class="text-primary-fixed/80 text-sm">Your financial privacy is our highest priority.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Decorative Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/60 to-transparent pointer-events-none"></div>
+</aside>
+<!-- Main Content Area -->
+<main class="w-full lg:w-1/2 flex flex-col items-center justify-center p-6 sm:p-12 md:p-24 bg-background">
+<!-- Mobile Logo Anchor -->
+<div class="lg:hidden mb-12 text-center">
+<h1 class="font-headline text-3xl font-extrabold text-primary tracking-tighter">Our Sanctuary</h1>
+</div>
+<!-- Auth Container -->
+<div class="w-full max-w-md space-y-10">
+<!-- Header Section -->
+<div class="space-y-2">
+<h2 class="font-headline text-3xl font-bold text-on-surface tracking-tight">Welcome Home</h2>
+<p class="text-secondary font-medium">Please enter your details to sign in.</p>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-3 py-3.5 px-4 rounded-xl bg-surface-container-lowest border border-outline-variant/20 hover:bg-surface-container transition-all active:scale-95 duration-200">
+<img alt="Google Logo" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFP6EGp6Q1Jxv0J5enqgr_mu4QMyTlKejmifK2ZOko-FGV5WYcZ5YLDhP1FH9WcO8nMkZCvFkZG9Q2t_lgBF_NMpz5YdRXf2kcQvFjlHsGNmzfmdKGIFVpXOraUMAsNcy5rUeoqebf6iQsE6GTC97Wx_hnqe7s43UMBFJnmCIZx1HywtTWHptsF9nkUWL9wZdbE1HEK0CQcFzF-QvTci3SKZQYkGPEBkw5T9IAqjtSgnNQs-OPtnOQV36cZ3WZM-Uvq-zMCW57Yi4"/>
+<span class="text-sm font-semibold text-on-surface-variant font-label">Google</span>
+</button>
+<button class="flex items-center justify-center gap-3 py-3.5 px-4 rounded-xl bg-on-surface text-surface-bright hover:opacity-90 transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">ios</span>
+<span class="text-sm font-semibold font-label">Apple</span>
+</button>
+</div>
+<!-- Separator -->
+<div class="relative flex items-center py-2">
+<div class="flex-grow border-t border-outline-variant/30"></div>
+<span class="flex-shrink mx-4 text-xs font-bold text-outline uppercase tracking-widest font-label">Or Email</span>
+<div class="flex-grow border-t border-outline-variant/30"></div>
+</div>
+<!-- Email Form -->
+<form class="space-y-6">
+<div class="space-y-4">
+<div class="space-y-1.5">
+<label class="block text-xs font-bold text-secondary tracking-wide uppercase font-label ml-1" for="email">Email Address</label>
+<input class="w-full px-4 py-4 rounded-xl bg-surface-container-low border-none focus:ring-2 focus:ring-primary-container/20 text-on-surface placeholder:text-outline/50 font-body transition-all" id="email" placeholder="hello@yoursanctuary.com" type="email"/>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-end">
+<label class="block text-xs font-bold text-secondary tracking-wide uppercase font-label ml-1" for="password">Password</label>
+<a class="text-xs font-semibold text-tertiary hover:underline" href="#">Forgot?</a>
+</div>
+<input class="w-full px-4 py-4 rounded-xl bg-surface-container-low border-none focus:ring-2 focus:ring-primary-container/20 text-on-surface placeholder:text-outline/50 font-body transition-all" id="password" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="flex items-center gap-3 ml-1">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20 bg-surface-container-low" id="remember" type="checkbox"/>
+<label class="text-sm font-medium text-on-surface-variant" for="remember">Remember our device</label>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary rounded-full font-headline font-bold text-lg hover:bg-primary-container transition-all shadow-xl shadow-primary/10 active:scale-[0.98] duration-200" type="submit">
+                    Sign In
+                </button>
+</form>
+<!-- Bottom Navigation -->
+<div class="pt-8 text-center border-t border-outline-variant/20">
+<p class="text-on-surface-variant font-medium">
+                    New to Our Sanctuary? 
+                    <button class="text-tertiary font-bold hover:underline ml-1">Create an Account</button>
+</p>
+</div>
+</div>
+<!-- Editorial Footnote -->
+<footer class="absolute bottom-8 text-center lg:text-left lg:left-24 lg:right-24">
+<p class="text-[10px] text-outline/60 font-bold tracking-[0.2em] uppercase">
+                © 2024 Editorial Financial Harmony. All rights reserved.
+            </p>
+</footer>
+</main>
+<!-- Contextual "Add Partner" Suggestion (Small Editorial Card) -->
+<div class="fixed bottom-12 right-12 hidden xl:block w-72 p-6 bg-surface-container-lowest/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">diversity_1</span>
+</div>
+<h4 class="font-headline font-bold text-on-surface text-sm">Couple's Tip</h4>
+</div>
+<p class="text-xs leading-relaxed text-on-surface-variant">
+            Did you know? Couples who track budgets together report 30% higher financial satisfaction. Invite your partner after signing in.
+        </p>
+</div>
+</body></html>

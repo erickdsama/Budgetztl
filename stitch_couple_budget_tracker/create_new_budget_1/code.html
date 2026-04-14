@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>New Budget Setup Wizard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#151d1d",
+                        "surface-container-low": "#fcf2eb",
+                        "inverse-on-surface": "#f9efe8",
+                        "tertiary-container": "#c25227",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#ffdbcf",
+                        "primary-fixed-dim": "#79d5d7",
+                        "on-surface-variant": "#3e4949",
+                        "on-primary-fixed-variant": "#004f51",
+                        "surface-bright": "#fff8f5",
+                        "on-background": "#1f1b17",
+                        "surface-tint": "#00696b",
+                        "tertiary": "#a13a0f",
+                        "on-primary-fixed": "#002020",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-container-high": "#f0e6e0",
+                        "background": "#fff8f5",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#95f2f4",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#eae1da",
+                        "on-error": "#ffffff",
+                        "outline": "#6e7979",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f6ece6",
+                        "secondary-fixed": "#dbe4e4",
+                        "on-primary-container": "#f3ffff",
+                        "secondary-fixed-dim": "#bfc8c8",
+                        "secondary": "#576060",
+                        "inverse-surface": "#342f2b",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#404848",
+                        "on-tertiary-fixed": "#380c00",
+                        "surface-container-highest": "#eae1da",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1f1b17",
+                        "on-error-container": "#93000a",
+                        "surface": "#fff8f5",
+                        "on-secondary-container": "#5d6666",
+                        "inverse-primary": "#79d5d7",
+                        "tertiary-fixed-dim": "#ffb59c",
+                        "outline-variant": "#bdc9c8",
+                        "surface-dim": "#e2d8d2",
+                        "primary-container": "#118184",
+                        "primary": "#006769",
+                        "secondary-container": "#dbe4e4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .wizard-step {
+            display: none;
+        }
+        .wizard-step.active {
+            display: flex;
+        }
+        .progress-bar {
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .editorial-shadow {
+            box-shadow: 0px 12px 32px rgba(52, 47, 43, 0.06);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed min-h-screen flex flex-col">
+<header class="bg-[#fff8f5] dark:bg-neutral-900 w-full sticky top-0 z-50 flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-4">
+<button class="text-[#006769] dark:text-[#79d5d7] active:scale-95 duration-200 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Manrope'] text-2xl font-bold tracking-tight text-[#006769] dark:text-[#79d5d7]">New Budget</h1>
+</div>
+<div class="flex items-center gap-2">
+<div class="h-1 w-12 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary progress-bar" style="width: 50%;"></div>
+</div>
+<span class="text-[10px] font-bold text-secondary uppercase tracking-widest">1 / 2</span>
+</div>
+</header>
+<main class="flex-grow px-6 flex flex-col pt-8 max-w-lg mx-auto w-full pb-32">
+<section class="mb-12">
+<h2 class="font-headline text-4xl font-extrabold tracking-tight text-primary leading-tight mb-4">
+                Name Your Sanctuary
+            </h2>
+<p class="text-secondary font-medium text-lg leading-relaxed">
+                Give your financial goal a name that inspires you both.
+            </p>
+</section>
+<div class="flex-grow">
+<div class="wizard-step active flex-col space-y-8 animate-in fade-in duration-500">
+<div class="space-y-3">
+<label class="font-label text-xs font-bold uppercase tracking-widest text-secondary ml-1" for="budget-name">Budget Name</label>
+<div class="relative">
+<input autofocus="" class="w-full bg-surface-container border-none focus:ring-2 focus:ring-primary/20 rounded-xl px-5 py-6 text-2xl font-semibold placeholder:text-outline-variant transition-all outline-none" id="budget-name" placeholder="e.g., Our First Home" type="text"/>
+</div>
+</div>
+<div class="relative overflow-hidden bg-primary-container text-on-primary-container p-6 rounded-xl editorial-shadow group">
+<div class="absolute -right-4 -top-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[120px]" data-icon="favorite">favorite</span>
+</div>
+<div class="relative z-10 flex flex-col gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<span class="font-headline font-bold text-sm uppercase tracking-wider">Pro-Tip for Us</span>
+</div>
+<p class="font-body text-sm leading-relaxed font-medium">
+                            Couples who name their budgets after shared dreams—like "European Summer"—are <span class="font-bold underline decoration-secondary/30 underline-offset-4">40% more likely</span> to reach their goals together.
+                        </p>
+</div>
+</div>
+</div>
+<div class="wizard-step flex-col space-y-4">
+<label class="font-label text-xs font-bold uppercase tracking-widest text-secondary ml-1">Currency</label>
+<div class="bg-surface-container-low rounded-xl p-4 space-y-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full bg-surface-container-lowest border-none rounded-lg pl-10 pr-4 py-3 text-lg outline-none focus:ring-1 focus:ring-primary" placeholder="Search currency..." type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<button class="flex items-center justify-center gap-2 px-4 py-4 bg-primary text-on-primary rounded-xl font-semibold text-base active:scale-95 duration-200">
+                            USD ($)
+                        </button>
+<button class="flex items-center justify-center gap-2 px-4 py-4 bg-surface-container-highest text-on-surface-variant rounded-xl font-semibold text-base hover:bg-secondary-container transition-colors active:scale-95 duration-200">
+                            EUR (€)
+                        </button>
+<button class="flex items-center justify-center gap-2 px-4 py-4 bg-surface-container-highest text-on-surface-variant rounded-xl font-semibold text-base hover:bg-secondary-container transition-colors active:scale-95 duration-200">
+                            GBP (£)
+                        </button>
+<button class="flex items-center justify-center gap-2 px-4 py-4 bg-surface-container-highest text-on-surface-variant rounded-xl font-semibold text-base hover:bg-secondary-container transition-colors active:scale-95 duration-200">
+                            JPY (¥)
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-12 pb-8">
+<button class="w-full py-5 bg-tertiary text-on-tertiary rounded-full font-headline font-extrabold text-xl editorial-shadow active:scale-[0.98] transition-all hover:opacity-90 flex items-center justify-center gap-2">
+                Continue
+                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#fff8f5]/80 dark:bg-neutral-900/80 backdrop-blur-xl rounded-t-[2rem] shadow-[0px_-4px_24px_rgba(52,47,43,0.04)]">
+<div class="flex flex-col items-center justify-center text-[#576060] dark:text-neutral-400 px-4 py-2 hover:text-[#a13a0f] transition-colors active:scale-90 duration-300">
+<span class="material-symbols-outlined" data-icon="home_app_fill">home_filled</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Sanctuary</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#006769]/10 dark:bg-[#79d5d7]/10 text-[#006769] dark:text-[#79d5d7] rounded-full px-4 py-2 active:scale-90 duration-300">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Budgets</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#576060] dark:text-neutral-400 px-4 py-2 hover:text-[#a13a0f] transition-colors active:scale-90 duration-300">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Vault</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#576060] dark:text-neutral-400 px-4 py-2 hover:text-[#a13a0f] transition-colors active:scale-90 duration-300">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Us</span>
+</div>
+</nav>
+
+</body></html>

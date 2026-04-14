@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Start Your Journey - Shared Budget</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"tertiary-fixed": "#dfccfd", "secondary-fixed-dim": "#ccd4ea", "surface-tint": "#475f8a", "surface-container-lowest": "#ffffff", "surface-container-high": "#e6e8f1", "secondary-container": "#dae2f9", tertiary: "#675882", "inverse-on-surface": "#9c9ca2", "tertiary-container": "#dfccfd", "outline-variant": "#afb2bc", "error-container": "#fa746f", "surface-container-low": "#f3f3fa", "on-primary": "#f8f8ff", "on-primary-container": "#2a446d", "secondary-fixed": "#dae2f9", "inverse-primary": "#b3cdfe", "primary-container": "#b3cdfe", "on-tertiary-container": "#50426a", "on-surface": "#2f323a", secondary: "#565f72", background: "#f9f9fe", "surface-variant": "#e0e2ec", "on-secondary": "#f8f8ff", "inverse-surface": "#0c0e12", "surface-container": "#ecedf6", "on-tertiary-fixed-variant": "#5a4b74", "on-primary-fixed": "#143058", primary: "#475f8a", outline: "#777a84", "tertiary-fixed-dim": "#d1beee", "on-secondary-container": "#495264", "primary-fixed": "#b3cdfe", "on-secondary-fixed": "#373f51", "on-error": "#fff7f6", error: "#a83836", "on-background": "#2f323a", "surface-container-highest": "#e0e2ec", "on-tertiary-fixed": "#3d2f56", "on-surface-variant": "#5c5f68", "surface-dim": "#d7dae4", "primary-fixed-dim": "#a6bfef", "on-error-container": "#6e0a12", surface: "#f9f9fe", "on-primary-fixed-variant": "#344d77", "on-secondary-fixed-variant": "#535c6e", "surface-bright": "#f9f9fe", "on-tertiary": "#fef7ff", "tertiary-dim": "#5b4c75", "secondary-dim": "#4a5365", "primary-dim": "#3a537e", "error-dim": "#67040d"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, fontFamily: {headline: ["Inter"], body: ["Inter"], label: ["Inter"], display: "Inter"}}}};</script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .code-input-char {
+            width: 3.5rem;
+            height: 4.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-radius: 0.75rem;
+            background-color: #eae1da; /* surface-variant */
+            color: #1f1b17; /* on-surface */
+            transition: all 0.2s ease;
+        }
+        .keypad-button {
+            height: 4.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            border-radius: 1rem;
+            transition: all 0.2s ease;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col overflow-x-hidden">
+<!-- Header: Shared Component Implementation -->
+<header class="fixed top-0 w-full z-50 bg-[#fff8f5]/80 backdrop-blur-md flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-[#576060]/5 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[#006769]">arrow_back</span>
+</button>
+<span class="text-[#006769] font-['Manrope'] font-bold tracking-tighter text-lg">Our Sanctuary</span>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-12 px-6 flex flex-col items-center max-w-2xl mx-auto w-full">
+<!-- Primary Action Section: Create New Budget -->
+<div class="w-full mb-12 space-y-4">
+<h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-primary">Start Your Journey</h1>
+<p class="text-secondary text-lg font-medium leading-relaxed max-w-md">
+                Create a new shared sanctuary to manage finances, set goals, and build a secure future together.
+            </p>
+</div>
+<div class="w-full max-w-md mb-12">
+<button class="w-full bg-primary text-on-primary py-5 rounded-xl font-bold text-xl shadow-[0px_12px_32px_rgba(0,103,105,0.15)] active:scale-95 transition-transform">
+                Create New Budget
+            </button>
+</div>
+<!-- Separator -->
+<div class="w-full max-w-md flex items-center gap-4 py-8">
+<div class="h-px flex-grow bg-outline-variant/30"></div>
+<span class="text-sm font-label uppercase tracking-widest text-secondary font-semibold">Or</span>
+<div class="h-px flex-grow bg-outline-variant/30"></div>
+</div>
+<!-- Secondary Action Section: Join Your Partner -->
+<div class="w-full max-w-md space-y-6">
+<div class="space-y-2">
+<h2 class="text-2xl font-bold text-on-surface">Join Your Partner</h2>
+<p class="text-secondary text-sm font-medium">
+                    Enter the 6-digit code shared by your partner to sync with an existing budget.
+                </p>
+</div>
+<!-- Code Input Visualization (Secondary Style) -->
+<div class="flex justify-between gap-2 md:gap-3">
+<div class="code-input-char w-12 h-16 md:w-14 md:h-18 !bg-surface-container shadow-sm"></div>
+<div class="code-input-char w-12 h-16 md:w-14 md:h-18 !bg-surface-container shadow-sm"></div>
+<div class="code-input-char w-12 h-16 md:w-14 md:h-18 !bg-surface-container shadow-sm"></div>
+<div class="code-input-char w-12 h-16 md:w-14 md:h-18 !bg-surface-container shadow-sm"></div>
+<div class="code-input-char w-12 h-16 md:w-14 md:h-18 !bg-surface-container shadow-sm"></div>
+<div class="code-input-char w-12 h-16 md:w-14 md:h-18 !bg-surface-container shadow-sm"></div>
+</div>
+<button class="w-full bg-surface-container-highest text-primary py-4 rounded-xl font-bold text-lg hover:bg-surface-container-high transition-colors">
+                Enter Code &amp; Join
+            </button>
+</div>
+<!-- Helpful Guiding Text Card -->
+<div class="mt-16 w-full max-w-md p-6 rounded-xl bg-surface-container-low relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+<div class="flex items-start gap-4 relative z-10">
+<div class="bg-primary-container/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">help_outline</span>
+</div>
+<div class="space-y-1">
+<p class="font-bold text-on-surface">Can't find the code?</p>
+<p class="text-sm text-secondary leading-relaxed">
+                        The 6-digit code is generated by the budget owner. Ask your partner to open 'Invite Partner' in their Sanctuary settings.
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Decoration -->
+<footer class="mt-auto py-8 text-center text-secondary/40 text-xs font-label uppercase tracking-[0.2em]">
+        Design for Unity • Shared Sanctuary © 2024
+    </footer>
+</body></html>

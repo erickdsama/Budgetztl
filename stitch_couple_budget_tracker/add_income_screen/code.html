@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Income</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#dfccfd",
+                        "error-container": "#fa746f",
+                        "inverse-primary": "#b3cdfe",
+                        "inverse-surface": "#0c0e12",
+                        "tertiary-container": "#dfccfd",
+                        "on-surface-variant": "#5c5f68",
+                        "on-tertiary-fixed": "#3d2f56",
+                        "outline": "#777a84",
+                        "on-primary-fixed-variant": "#344d77",
+                        "on-primary": "#f8f8ff",
+                        "tertiary-dim": "#5b4c75",
+                        "secondary": "#565f72",
+                        "primary-dim": "#3a537e",
+                        "on-tertiary": "#fef7ff",
+                        "tertiary-fixed-dim": "#d1beee",
+                        "secondary-dim": "#4a5365",
+                        "on-error-container": "#6e0a12",
+                        "surface": "#f9f9fe",
+                        "surface-tint": "#475f8a",
+                        "primary-fixed-dim": "#a6bfef",
+                        "inverse-on-surface": "#9c9ca2",
+                        "secondary-container": "#dae2f9",
+                        "on-tertiary-container": "#50426a",
+                        "on-secondary-fixed-variant": "#535c6e",
+                        "on-tertiary-fixed-variant": "#5a4b74",
+                        "primary": "#475f8a",
+                        "on-error": "#fff7f6",
+                        "primary-fixed": "#b3cdfe",
+                        "surface-container": "#ecedf6",
+                        "outline-variant": "#afb2bc",
+                        "secondary-fixed-dim": "#ccd4ea",
+                        "error-dim": "#67040d",
+                        "on-primary-container": "#2a446d",
+                        "surface-bright": "#f9f9fe",
+                        "surface-variant": "#e0e2ec",
+                        "on-secondary-fixed": "#373f51",
+                        "tertiary": "#675882",
+                        "on-secondary": "#f8f8ff",
+                        "secondary-fixed": "#dae2f9",
+                        "background": "#f9f9fe",
+                        "on-secondary-container": "#495264",
+                        "surface-container-high": "#e6e8f1",
+                        "surface-container-low": "#f3f3fa",
+                        "on-primary-fixed": "#143058",
+                        "primary-container": "#b3cdfe",
+                        "error": "#a83836",
+                        "on-surface": "#2f323a",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#d7dae4",
+                        "surface-container-highest": "#e0e2ec",
+                        "on-background": "#2f323a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope", "Inter", "sans-serif"],
+                        "body": ["Manrope", "Inter", "sans-serif"],
+                        "label": ["Manrope", "Inter", "sans-serif"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fff8f5;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body text-on-background">
+<div class="relative flex min-h-screen w-full flex-col bg-[#fff8f5] overflow-x-hidden max-w-md mx-auto">
+<!-- Shared Header Component -->
+<div class="flex items-center bg-transparent p-4 pb-2 justify-between">
+<div class="text-on-surface flex size-12 shrink-0 items-center cursor-pointer" data-icon="ArrowLeft" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+</svg>
+</div>
+<h2 class="text-on-surface text-lg font-bold leading-tight tracking-[-0.015em] flex-1 font-headline">Add Income</h2>
+</div>
+<!-- Transaction Amount Display -->
+<div class="px-4 pb-3 pt-6 text-center">
+<p class="text-primary font-medium text-sm mb-1">Income Amount</p>
+<h1 class="text-primary tracking-tight text-[48px] font-bold leading-tight">$0.00</h1>
+</div>
+<!-- Toggle (Shared Logic) -->
+<div class="flex px-4 py-3">
+<div class="flex h-12 flex-1 items-center justify-center rounded-xl bg-surface-container-high p-1 shadow-sm">
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg px-2 has-[:checked]:bg-surface-container-lowest has-[:checked]:shadow-[0_2px_8px_rgba(0,0,0,0.05)] has-[:checked]:text-on-surface text-on-surface-variant text-sm font-semibold transition-all">
+<span class="truncate">Expense</span>
+<input class="invisible w-0" name="transaction-type" type="radio" value="Expense"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg px-2 has-[:checked]:bg-surface-container-lowest has-[:checked]:shadow-[0_2px_8px_rgba(0,0,0,0.05)] has-[:checked]:text-primary text-on-surface-variant text-sm font-semibold transition-all">
+<span class="truncate">Income</span>
+<input checked="" class="invisible w-0" name="transaction-type" type="radio" value="Income"/>
+</label>
+</div>
+</div>
+<!-- Income Categories (Shared Grid Structure) -->
+<h3 class="text-on-surface text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4 font-headline">Income Category</h3>
+<div class="grid grid-cols-2 gap-3 p-4">
+<!-- Salary -->
+<div class="flex flex-1 gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-4 items-center ring-2 ring-primary ring-offset-2">
+<div class="text-primary" data-icon="Wallet" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M216,72H56a8,8,0,0,1,0-16H192a8,8,0,0,0,0-16H56A24,24,0,0,0,32,64V192a24,24,0,0,0,24,24H216a16,16,0,0,0,16-16V88A16,16,0,0,0,216,72Zm0,128H56a8,8,0,0,1-8-8V86.63A23.84,23.84,0,0,0,56,88H216Zm-48-60a12,12,0,1,1,12,12A12,12,0,0,1,168,140Z"></path>
+</svg>
+</div>
+<h2 class="text-on-surface text-base font-bold leading-tight">Salary</h2>
+</div>
+<!-- Bonus -->
+<div class="flex flex-1 gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-4 items-center">
+<div class="text-on-surface" data-icon="Star" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M239.2,97.29a16,16,0,0,0-13.81-11L166,81.17,142.72,25.81h0a15.95,15.95,0,0,0-29.44,0L90.07,81.17,30.61,86.32a16,16,0,0,0-9.11,28.06L66.61,153.8,53.09,212.34a16,16,0,0,0,23.84,17.34l51-31,51.11,31a16,16,0,0,0,23.84-17.34l-13.51-58.6,45.1-39.36A16,16,0,0,0,239.2,97.29Zm-15.22,5-45.1,39.36a16,16,0,0,0-5.08,15.71L187.35,216v0l-51.07-31a15.9,15.9,0,0,0-16.54,0l-51,31h0L82.2,157.4a16,16,0,0,0-5.08-15.71L32,102.35a.37.37,0,0,1,0-.09l59.44-5.14a16,16,0,0,0,13.35-9.75L128,32.08l23.2,55.29a16,16,0,0,0,13.35,9.75L224,102.26S224,102.32,224,102.33Z"></path>
+</svg>
+</div>
+<h2 class="text-on-surface text-base font-bold leading-tight">Bonus</h2>
+</div>
+<!-- Dividends -->
+<div class="flex flex-1 gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-4 items-center">
+<div class="text-on-surface" data-icon="TrendUp" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M240,56v64a8,8,0,0,1-16,0V75.31l-82.34,82.35a8,8,0,0,1-11.32,0L96,123.31,29.66,189.66a8,8,0,0,1-11.32-11.32l72-72a8,8,0,0,1,11.32,0L136,140.69,212.69,64H168a8,8,0,0,1,0-16h64A8,8,0,0,1,240,56Z"></path>
+</svg>
+</div>
+<h2 class="text-on-surface text-base font-bold leading-tight">Dividends</h2>
+</div>
+<!-- Gift -->
+<div class="flex flex-1 gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-4 items-center">
+<div class="text-on-surface" data-icon="Gift" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M216,72H180.92c.39-.33.79-.65,1.17-1A29.53,29.53,0,0,0,192,49.57,32.62,32.62,0,0,0,158.44,16,29.53,29.53,0,0,0,137,25.91a54.94,54.94,0,0,0-9,14.48,54.94,54.94,0,0,0-9-14.48A29.53,29.53,0,0,0,97.56,16,32.62,32.62,0,0,0,64,49.57,29.53,29.53,0,0,0,73.91,71c.38.33.78.65,1.17,1H40A16,16,0,0,0,24,88v32a16,16,0,0,0,16,16v64a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V136a16,16,0,0,0,16-16V88A16,16,0,0,0,216,72ZM149,36.51a13.69,13.69,0,0,1,10-4.5h.49A16.62,16.62,0,0,1,176,49.08a13.69,13.69,0,0,1-4.5,10c-9.49,8.4-25.24,11.36-35,12.4C137.7,60.89,141,45.5,149,36.51Zm-64.09.36A16.63,16.63,0,0,1,96.59,32h.49a13.69,13.69,0,0,1,10,4.5c8.39,9.48,11.35,25.2,12.39,34.92-9.72-1-25.44-4-34.92-12.39a13.69,13.69,0,0,1-4.5-10A16.6,16.6,0,0,1,84.87,36.87ZM40,88h80v32H40Zm16,48h64v64H56Zm144,64H136V136h64Zm16-80H136V88h80v32Z"></path>
+</svg>
+</div>
+<h2 class="text-on-surface text-base font-bold leading-tight">Gift</h2>
+</div>
+<!-- Refund -->
+<div class="flex flex-1 gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-4 items-center">
+<div class="text-on-surface" data-icon="ArrowCounterClockwise" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,128a96,96,0,0,1-94.71,96H128A95.38,95.38,0,0,1,62.1,197.8a8,8,0,0,1,11-11.63A80,80,0,1,0,71.43,71.39a3.07,3.07,0,0,1-.26.25L44.59,96H72a8,8,0,0,1,0,16H24a8,8,0,0,1-8-8V56a8,8,0,0,1,16,0V85.8L60.25,60A96,96,0,0,1,224,128Z"></path>
+</svg>
+</div>
+<h2 class="text-on-surface text-base font-bold leading-tight">Refund</h2>
+</div>
+<!-- Transfer -->
+<div class="flex flex-1 gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-4 items-center">
+<div class="text-on-surface" data-icon="ArrowsLeftRight" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M213.66,181.66l-32,32a8,8,0,0,1-11.32-11.32L188.69,184H48a8,8,0,0,1,0-16H188.69l-18.35-18.34a8,8,0,0,1,11.32-11.32l32,32A8,8,0,0,1,213.66,181.66Zm-139.32-64a8,8,0,0,0,11.32-11.32L67.31,88H208a8,8,0,0,0,0-16H67.31L85.66,53.66A8,8,0,0,0,74.34,42.34l-32,32a8,8,0,0,0,0,11.32Z"></path>
+</svg>
+</div>
+<h2 class="text-on-surface text-base font-bold leading-tight">Transfer</h2>
+</div>
+</div>
+<!-- Details Section -->
+<div class="px-4 py-2 space-y-4">
+<div class="flex flex-col gap-1.5">
+<label class="text-on-surface text-sm font-bold px-1 font-headline">Transaction Date</label>
+<div class="flex items-center gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-3.5">
+<span class="material-symbols-outlined text-outline">calendar_today</span>
+<input class="bg-transparent border-none p-0 focus:ring-0 text-on-surface w-full font-medium" type="text" value="Today, Oct 24, 2023"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-on-surface text-sm font-bold px-1 font-headline">Add Details/Notes</label>
+<div class="flex items-start gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-3.5">
+<span class="material-symbols-outlined text-outline mt-0.5">notes</span>
+<textarea class="bg-transparent border-none p-0 focus:ring-0 text-on-surface w-full resize-none font-medium" placeholder="What was this for?" rows="2"></textarea>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<div class="mt-auto p-4 pt-6">
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-bold text-lg shadow-lg shadow-primary/20 active:scale-[0.98] transition-transform">
+                Confirm Income
+            </button>
+</div>
+<!-- Visual Padder -->
+<div class="h-8"></div>
+</div>
+</body></html>

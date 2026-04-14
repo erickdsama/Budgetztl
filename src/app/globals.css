@@ -1,26 +1,184 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary */
+  --primary: #475f8a;
+  --primary-container: #b3cdfe;
+  --primary-inverse: #b3cdfe;
+  --primary-hover: #344d77;
+  --on-primary: #f8f8ff;
+  --on-primary-container: #2a446d;
+
+  /* Secondary */
+  --secondary: #565f72;
+  --secondary-container: #dae2f9;
+  --on-secondary: #f8f8ff;
+  --on-secondary-container: #495264;
+
+  /* Tertiary */
+  --tertiary: #675882;
+  --tertiary-container: #dfccfd;
+  --on-tertiary: #fef7ff;
+  --on-tertiary-container: #50426a;
+
+  /* Background & Surface */
+  --background: #f9f9fe;
+  --surface: #f9f9fe;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f3f3fa;
+  --surface-container: #ecedf6;
+  --surface-container-high: #e6e8f1;
+  --surface-container-highest: #e0e2ec;
+  --surface-dim: #d7dae4;
+
+  /* On-Surface */
+  --on-surface: #2f323a;
+  --on-surface-variant: #5c5f68;
+  --foreground: #2f323a;
+
+  /* Outline */
+  --outline: #777a84;
+  --outline-variant: #afb2bc;
+
+  /* Error */
+  --error: #a83836;
+  --error-container: #ffdad6;
+  --on-error: #fff7f6;
+  --on-error-container: #6e0a12;
+
+  /* Legacy aliases */
+  --muted: #777a84;
+  --card: #ffffff;
+  --accent: #ecedf6;
+  --border: #afb2bc;
+}
+
+.dark {
+  --primary: #aac7ff;
+  --primary-container: #2a446d;
+  --primary-hover: #8db0f0;
+  --on-primary: #1b2d4f;
+  --on-primary-container: #d6e3ff;
+  --secondary: #c2c7d7;
+  --secondary-container: #3a4051;
+  --on-secondary: #2c3141;
+  --on-secondary-container: #dee3f3;
+  --background: #111318;
+  --surface: #111318;
+  --surface-container-lowest: #0c0e13;
+  --surface-container-low: #191c22;
+  --surface-container: #1d2027;
+  --surface-container-high: #282b33;
+  --surface-container-highest: #32353e;
+  --on-surface: #e2e2e9;
+  --on-surface-variant: #c4c6d0;
+  --outline: #8e9099;
+  --outline-variant: #44464f;
+  --error: #ffb4ab;
+  --error-container: #93000a;
+  --on-error: #690005;
+  --on-error-container: #ffdad6;
+  --foreground: #e2e2e9;
+  --muted: #8e9099;
+  --card: #1d2027;
+  --accent: #1d2027;
+  --border: #44464f;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Primary */
+  --color-primary: var(--primary);
+  --color-primary-container: var(--primary-container);
+  --color-primary-inverse: var(--primary-inverse);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-on-primary-container: var(--on-primary-container);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Secondary */
+  --color-secondary: var(--secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-secondary: var(--on-secondary);
+  --color-on-secondary-container: var(--on-secondary-container);
+
+  /* Tertiary */
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-container: var(--tertiary-container);
+  --color-on-tertiary: var(--on-tertiary);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+
+  /* Background & Surface */
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-surface-dim: var(--surface-dim);
+
+  /* On-Surface */
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-foreground: var(--foreground);
+
+  /* Outline */
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+
+  /* Error */
+  --color-error: var(--error);
+  --color-error-container: var(--error-container);
+  --color-on-error: var(--on-error);
+  --color-on-error-container: var(--on-error-container);
+
+  /* Legacy aliases for existing components */
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+
+  /* Fonts */
+  --font-heading: var(--font-manrope);
+  --font-body: var(--font-inter);
+
+  /* Shadows */
+  --shadow-ambient: 0px 12px 32px rgba(52, 47, 43, 0.06);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body, Inter, Arial, Helvetica, sans-serif);
+}
+
+/* iOS Tap Handling & Interactive Cursor */
+a, button, input, label, select, textarea, [role="button"], .cursor-pointer {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+/* Ensure inputs don't have pointer cursor when focused unless intended */
+input[type="text"], input[type="number"], input[type="email"], input[type="password"], textarea {
+  cursor: text;
+}
+
+button:disabled, [role="button"]:disabled {
+  cursor: not-allowed;
+}
+
+button, [role="button"] {
+  cursor: pointer;
+  /* Prevent iOS from treating buttons as non-interactive in forms */
+  -webkit-appearance: none;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Headline font - Manrope with -2% letter-spacing */
+.font-heading {
+  font-family: var(--font-heading, Manrope, Arial, Helvetica, sans-serif);
+  letter-spacing: -0.02em;
 }

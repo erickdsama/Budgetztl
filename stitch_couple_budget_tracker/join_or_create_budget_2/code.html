@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Start Your Journey - Shared Budget</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdbcf",
+                    "secondary-fixed-dim": "#bfc8c8",
+                    "surface-tint": "#00696b",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#f0e6e0",
+                    "secondary-container": "#dbe4e4",
+                    "tertiary": "#a13a0f",
+                    "inverse-on-surface": "#f9efe8",
+                    "tertiary-container": "#c25227",
+                    "outline-variant": "#bdc9c8",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#fcf2eb",
+                    "on-primary": "#ffffff",
+                    "on-primary-container": "#f3ffff",
+                    "secondary-fixed": "#dbe4e4",
+                    "inverse-primary": "#79d5d7",
+                    "primary-container": "#118184",
+                    "on-tertiary-container": "#fffbff",
+                    "on-surface": "#1f1b17",
+                    "secondary": "#576060",
+                    "background": "#fff8f5",
+                    "surface-variant": "#eae1da",
+                    "on-secondary": "#ffffff",
+                    "inverse-surface": "#342f2b",
+                    "surface-container": "#f6ece6",
+                    "on-tertiary-fixed-variant": "#822800",
+                    "on-primary-fixed": "#002020",
+                    "primary": "#006769",
+                    "outline": "#6e7979",
+                    "tertiary-fixed-dim": "#ffb59c",
+                    "on-secondary-container": "#5d6666",
+                    "primary-fixed": "#95f2f4",
+                    "on-secondary-fixed": "#151d1d",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-background": "#1f1b17",
+                    "surface-container-highest": "#eae1da",
+                    "on-tertiary-fixed": "#380c00",
+                    "on-surface-variant": "#3e4949",
+                    "surface-dim": "#e2d8d2",
+                    "primary-fixed-dim": "#79d5d7",
+                    "on-error-container": "#93000a",
+                    "surface": "#fff8f5",
+                    "on-primary-fixed-variant": "#004f51",
+                    "on-secondary-fixed-variant": "#404848",
+                    "surface-bright": "#fff8f5",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .code-input-char {
+            width: 3.5rem;
+            height: 4.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-radius: 0.75rem;
+            background-color: #eae1da; /* surface-variant */
+            color: #1f1b17; /* on-surface */
+            transition: all 0.2s ease;
+        }
+        .keypad-button {
+            height: 4.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            border-radius: 1rem;
+            transition: all 0.2s ease;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col overflow-x-hidden">
+<!-- Header: Shared Component Implementation -->
+<header class="fixed top-0 w-full z-50 bg-[#fff8f5]/80 backdrop-blur-md flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-[#576060]/5 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[#006769]">arrow_back</span>
+</button>
+<span class="text-[#006769] font-['Manrope'] font-bold tracking-tighter text-lg">Our Sanctuary</span>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-12 px-6 flex flex-col items-center max-w-2xl mx-auto w-full">
+<!-- Primary Action Section: Create New Budget -->
+<div class="w-full mb-12 space-y-4">
+<h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-primary">Start Your Journey</h1>
+<p class="text-secondary text-lg font-medium leading-relaxed max-w-md">Give your shared budget a name to start tracking and controlling your spending. Create a sanctuary to manage your finances together.</p>
+</div>
+<div class="w-full max-w-md mb-12">
+<button class="w-full bg-primary text-on-primary py-5 rounded-xl font-bold text-xl shadow-[0px_12px_32px_rgba(0,103,105,0.15)] active:scale-95 transition-transform">
+                Create New Budget
+            </button>
+</div>
+<!-- Separator -->
+<div class="w-full max-w-md flex items-center gap-4 py-8">
+<div class="h-px flex-grow bg-outline-variant/30"></div>
+<span class="text-sm font-label uppercase tracking-widest text-secondary font-semibold">Or</span>
+<div class="h-px flex-grow bg-outline-variant/30"></div>
+</div>
+<!-- Secondary Action Section: Join Your Partner -->
+<div class="w-full max-w-md space-y-6">
+<div class="space-y-2">
+<h2 class="text-2xl font-bold text-on-surface">Join Your Partner</h2>
+<p class="text-secondary text-sm font-medium">Enter the 6-digit sync code from your partner to access and manage your shared budget immediately.</p>
+</div>
+<!-- Code Input Visualization (Secondary Style) -->
+<div class="flex justify-between gap-2 md:gap-3">
+<div class="code-input-char w-12 h-16 md:w-14 md:h-18 !bg-surface-container shadow-sm"></div>
+<div class="code-input-char w-12 h-16 md:w-14 md:h-18 !bg-surface-container shadow-sm"></div>
+<div class="code-input-char w-12 h-16 md:w-14 md:h-18 !bg-surface-container shadow-sm"></div>
+<div class="code-input-char w-12 h-16 md:w-14 md:h-18 !bg-surface-container shadow-sm"></div>
+<div class="code-input-char w-12 h-16 md:w-14 md:h-18 !bg-surface-container shadow-sm"></div>
+<div class="code-input-char w-12 h-16 md:w-14 md:h-18 !bg-surface-container shadow-sm"></div>
+</div>
+<button class="w-full bg-surface-container-highest text-primary py-4 rounded-xl font-bold text-lg hover:bg-surface-container-high transition-colors">
+                Enter Code &amp; Join
+            </button>
+</div>
+<!-- Helpful Guiding Text Card -->
+<div class="mt-16 w-full max-w-md p-6 rounded-xl bg-surface-container-low relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+<div class="flex items-start gap-4 relative z-10">
+<div class="bg-primary-container/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">help_outline</span>
+</div>
+<div class="space-y-1">
+<p class="font-bold text-on-surface">Can't find the code?</p>
+<p class="text-sm text-secondary leading-relaxed">The sync code is generated by the primary account holder. Your partner must provide this code from their 'Invite Partner' settings to link your accounts.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Decoration -->
+<footer class="mt-auto py-8 text-center text-secondary/40 text-xs font-label uppercase tracking-[0.2em]">
+        Design for Unity • Shared Sanctuary © 2024
+    </footer>
+</body></html>

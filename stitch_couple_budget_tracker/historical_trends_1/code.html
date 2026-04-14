@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analyst Console - Our Shared Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --bg-deep: #0a0c10;
+            --bg-card: #161b22;
+            --electric-blue: #2f81f7;
+            --bright-green: #3fb950;
+            --sharp-red: #f85149;
+            --text-main: #c9d1d9;
+            --text-dim: #8b949e;
+        }
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #30363d;
+            border-radius: 10px;
+        }
+        .glass-panel {
+            background: rgba(22, 27, 34, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #30363d;
+        }
+        .active-widget {
+            border: 2px solid var(--electric-blue);
+            background: rgba(47, 129, 247, 0.1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2f81f7",
+                        secondary: "#8b949e",
+                        background: "#0a0c10",
+                        surface: "#161b22",
+                        error: "#f85149",
+                        success: "#3fb950"
+                    }
+                }
+            }
+        };
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-24 overflow-x-hidden">
+<header class="sticky top-0 z-50 glass-panel px-4 py-4 flex justify-between items-center border-b border-[#30363d]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-[#30363d]">
+<img alt="Couple portrait" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqI4ZUPupOEJNR4NX2ZELUUVuQ-Vx6MYW4XN4UT5idngAWmdvjEc1sU5WNtWdxzsaivKbgQC1d6nk6g76hsDr7EG4TZQz9_BzWtmzZq2GKCbIvMr0tRhqDfNjMBRLSDIetyutklZtg2OHnGHAWMK1F2Nj1bHsPJ1xRctvGC8okCfVt1LtcEZK3Wdn7XLUgpmAOHyO-X4TbWVKnQnetAh37XG7EAWoBqh6Yk514EwdfzHlab1cUki0Kf9FN5naHtXCvs3Dj6P3AN04"/>
+</div>
+<div>
+<h1 class="text-xs font-bold uppercase tracking-widest text-primary">Terminal v2.4</h1>
+<p class="text-[10px] text-secondary font-mono">Our Shared Sanctuary // DATA_FEED_ACTIVE</p>
+</div>
+</div>
+<button class="text-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+</header>
+<main class="max-w-xl mx-auto pt-4 space-y-6">
+<section>
+<div class="flex justify-between items-center px-4 mb-3">
+<h2 class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Timeline Matrix</h2>
+<span class="text-[10px] font-mono text-primary">2024 - 2023</span>
+</div>
+<div class="flex gap-3 overflow-x-auto px-4 pb-4 custom-scrollbar snap-x">
+<div class="min-w-[100px] h-[110px] bg-surface border border-primary p-3 rounded-lg snap-start flex flex-col justify-between active-widget">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-bold text-white">JUL 24</span>
+<span class="material-symbols-outlined text-success text-sm">check_circle</span>
+</div>
+<div class="h-8 flex items-end gap-[2px]">
+<div class="w-1 bg-primary/30 h-[20%]"></div>
+<div class="w-1 bg-primary/30 h-[40%]"></div>
+<div class="w-1 bg-primary/30 h-[30%]"></div>
+<div class="w-1 bg-primary/30 h-[70%]"></div>
+<div class="w-1 bg-primary h-[90%]"></div>
+</div>
+<div class="text-[10px] font-mono text-primary">$3,420</div>
+</div>
+<div class="min-w-[100px] h-[110px] bg-surface border border-[#30363d] p-3 rounded-lg snap-start flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-bold text-secondary">JUN 24</span>
+<span class="material-symbols-outlined text-error text-sm">warning</span>
+</div>
+<div class="h-8 flex items-end gap-[2px]">
+<div class="w-1 bg-error/30 h-[60%]"></div>
+<div class="w-1 bg-error/30 h-[80%]"></div>
+<div class="w-1 bg-error/30 h-[90%]"></div>
+<div class="w-1 bg-error h-[100%]"></div>
+<div class="w-1 bg-error/30 h-[85%]"></div>
+</div>
+<div class="text-[10px] font-mono text-error">$4,210</div>
+</div>
+<div class="min-w-[100px] h-[110px] bg-surface border border-[#30363d] p-3 rounded-lg snap-start flex flex-col justify-between opacity-80">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-bold text-secondary">MAY 24</span>
+<span class="material-symbols-outlined text-success text-sm">trending_down</span>
+</div>
+<div class="h-8 flex items-end gap-[2px]">
+<div class="w-1 bg-success/30 h-[30%]"></div>
+<div class="w-1 bg-success/30 h-[20%]"></div>
+<div class="w-1 bg-success h-[40%]"></div>
+<div class="w-1 bg-success/30 h-[35%]"></div>
+<div class="w-1 bg-success/30 h-[25%]"></div>
+</div>
+<div class="text-[10px] font-mono text-success">$2,980</div>
+</div>
+<div class="min-w-[100px] h-[110px] bg-surface border border-[#30363d] p-3 rounded-lg snap-start flex flex-col justify-between opacity-80">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-bold text-secondary">APR 24</span>
+<span class="material-symbols-outlined text-primary text-sm">drag_handle</span>
+</div>
+<div class="h-8 flex items-end gap-[2px]">
+<div class="w-1 bg-primary/30 h-[40%]"></div>
+<div class="w-1 bg-primary/30 h-[50%]"></div>
+<div class="w-1 bg-primary/30 h-[55%]"></div>
+<div class="w-1 bg-primary h-[60%]"></div>
+<div class="w-1 bg-primary/30 h-[45%]"></div>
+</div>
+<div class="text-[10px] font-mono text-primary">$3,650</div>
+</div>
+</div>
+</section>
+<section class="px-4">
+<div class="bg-surface border border-[#30363d] rounded-xl p-5 relative overflow-hidden">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Yearly Spending Trends</h3>
+<p class="text-2xl font-black text-white mt-1">Spending History</p>
+</div>
+<div class="text-right">
+<span class="text-[10px] font-mono text-primary block">Efficiency Score</span>
+<span class="text-xl font-bold text-primary">94%</span>
+</div>
+</div>
+<div class="h-48 w-full flex items-end justify-between gap-2 px-2 border-b border-[#30363d] pb-2">
+<div class="flex-1 bg-[#30363d] hover:bg-primary transition-colors rounded-t h-[40%]"></div>
+<div class="flex-1 bg-[#30363d] hover:bg-primary transition-colors rounded-t h-[55%]"></div>
+<div class="flex-1 bg-[#30363d] hover:bg-primary transition-colors rounded-t h-[45%]"></div>
+<div class="flex-1 bg-primary rounded-t h-[85%] relative">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-mono text-white bg-primary px-1 rounded">JUL</div>
+</div>
+<div class="flex-1 bg-error rounded-t h-[100%] relative opacity-60"></div>
+<div class="flex-1 bg-[#30363d] hover:bg-primary transition-colors rounded-t h-[30%]"></div>
+<div class="flex-1 bg-[#30363d] hover:bg-primary transition-colors rounded-t h-[50%]"></div>
+<div class="flex-1 bg-[#30363d] hover:bg-primary transition-colors rounded-t h-[65%]"></div>
+</div>
+<div class="flex justify-between pt-2 px-1">
+<span class="text-[8px] font-mono text-secondary">JAN</span>
+<span class="text-[8px] font-mono text-secondary">MAR</span>
+<span class="text-[8px] font-mono text-primary font-bold">JUL</span>
+<span class="text-[8px] font-mono text-secondary">SEP</span>
+<span class="text-[8px] font-mono text-secondary">DEC</span>
+</div>
+</div>
+</section>
+<section class="px-4">
+<div class="bg-surface border border-[#30363d] rounded-xl p-5">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Top Shared Categories (JUL)</h3>
+<span class="text-[10px] font-mono text-primary">ID: 0724-EXP</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-2 rounded-lg bg-[#0d1117] border border-[#30363d]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">home</span>
+</div>
+<div>
+<p class="text-xs font-bold text-white uppercase tracking-wider">Mortgage &amp; Rent</p>
+<div class="w-24 h-[2px] bg-[#30363d] mt-1">
+<div class="w-[70%] h-full bg-primary"></div>
+</div>
+</div>
+</div>
+<span class="text-sm font-mono font-bold text-white">$1,800.00</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-[#0d1117] border border-[#30363d]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">restaurant</span>
+</div>
+<div>
+<p class="text-xs font-bold text-white uppercase tracking-wider">Dining Out</p>
+<div class="w-24 h-[2px] bg-[#30363d] mt-1">
+<div class="w-[30%] h-full bg-primary"></div>
+</div>
+</div>
+</div>
+<span class="text-sm font-mono font-bold text-white">$450.00</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-[#0d1117] border border-[#30363d]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">flight</span>
+</div>
+<div>
+<p class="text-xs font-bold text-white uppercase tracking-wider">Travel &amp; Leisure</p>
+<div class="w-24 h-[2px] bg-[#30363d] mt-1">
+<div class="w-[15%] h-full bg-primary"></div>
+</div>
+</div>
+</div>
+<span class="text-sm font-mono font-bold text-white">$320.00</span>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-[#30363d] grid grid-cols-2 gap-4">
+<div class="bg-[#0d1117] p-3 rounded border border-[#30363d]">
+<p class="text-[8px] text-secondary uppercase tracking-widest">Total Shared Savings</p>
+<p class="text-lg font-bold text-white">$42,850.00</p>
+</div>
+<div class="bg-[#0d1117] p-3 rounded border border-[#30363d]">
+<p class="text-[8px] text-secondary uppercase tracking-widest">Status Report</p>
+<p class="text-xs font-bold text-success mt-1">Healthy balance maintained</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<nav class="fixed bottom-0 left-0 w-full bg-surface border-t border-[#30363d] px-6 py-4 flex justify-between items-center z-50">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors">grid_view</span>
+<span class="text-[9px] font-bold uppercase text-secondary group-hover:text-primary">Dashboard</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="text-[9px] font-bold uppercase text-primary">History</span>
+</a>
+<div class="relative -top-8">
+<button class="w-14 h-14 bg-primary rounded-full shadow-lg shadow-primary/20 flex items-center justify-center border-4 border-background hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white text-3xl font-bold">add</span>
+</button>
+</div>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors">category</span>
+<span class="text-[9px] font-bold uppercase text-secondary group-hover:text-primary">Categories</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors">settings</span>
+<span class="text-[9px] font-bold uppercase text-secondary group-hover:text-primary">Settings</span>
+</a>
+</nav>
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] z-[100]" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E');"></div>
+
+</body></html>

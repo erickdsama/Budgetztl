@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>New Budget Setup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#151d1d",
+                        "surface-container-low": "#fcf2eb",
+                        "inverse-on-surface": "#f9efe8",
+                        "tertiary-container": "#c25227",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#ffdbcf",
+                        "primary-fixed-dim": "#79d5d7",
+                        "on-surface-variant": "#3e4949",
+                        "on-primary-fixed-variant": "#004f51",
+                        "surface-bright": "#fff8f5",
+                        "on-background": "#1f1b17",
+                        "surface-tint": "#00696b",
+                        "tertiary": "#a13a0f",
+                        "on-primary-fixed": "#002020",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-container-high": "#f0e6e0",
+                        "background": "#fff8f5",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#95f2f4",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#eae1da",
+                        "on-error": "#ffffff",
+                        "outline": "#6e7979",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f6ece6",
+                        "secondary-fixed": "#dbe4e4",
+                        "on-primary-container": "#f3ffff",
+                        "secondary-fixed-dim": "#bfc8c8",
+                        "secondary": "#576060",
+                        "inverse-surface": "#342f2b",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#404848",
+                        "on-tertiary-fixed": "#380c00",
+                        "surface-container-highest": "#eae1da",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1f1b17",
+                        "on-error-container": "#93000a",
+                        "surface": "#fff8f5",
+                        "on-secondary-container": "#5d6666",
+                        "inverse-primary": "#79d5d7",
+                        "tertiary-fixed-dim": "#ffb59c",
+                        "outline-variant": "#bdc9c8",
+                        "surface-dim": "#e2d8d2",
+                        "primary-container": "#118184",
+                        "primary": "#006769",
+                        "secondary-container": "#dbe4e4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-banner {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(180deg, rgba(0,103,105,0.05) 0%, rgba(255,248,245,0) 100%);
+        }
+        .sticky-note {
+            transform: rotate(-3deg);
+            box-shadow: 2px 4px 12px rgba(0,0,0,0.1);
+        }#currency-overlay:not(.active) {
+            display: none;
+        }
+        #currency-overlay.active {
+            display: flex;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed min-h-screen relative overflow-x-hidden">
+<header class="w-full absolute top-0 z-50 flex items-center justify-between px-6 py-4">
+<button class="text-[#006769] active:scale-95 duration-200 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline text-sm font-bold uppercase tracking-widest text-[#006769]">New Budget</h1>
+<div class="w-6"></div>
+</header>
+<main class="min-h-screen flex flex-col">
+<section class="hero-banner relative">
+<h2 class="font-headline text-5xl font-extrabold tracking-tight text-primary leading-[1.1] mb-6 px-4">
+                Name Your Sanctuary
+            </h2>
+<p class="text-secondary font-medium text-lg max-w-[280px] leading-relaxed opacity-80">
+                Give your financial goal a name that inspires you both.
+            </p>
+<div class="absolute top-24 -right-4 sticky-note bg-primary-container text-on-primary-container p-4 rounded-lg w-40 z-20 overflow-hidden group">
+<div class="absolute -right-2 -top-2 opacity-10 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-6xl" data-icon="favorite">favorite</span>
+</div>
+<div class="relative z-10 flex flex-col gap-1">
+<div class="flex items-center gap-1 mb-1">
+<span class="material-symbols-outlined text-xs" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<span class="font-headline font-bold text-[8px] uppercase tracking-wider">Pro-Tip</span>
+</div>
+<p class="font-body text-[10px] leading-tight font-medium">
+                        Couples who name their budgets after shared dreams are <span class="font-bold underline decoration-secondary/30">40% more likely</span> to reach goals.
+                    </p>
+</div>
+</div>
+</section>
+<div class="flex-grow flex flex-col items-center justify-start px-6 -mt-10">
+<div class="w-full space-y-12">
+<div class="relative text-center">
+<label class="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-outline mb-4 block" for="budget-name">Budget Name</label>
+<input class="w-full bg-transparent border-b-2 border-primary/20 focus:border-primary focus:ring-0 rounded-none px-0 py-6 text-4xl font-extrabold text-center placeholder:text-outline/20 transition-all outline-none text-primary" id="budget-name" placeholder="Our First Home" type="text"/>
+</div>
+<div class="flex justify-center">
+<button class="flex items-center gap-3 px-8 py-4 bg-surface-container rounded-full text-primary font-bold text-sm tracking-wide active:scale-95 transition-all shadow-sm border border-primary/5" onclick="document.getElementById('currency-overlay').classList.add('active')">
+<span class="material-symbols-outlined text-xl">payments</span>
+                        Select Currency
+                        <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<div class="px-6 pb-32 pt-12">
+<button class="w-full py-5 bg-tertiary text-on-tertiary rounded-full font-headline font-extrabold text-xl shadow-lg active:scale-[0.98] transition-all">
+                Continue
+            </button>
+</div>
+</main>
+<div class="fixed inset-0 z-[100] bg-surface flex-col hidden" id="currency-overlay">
+<header class="flex items-center justify-between px-6 py-4 border-b border-surface-container-highest">
+<button class="text-primary" onclick="document.getElementById('currency-overlay').classList.remove('active')">
+<span class="material-symbols-outlined">close</span>
+</button>
+<h3 class="font-headline font-bold text-primary">Select Currency</h3>
+<div class="w-6"></div>
+</header>
+<div class="p-6 space-y-6 flex-grow overflow-y-auto">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-2xl pl-12 pr-4 py-4 text-base outline-none focus:ring-2 focus:ring-primary/20" placeholder="Search currency..." type="text"/>
+</div>
+<div class="grid grid-cols-1 gap-3">
+<button class="flex items-center justify-between p-5 bg-primary text-on-primary rounded-2xl">
+<span class="font-bold">USD - US Dollar</span>
+<span class="material-symbols-outlined">check_circle</span>
+</button>
+<button class="flex items-center justify-between p-5 bg-surface-container-low text-on-surface rounded-2xl hover:bg-surface-container transition-colors">
+<span class="font-semibold">EUR - Euro</span>
+</button>
+<button class="flex items-center justify-between p-5 bg-surface-container-low text-on-surface rounded-2xl hover:bg-surface-container transition-colors">
+<span class="font-semibold">GBP - British Pound</span>
+</button>
+<button class="flex items-center justify-between p-5 bg-surface-container-low text-on-surface rounded-2xl hover:bg-surface-container transition-colors">
+<span class="font-semibold">JPY - Japanese Yen</span>
+</button>
+</div>
+</div>
+</div>
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#fff8f5]/80 backdrop-blur-xl rounded-t-[2rem] shadow-[0px_-4px_24px_rgba(52,47,43,0.04)]">
+<div class="flex flex-col items-center justify-center text-[#576060] px-4 py-2 hover:text-[#a13a0f] transition-colors active:scale-90 duration-300">
+<span class="material-symbols-outlined" data-icon="home_app_fill">home_filled</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Sanctuary</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#006769]/10 text-[#006769] rounded-full px-4 py-2 active:scale-90 duration-300">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Budgets</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#576060] px-4 py-2 hover:text-[#a13a0f] transition-colors active:scale-90 duration-300">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Vault</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#576060] px-4 py-2 hover:text-[#a13a0f] transition-colors active:scale-90 duration-300">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Us</span>
+</div>
+</nav>
+
+</body></html>

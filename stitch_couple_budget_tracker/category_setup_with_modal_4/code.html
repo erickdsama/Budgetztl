@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Category Configuration | Our Shared Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1e293b", // Deep Navy Blue
+                        secondary: "#64748b", // Cool Grey
+                        accent: "#94a3b8", // Muted accent
+                        background: "#ffffff", // Clean White
+                        surface: "#f8fafc", // Very light grey surface
+                        border: "#e2e8f0"
+                    },
+                    fontFamily: {
+                        headline: ["Inter"],
+                        body: ["Inter"],
+                        label: ["Inter"],
+                        display: "Inter"
+                    }
+                }
+            }
+        };
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            }
+            body {
+                font-family: 'Inter', sans-serif;
+                background-color: #ffffff;
+            }
+        }
+        #add-category-modal {
+            display: none;
+        }
+        #add-category-modal.active {
+            display: flex;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-slate-900 min-h-screen pb-40">
+<header class="bg-white/80 backdrop-blur-md flex justify-between items-center w-full px-6 pt-10 pb-4 max-w-xl mx-auto fixed top-0 left-0 right-0 z-50 border-b border-slate-100">
+<div class="flex items-center gap-3">
+<img alt="Couple portrait" class="w-8 h-8 rounded-full object-cover grayscale-[0.2]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGdUA30hIOoBtEB5Jko0sxij9VERj9CD1WnBADsrWE3kTSINtxpK1p0JVPIGwhTKZPojBqjHFH1KiLYZ6ghXeDuho8-_UxxWRZEDbaWa3jjLPIcBox9lC_MAxmWD0ml5lwSUkSHe6deu-mlyHsmuNKWEqQIhtNn7kR_gx3F5h3YP0NWTj-55tEaLBWPqfYn322kzxNUTKRoShn9-vuorxrNTCT8tNTGMNKuiaE78Z6fKjHpma-ezGwegNKb7FQN2XBCzagRV8KNsE"/>
+<h1 class="text-primary font-bold tracking-tight text-xl">Our Shared Sanctuary</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-slate-100 text-primary hover:bg-slate-200 transition-colors" onclick="document.getElementById('add-category-modal').classList.add('active')">
+<span class="material-symbols-outlined text-xl">add</span>
+</button>
+<button class="text-secondary hover:text-primary transition-colors ml-2">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-32 px-6 max-w-xl mx-auto">
+<header class="mb-8">
+<h2 class="font-headline font-bold text-2xl text-primary tracking-tight mb-1">Category Setup</h2>
+<p class="text-secondary text-sm font-body">Define the monthly boundaries for our shared life.</p>
+</header>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface border border-slate-100 p-4 rounded-xl flex flex-col justify-between hover:shadow-sm transition-shadow">
+<div class="flex items-start justify-between mb-3">
+<div class="w-8 h-8 rounded-lg bg-slate-200 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="shopping_basket">shopping_basket</span>
+</div>
+<div class="text-right">
+<span class="text-xs font-bold text-primary block">$800</span>
+</div>
+</div>
+<div>
+<h3 class="font-bold text-sm text-primary truncate">Groceries</h3>
+<span class="text-[9px] font-bold uppercase tracking-wider text-secondary">Household</span>
+</div>
+<div class="mt-3 w-full bg-slate-200 h-1 rounded-full overflow-hidden">
+<div class="bg-slate-400 h-full rounded-full w-[65%]"></div>
+</div>
+</div>
+<div class="bg-surface border border-slate-100 p-4 rounded-xl flex flex-col justify-between hover:shadow-sm transition-shadow">
+<div class="flex items-start justify-between mb-3">
+<div class="w-8 h-8 rounded-lg bg-slate-200 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="restaurant">restaurant</span>
+</div>
+<div class="text-right">
+<span class="text-xs font-bold text-primary block">$350</span>
+</div>
+</div>
+<div>
+<h3 class="font-bold text-sm text-primary truncate">Dining Out</h3>
+<span class="text-[9px] font-bold uppercase tracking-wider text-secondary">Lifestyle</span>
+</div>
+<div class="mt-3 w-full bg-slate-200 h-1 rounded-full overflow-hidden">
+<div class="bg-slate-400 h-full rounded-full w-[40%]"></div>
+</div>
+</div>
+<div class="bg-surface border border-slate-100 p-4 rounded-xl flex flex-col justify-between hover:shadow-sm transition-shadow">
+<div class="flex items-start justify-between mb-3">
+<div class="w-8 h-8 rounded-lg bg-slate-200 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="bolt">bolt</span>
+</div>
+<div class="text-right">
+<span class="text-xs font-bold text-primary block">$220</span>
+</div>
+</div>
+<div>
+<h3 class="font-bold text-sm text-primary truncate">Utilities</h3>
+<span class="text-[9px] font-bold uppercase tracking-wider text-secondary">Fixed Costs</span>
+</div>
+<div class="mt-3 w-full bg-slate-200 h-1 rounded-full overflow-hidden">
+<div class="bg-slate-400 h-full rounded-full w-[90%]"></div>
+</div>
+</div>
+<button class="border border-dashed border-slate-300 rounded-xl flex flex-col items-center justify-center gap-1 text-secondary hover:bg-slate-50 transition-colors p-4" onclick="document.getElementById('add-category-modal').classList.add('active')">
+<span class="material-symbols-outlined text-xl" data-icon="add_circle">add_circle</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Add New</span>
+</button>
+</div>
+<div class="mt-10 bg-primary text-white p-6 rounded-2xl relative overflow-hidden shadow-lg">
+<div class="relative z-10">
+<span class="text-[10px] font-bold uppercase tracking-[0.1em] text-slate-400 mb-1 block">Projected Monthly Total</span>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold">$1,890</span>
+<span class="text-sm opacity-50 font-medium">/ month</span>
+</div>
+</div>
+<div class="absolute -right-6 -bottom-6 w-32 h-32 bg-slate-700/50 rounded-full blur-2xl"></div>
+</div>
+</main>
+<div class="fixed inset-0 z-[100] items-end justify-center bg-slate-900/40 backdrop-blur-sm p-4 sm:items-center" id="add-category-modal">
+<div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-2xl p-8 relative shadow-2xl animate-in slide-in-from-bottom duration-300">
+<button class="absolute top-6 right-6 text-slate-400 hover:text-primary" onclick="document.getElementById('add-category-modal').classList.remove('active')">
+<span class="material-symbols-outlined">close</span>
+</button>
+<h4 class="font-bold text-xl text-primary mb-6">Create Category</h4>
+<div class="mb-6">
+<span class="text-[10px] font-bold uppercase tracking-widest text-secondary block mb-3">Select Icon</span>
+<div class="grid grid-cols-5 gap-2">
+<button class="aspect-square rounded-lg bg-slate-100 flex items-center justify-center text-primary hover:bg-slate-200 transition-all border border-transparent focus:border-primary">
+<span class="material-symbols-outlined text-lg" data-icon="home">home</span>
+</button>
+<button class="aspect-square rounded-lg bg-slate-100 flex items-center justify-center text-primary hover:bg-slate-200 transition-all border-2 border-primary">
+<span class="material-symbols-outlined text-lg" data-icon="movie" style="font-variation-settings: 'FILL' 1;">movie</span>
+</button>
+<button class="aspect-square rounded-lg bg-slate-100 flex items-center justify-center text-primary hover:bg-slate-200 transition-all border border-transparent">
+<span class="material-symbols-outlined text-lg" data-icon="fitness_center">fitness_center</span>
+</button>
+<button class="aspect-square rounded-lg bg-slate-100 flex items-center justify-center text-primary hover:bg-slate-200 transition-all border border-transparent">
+<span class="material-symbols-outlined text-lg" data-icon="medical_services">medical_services</span>
+</button>
+<button class="aspect-square rounded-lg bg-slate-100 flex items-center justify-center text-primary hover:bg-slate-200 transition-all border border-transparent">
+<span class="material-symbols-outlined text-lg" data-icon="pets">pets</span>
+</button>
+<button class="aspect-square rounded-lg bg-slate-100 flex items-center justify-center text-primary hover:bg-slate-200 transition-all border border-transparent">
+<span class="material-symbols-outlined text-lg" data-icon="education">school</span>
+</button>
+<button class="aspect-square rounded-lg bg-slate-100 flex items-center justify-center text-primary hover:bg-slate-200 transition-all border border-transparent">
+<span class="material-symbols-outlined text-lg" data-icon="local_gas_station">local_gas_station</span>
+</button>
+<button class="aspect-square rounded-lg bg-slate-100 flex items-center justify-center text-primary hover:bg-slate-200 transition-all border border-transparent">
+<span class="material-symbols-outlined text-lg" data-icon="style">style</span>
+</button>
+<button class="aspect-square rounded-lg bg-slate-100 flex items-center justify-center text-primary hover:bg-slate-200 transition-all border border-transparent">
+<span class="material-symbols-outlined text-lg" data-icon="celebration">celebration</span>
+</button>
+<button class="aspect-square rounded-lg bg-slate-100 flex items-center justify-center text-primary hover:bg-slate-200 transition-all border border-transparent">
+<span class="material-symbols-outlined text-lg" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex flex-col">
+<label class="text-[10px] font-bold uppercase tracking-widest text-secondary mb-1.5">Category Name</label>
+<input class="w-full bg-slate-50 border border-slate-200 focus:ring-1 focus:ring-primary focus:border-primary rounded-lg py-3 px-4 font-body text-primary text-sm" placeholder="e.g. Entertainment" type="text"/>
+</div>
+<div class="flex flex-col">
+<label class="text-[10px] font-bold uppercase tracking-widest text-secondary mb-1.5">Monthly Budget</label>
+<div class="relative flex items-center">
+<span class="absolute left-4 text-slate-400 font-bold">$</span>
+<input class="w-full bg-slate-50 border border-slate-200 focus:ring-1 focus:ring-primary focus:border-primary rounded-lg py-3 pl-8 pr-4 font-bold text-primary text-lg" placeholder="0.00" type="number"/>
+</div>
+</div>
+<button class="w-full py-3.5 bg-primary text-white rounded-lg font-bold text-sm hover:bg-slate-800 transition-colors mt-4" onclick="document.getElementById('add-category-modal').classList.remove('active')">
+                Create Category
+            </button>
+</div>
+</div>
+</div>
+<nav class="bg-white/90 backdrop-blur-xl fixed bottom-0 left-0 w-full flex justify-around items-end px-4 pb-8 pt-4 z-50 border-t border-slate-100 shadow-lg">
+<a class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-inter text-[9px] font-bold tracking-wider uppercase mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-inter text-[9px] font-bold tracking-wider uppercase mt-1">History</span>
+</a>
+<button class="bg-primary text-white rounded-full p-4 shadow-xl -translate-y-4 transition-transform active:scale-95" onclick="document.getElementById('add-category-modal').classList.add('active')">
+<span class="material-symbols-outlined text-2xl" data-icon="add">add</span>
+</button>
+<a class="flex flex-col items-center justify-center text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="category" style="font-variation-settings: 'FILL' 1;">category</span>
+<span class="font-inter text-[9px] font-bold tracking-wider uppercase mt-1">Categories</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-inter text-[9px] font-bold tracking-wider uppercase mt-1">Settings</span>
+</a>
+</nav>
+
+</body></html>
