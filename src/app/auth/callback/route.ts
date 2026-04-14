@@ -1,72 +1,84 @@
-import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { NextResponse, type NextRequest } from "next/server";
+import { createServerClient } from "@supabase/ssr";
+import type { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import type { Database } from "@/lib/supabase/types";
 
-export async function GET(request: Request) {
-  const { searchParams, origin } = new URL(request.url);
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
   const code = searchParams.get("code");
   const nextParam = searchParams.get("next");
 
-  if (code) {
-    const supabase = await createClient();
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ??
+    (request.headers.get("x-forwarded-host")
+      ? `https://${request.headers.get("x-forwarded-host")}`
+      : null) ??
+    new URL(request.url).origin;
 
-    if (!error) {
-      // Check if the user already has a profile; if not, create one from auth metadata
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+  if (!code) {
+    return NextResponse.redirect(`${siteUrl}/login?error=auth_callback_failed`);
+  }
 
-      let next = nextParam ?? "/onboarding";
+  // Collect cookies emitted by Supabase during the code exchange
+  const pendingCookies: ResponseCookie[] = [];
 
-      if (user) {
-        const { data: existingProfile } = await supabase
-          .from("profiles")
-          .select("id")
-          .eq("id", user.id)
-          .single();
+  const supabase = createServerClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          // Collect — applied to the final response below
+          cookiesToSet.forEach(({ name, value, options }) =>
+            pendingCookies.push({ name, value, ...options })
+          );
+        },
+      },
+    }
+  );
 
-        if (!existingProfile) {
-          const fullName =
-            (user.user_metadata?.full_name as string) ??
-            (user.user_metadata?.name as string) ??
-            "User";
+  const { error } = await supabase.auth.exchangeCodeForSession(code);
 
-          await supabase.from("profiles").insert({
-            id: user.id,
-            full_name: fullName,
-            avatar_url:
-              (user.user_metadata?.avatar_url as string | undefined) ?? null,
-          });
-        }
+  if (error) {
+    return NextResponse.redirect(`${siteUrl}/login?error=auth_callback_failed`);
+  }
 
-        // If no explicit next param, route based on budget membership
-        if (!nextParam) {
-          const { data: membership } = await supabase
-            .from("budget_members")
-            .select("id")
-            .eq("user_id", user.id)
-            .limit(1)
-            .single();
+  // Determine where to send the user
+  let redirectPath = nextParam ?? "/onboarding";
 
-          if (membership) {
-            next = "/dashboard";
-          }
-        }
-      }
+  const { data: { user } } = await supabase.auth.getUser();
 
-      const forwardedHost = request.headers.get("x-forwarded-host");
-      const isLocalEnv = process.env.NODE_ENV === "development";
+  if (user) {
+    // Create profile for first-time OAuth users
+    const { data: existingProfile } = await supabase
+      .from("profiles").select("id").eq("id", user.id).single();
 
-      if (isLocalEnv) {
-        return NextResponse.redirect(`${origin}${next}`);
-      } else if (forwardedHost) {
-        return NextResponse.redirect(`https://${forwardedHost}${next}`);
-      } else {
-        return NextResponse.redirect(`${origin}${next}`);
-      }
+    if (!existingProfile) {
+      const fullName =
+        (user.user_metadata?.full_name as string) ??
+        (user.user_metadata?.name as string) ??
+        "User";
+      await supabase.from("profiles").insert({
+        id: user.id,
+        full_name: fullName,
+        avatar_url: (user.user_metadata?.avatar_url as string | undefined) ?? null,
+      });
+    }
+
+    if (!nextParam) {
+      const { data: membership } = await supabase
+        .from("budget_members").select("id").eq("user_id", user.id).limit(1).single();
+      redirectPath = membership ? "/dashboard" : "/onboarding";
     }
   }
 
-  // If code exchange fails, redirect to login with an error
-  return NextResponse.redirect(`${origin}/login?error=auth_callback_failed`);
+  // Build final response and apply all collected session cookies
+  const response = NextResponse.redirect(`${siteUrl}${redirectPath}`);
+  pendingCookies.forEach((cookie) => response.cookies.set(cookie));
+
+  return response;
 }

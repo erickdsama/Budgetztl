@@ -6,22 +6,24 @@ import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 
 async function getOrigin(): Promise<string> {
-  const headersList = await headers();
-  // x-forwarded-proto is set by Vercel/proxies in production
-  // In dev, protocol is always http
-  const protocol = headersList.get("x-forwarded-proto") ?? "http";
-
-  // Use NEXT_PUBLIC_SITE_URL env var if set (best for production)
+  // 1. Explicit env var — always wins (set this in Vercel dashboard)
   if (process.env.NEXT_PUBLIC_SITE_URL) {
     return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
   }
 
-  // Fall back to the host header (works in dev + Vercel)
+  // 2. Vercel automatically provides VERCEL_URL for the current deployment
+  //    It's the deployment domain without protocol (e.g. budgetztl.vercel.app)
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+
+  // 3. Read from request headers (dev fallback)
+  const headersList = await headers();
+  const protocol = headersList.get("x-forwarded-proto") ?? "http";
   const host = headersList.get("host");
   if (host) return `${protocol}://${host}`;
 
-  // Last resort fallback
-  return "https://budgetztl.novaminds.xyz";
+  return "http://localhost:3001";
 }
 
 export type AuthState = {
