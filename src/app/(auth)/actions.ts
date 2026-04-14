@@ -7,9 +7,21 @@ import { headers } from "next/headers";
 
 async function getOrigin(): Promise<string> {
   const headersList = await headers();
-  const host = headersList.get("host") ?? "budgetztl.novaminds.xyz";
+  // x-forwarded-proto is set by Vercel/proxies in production
+  // In dev, protocol is always http
   const protocol = headersList.get("x-forwarded-proto") ?? "http";
-  return `${protocol}://${host}`;
+
+  // Use NEXT_PUBLIC_SITE_URL env var if set (best for production)
+  if (process.env.NEXT_PUBLIC_SITE_URL) {
+    return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
+  }
+
+  // Fall back to the host header (works in dev + Vercel)
+  const host = headersList.get("host");
+  if (host) return `${protocol}://${host}`;
+
+  // Last resort fallback
+  return "https://budgetztl.novaminds.xyz";
 }
 
 export type AuthState = {
