@@ -1,8 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { IconDisplay } from "@/app/categories/components/category-modal";
 import { formatCurrency, formatRelativeDate } from "@/lib/format";
 import type { DashboardTransaction } from "@/app/dashboard/actions";
+import { useTranslation } from "@/lib/i18n";
 
 interface RecentActivityProps {
   transactions: DashboardTransaction[];
@@ -13,18 +16,17 @@ export function RecentActivity({
   transactions,
   currency,
 }: RecentActivityProps) {
+  const t = useTranslation();
+
   if (transactions.length === 0) {
     return (
       <div className="rounded-3xl bg-surface-container-low px-6 py-8 text-center">
-        <p className="text-sm text-on-surface-variant">No transactions yet.</p>
-        <p className="mt-1 text-xs text-outline">
-          Start tracking your spending together!
-        </p>
+        <p className="text-sm text-on-surface-variant">{t.dashboard.noRecentActivity}</p>
         <Link
           href="/transactions/new"
           className="mt-3 inline-block text-sm font-medium text-primary hover:text-primary-hover"
         >
-          Add your first transaction
+          {t.categories.addNew}
         </Link>
       </div>
     );
@@ -33,12 +35,12 @@ export function RecentActivity({
   return (
     <div>
       <h3 className="font-heading text-2xl font-bold tracking-tight text-on-surface">
-        Recent Activity
+        {t.dashboard.recentActivity}
       </h3>
 
       <div className="mt-4 space-y-3">
-        {transactions.map((t) => (
-          <TransactionRow key={t.id} transaction={t} currency={currency} />
+        {transactions.map((tx) => (
+          <TransactionRow key={tx.id} transaction={tx} currency={currency} />
         ))}
       </div>
     </div>

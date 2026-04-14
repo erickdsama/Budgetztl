@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import { updateProfile } from "@/app/settings/actions";
+import { useTranslation } from "@/lib/i18n";
 
 type ProfileSectionProps = {
   fullName: string;
@@ -23,6 +24,7 @@ export function ProfileSection({
   email,
   avatarUrl,
 }: ProfileSectionProps) {
+  const t = useTranslation();
   const [isEditingName, setIsEditingName] = useState(false);
   const [name, setName] = useState(fullName);
   const [saving, setSaving] = useState(false);
@@ -45,7 +47,7 @@ export function ProfileSection({
     if (result.success) {
       setIsEditingName(false);
     } else {
-      setError(result.error ?? "Failed to update name.");
+      setError(result.error ?? t.common.error);
     }
   }
 
@@ -121,14 +123,14 @@ export function ProfileSection({
               disabled={saving}
               className="rounded-xl bg-primary px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-primary-hover disabled:opacity-50"
             >
-              {saving ? "..." : "Save"}
+              {saving ? "..." : t.common.save}
             </button>
             <button
               onClick={handleCancelEdit}
               disabled={saving}
               className="rounded-xl bg-surface-container px-3 py-1.5 text-xs font-semibold text-outline transition-colors hover:text-on-surface disabled:opacity-50"
             >
-              Cancel
+              {t.common.cancel}
             </button>
           </div>
         ) : (

@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import type { CategoryWithSpent } from "@/app/categories/actions";
 import { deleteCategory } from "@/app/categories/actions";
 import { CategoryModal, IconDisplay } from "@/app/categories/components/category-modal";
+import { useTranslation } from "@/lib/i18n";
 
 // Map category type → tailwind color token set
 // Design reference: emerald=Household, amber=Lifestyle, blue=Fixed Costs
@@ -34,6 +35,7 @@ interface CategoryListProps {
 }
 
 export function CategoryList({ categories, transactionType = "expense" }: CategoryListProps) {
+  const t = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<CategoryWithSpent | null>(null);
   const [modalKey, setModalKey] = useState(0);
@@ -69,7 +71,7 @@ export function CategoryList({ categories, transactionType = "expense" }: Catego
     setDeletingId(id);
     startTransition(async () => {
       const result = await deleteCategory(id);
-      if (!result.success) setDeleteError(result.error ?? "Failed to delete category.");
+      if (!result.success) setDeleteError(result.error ?? t.categories.deleteError);
       setDeletingId(null);
     });
   }
@@ -80,25 +82,25 @@ export function CategoryList({ categories, transactionType = "expense" }: Catego
         <div className="mx-6 mb-4 rounded-xl bg-error-container px-4 py-3 text-sm text-error">
           {deleteError}
           <button type="button" onClick={() => setDeleteError(null)} className="ml-2 font-semibold underline">
-            Dismiss
+            {t.common.dismiss}
           </button>
         </div>
       )}
 
       {/* Projected Monthly Total — compact banner at top */}
       <div className="mx-6 mb-4 flex items-center justify-between rounded-2xl bg-primary px-5 py-3">
-        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/60">Monthly Total</span>
+        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/60">{t.categories.monthlyTotal}</span>
         <div className="flex items-baseline gap-1.5">
           <span className="font-heading text-xl font-black text-white">{formatCurrency(projectedTotal)}</span>
-          <span className="text-xs text-white/60">/ mo</span>
+          <span className="text-xs text-white/60">{t.categories.monthly}</span>
         </div>
       </div>
 
       <div className="px-6 space-y-6">
         {categories.length === 0 ? (
           <div className="rounded-2xl bg-surface-container-low px-6 py-12 text-center shadow-[0px_12px_32px_rgba(52,47,43,0.04)]">
-            <p className="text-sm text-on-surface-variant">No categories yet.</p>
-            <p className="mt-1 text-xs text-outline">Add your first category to start planning your budget.</p>
+            <p className="text-sm text-on-surface-variant">{t.categories.noCategories}</p>
+            <p className="mt-1 text-xs text-outline">{t.categories.addFirstCategory}</p>
           </div>
         ) : (
           categories.map((cat) => {
@@ -138,7 +140,7 @@ export function CategoryList({ categories, transactionType = "expense" }: Catego
 
                     <div className="text-right">
                       <span className="text-[10px] font-bold uppercase tracking-widest text-outline block mb-1">
-                        Monthly Plan
+                        {t.categories.monthlyPlan}
                       </span>
                       <span className={`font-heading font-bold text-lg ${colors.text} truncate`}>
                         {formatCurrency(budget)}
@@ -189,7 +191,7 @@ export function CategoryList({ categories, transactionType = "expense" }: Catego
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
               </svg>
             </div>
-            <span className="font-heading font-bold text-xl text-primary">Add New Category</span>
+            <span className="font-heading font-bold text-xl text-primary">{t.categories.addNew}</span>
           </div>
         </div>
 

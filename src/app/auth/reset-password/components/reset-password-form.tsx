@@ -4,10 +4,12 @@ import { useActionState } from "react";
 import { SubmitButton } from "@/components/submit-button";
 import Link from "next/link";
 import { resetPassword, type AuthState } from "@/app/(auth)/actions";
+import { useTranslation } from "@/lib/i18n";
 
 const initialState: AuthState = {};
 
 export function ResetPasswordForm() {
+  const t = useTranslation();
   const [state, formAction, pending] = useActionState(
     resetPassword,
     initialState
@@ -23,11 +25,10 @@ export function ResetPasswordForm() {
 
         {/* Heading */}
         <h2 className="font-heading mt-8 text-3xl font-bold tracking-tight text-on-surface">
-          Reset Password
+          {t.auth.resetPassword}
         </h2>
         <p className="mt-2 text-sm text-on-surface-variant">
-          Enter your email address and we&apos;ll send you a link to reset your
-          password.
+          {t.auth.resetDesc}
         </p>
 
         {/* Success Message */}
@@ -53,7 +54,7 @@ export function ResetPasswordForm() {
                 htmlFor="email"
                 className="block text-xs font-semibold tracking-wider text-on-surface uppercase"
               >
-                Email Address
+                {t.auth.emailAddress}
               </label>
               <input
                 id="email"
@@ -73,9 +74,9 @@ export function ResetPasswordForm() {
 
             {/* Submit */}
             <SubmitButton
-              label="Send Reset Link"
-            pending={pending}
-              pendingLabel="Sending..."
+              label={t.auth.sendResetLink}
+              pending={pending}
+              pendingLabel={t.auth.sending}
               className="w-full rounded-full bg-primary px-4 py-3.5 text-base font-semibold text-white shadow-[0px_12px_32px_rgba(52,47,43,0.06)] transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
             />
           </form>
@@ -83,12 +84,12 @@ export function ResetPasswordForm() {
 
         {/* Back to Login */}
         <p className="mt-8 text-center text-sm text-on-surface-variant">
-          Remember your password?{" "}
+          {t.auth.backToLogin}{" "}
           <Link
             href="/login"
             className="font-semibold text-on-surface hover:text-primary"
           >
-            Sign In
+            {t.auth.signIn}
           </Link>
         </p>
 

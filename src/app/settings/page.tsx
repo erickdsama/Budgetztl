@@ -5,6 +5,7 @@ import { getAuthSession } from "@/lib/supabase/server";
 import { signOut } from "@/app/(auth)/actions";
 import { SettingsContent } from "@/app/settings/components/settings-content";
 import { BottomNav } from "@/components/bottom-nav";
+import { getT } from "@/lib/i18n/server";
 
 export const metadata: Metadata = {
   title: "Settings | Our Sanctuary",
@@ -18,6 +19,8 @@ export default async function SettingsPage() {
   if (!user) {
     redirect("/login");
   }
+
+  const t = await getT();
 
   return (
     <div className="flex min-h-dvh flex-col bg-surface pb-32 text-on-surface">
@@ -44,10 +47,10 @@ export default async function SettingsPage() {
             </svg>
           </Link>
           <h1 className="font-heading text-xl font-semibold tracking-tight text-primary">
-            Settings
+            {t.settings.title}
           </h1>
         </div>
-        <div className="font-heading font-bold text-primary">Harmonize</div>
+        <div className="font-heading font-bold text-primary">{t.settings.harmonize}</div>
       </header>
 
       <main className="mx-auto w-full max-w-2xl space-y-10 px-6 pt-8">
@@ -58,7 +61,7 @@ export default async function SettingsPage() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <section className="space-y-4">
             <h3 className="px-1 text-lg font-bold tracking-tight text-on-surface">
-              Account
+              {t.settings.account}
             </h3>
             <div className="space-y-1 rounded-3xl bg-surface-container-lowest p-2">
               <Link
@@ -80,7 +83,7 @@ export default async function SettingsPage() {
                     />
                   </svg>
                   <span className="text-sm font-medium text-on-surface">
-                    Change Password
+                    {t.settings.changePassword}
                   </span>
                 </div>
                 <svg
@@ -116,7 +119,7 @@ export default async function SettingsPage() {
                     />
                   </svg>
                   <span className="text-sm font-medium text-on-surface">
-                    Scheduled Transactions
+                    {t.settings.scheduledTransactions}
                   </span>
                 </div>
                 <svg
@@ -138,7 +141,7 @@ export default async function SettingsPage() {
 
           <section className="space-y-4">
             <h3 className="px-1 text-lg font-bold tracking-tight text-on-surface">
-              Support
+              {t.settings.support}
             </h3>
             <div className="space-y-1 rounded-3xl bg-surface-container-lowest p-2">
               <button className="flex w-full items-center justify-between rounded-2xl p-4 transition-colors hover:bg-surface-container">
@@ -157,7 +160,7 @@ export default async function SettingsPage() {
                     />
                   </svg>
                   <span className="text-sm font-medium text-on-surface">
-                    Help Center
+                    {t.settings.helpCenter}
                   </span>
                 </div>
               </button>
@@ -177,7 +180,7 @@ export default async function SettingsPage() {
                     />
                   </svg>
                   <span className="text-sm font-medium text-on-surface">
-                    Privacy Policy
+                    {t.settings.privacyPolicy}
                   </span>
                 </div>
               </button>
@@ -205,11 +208,11 @@ export default async function SettingsPage() {
                   d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
                 />
               </svg>
-              Sign Out
+              {t.settings.signOut}
             </button>
           </form>
           <p className="mt-6 text-center text-[10px] font-bold uppercase tracking-widest text-outline-variant">
-            Version 2.4.1 • Built with Love
+            {t.settings.version} 2.4.1 &bull; {t.settings.builtWithLove}
           </p>
         </div>
       </main>
@@ -218,4 +221,3 @@ export default async function SettingsPage() {
     </div>
   );
 }
-

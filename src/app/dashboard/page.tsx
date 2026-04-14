@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getAuthSession } from "@/lib/supabase/server";
 import { DashboardContent } from "@/app/dashboard/components/dashboard-content";
 import { BottomNav } from "@/components/bottom-nav";
+import { getT } from "@/lib/i18n/server";
 
 export const metadata: Metadata = {
   title: "Dashboard | Our Sanctuary",
@@ -13,6 +14,8 @@ export default async function DashboardPage() {
   const { user } = await getAuthSession();
   if (!user) redirect("/login");
 
+  const t = await getT();
+
   return (
     <div className="flex min-h-dvh flex-col bg-background pb-32">
       <header className="fixed left-0 right-0 top-0 z-40 mx-auto flex w-full max-w-xl items-center justify-between bg-background/80 px-6 pb-4 pt-10 backdrop-blur-md">
@@ -21,7 +24,7 @@ export default async function DashboardPage() {
           <div className="h-10 w-10 rounded-full bg-primary/5" />
         </div>
         <p className="font-heading text-xl font-black tracking-tight text-primary">
-          Our Shared Sanctuary
+          {t.dashboard.ourSharedSanctuary}
         </p>
         <button
           type="button"

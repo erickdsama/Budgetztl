@@ -1,6 +1,7 @@
 "use client";
 
 import { formatCurrency } from "@/lib/format";
+import { useTranslation } from "@/lib/i18n";
 
 interface LifetimeMetricsProps {
   lifetimeSavings: number;
@@ -16,6 +17,7 @@ export function LifetimeMetrics({
   currentBalance,
   currency,
 }: LifetimeMetricsProps) {
+  const t = useTranslation();
   const balanceIsPositive = currentBalance >= 0;
 
   return (
@@ -32,7 +34,7 @@ export function LifetimeMetrics({
       {/* Current Balance — hero metric */}
       <div className="flex flex-col gap-1">
         <p className="text-[10px] uppercase tracking-widest text-outline/50">
-          Current Balance
+          {t.history.currentBalance}
         </p>
         <p className={`text-3xl font-light ${balanceIsPositive ? "text-primary" : "text-error"}`}>
           {formatCurrency(currentBalance, currency)}
@@ -45,7 +47,7 @@ export function LifetimeMetrics({
       <div className="grid grid-cols-2 gap-12">
         <div className="flex flex-col gap-2">
           <p className="text-[10px] uppercase tracking-widest text-outline/50">
-            Total Shared Savings
+            {t.history.lifetime}
           </p>
           <p className="text-2xl font-light text-primary">
             {formatCurrency(Math.abs(lifetimeSavings), currency)}
@@ -53,7 +55,7 @@ export function LifetimeMetrics({
         </div>
         <div className="flex flex-col gap-2">
           <p className="text-[10px] uppercase tracking-widest text-outline/50">
-            Efficiency Score
+            {t.history.efficiency}
           </p>
           <p className="text-2xl font-light text-primary">
             {efficiencyScore}%

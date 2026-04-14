@@ -3,10 +3,12 @@
 import { useActionState } from "react";
 import { SubmitButton } from "@/components/submit-button";
 import { changePassword, type PasswordState } from "@/app/settings/actions";
+import { useTranslation } from "@/lib/i18n";
 
 const initialState: PasswordState = {};
 
 export function PasswordForm() {
+  const t = useTranslation();
   const [state, formAction, pending] = useActionState(
     changePassword,
     initialState
@@ -32,7 +34,7 @@ export function PasswordForm() {
           {state.message}
         </p>
         <p className="mt-1 text-sm text-on-surface-variant">
-          Your password has been changed. You can continue using the app.
+          {t.passwordForm.successMessage}
         </p>
       </div>
     );
@@ -54,7 +56,7 @@ export function PasswordForm() {
             htmlFor="currentPassword"
             className="block text-xs font-semibold uppercase tracking-wider text-on-surface"
           >
-            Current Password
+            {t.passwordForm.currentPassword}
           </label>
           <input
             id="currentPassword"
@@ -63,7 +65,7 @@ export function PasswordForm() {
             required
             autoComplete="current-password"
             className="mt-2 block w-full rounded-xl bg-surface-container-low px-4 py-3 text-sm text-on-surface placeholder:text-outline/60 focus:bg-primary-container/10 focus:outline-none transition-colors"
-            placeholder="Enter your current password"
+            placeholder={t.passwordForm.currentPasswordPlaceholder}
           />
           {state.errors?.currentPassword && (
             <p className="mt-1 text-xs text-error">
@@ -78,7 +80,7 @@ export function PasswordForm() {
             htmlFor="newPassword"
             className="block text-xs font-semibold uppercase tracking-wider text-on-surface"
           >
-            New Password
+            {t.passwordForm.newPassword}
           </label>
           <input
             id="newPassword"
@@ -88,7 +90,7 @@ export function PasswordForm() {
             minLength={8}
             autoComplete="new-password"
             className="mt-2 block w-full rounded-xl bg-surface-container-low px-4 py-3 text-sm text-on-surface placeholder:text-outline/60 focus:bg-primary-container/10 focus:outline-none transition-colors"
-            placeholder="At least 8 characters"
+            placeholder={t.passwordForm.newPasswordPlaceholder}
           />
           {state.errors?.newPassword && (
             <p className="mt-1 text-xs text-error">
@@ -103,7 +105,7 @@ export function PasswordForm() {
             htmlFor="confirmPassword"
             className="block text-xs font-semibold uppercase tracking-wider text-on-surface"
           >
-            Confirm New Password
+            {t.passwordForm.confirmNewPassword}
           </label>
           <input
             id="confirmPassword"
@@ -113,7 +115,7 @@ export function PasswordForm() {
             minLength={8}
             autoComplete="new-password"
             className="mt-2 block w-full rounded-xl bg-surface-container-low px-4 py-3 text-sm text-on-surface placeholder:text-outline/60 focus:bg-primary-container/10 focus:outline-none transition-colors"
-            placeholder="Re-enter your new password"
+            placeholder={t.passwordForm.confirmPasswordPlaceholder}
           />
           {state.errors?.confirmPassword && (
             <p className="mt-1 text-xs text-error">
@@ -124,9 +126,9 @@ export function PasswordForm() {
 
         {/* Submit */}
         <SubmitButton
-          label="Update Password"
-            pending={pending}
-          pendingLabel="Updating..."
+          label={t.passwordForm.updatePassword}
+          pending={pending}
+          pendingLabel={t.passwordForm.updating}
           className="w-full rounded-full bg-primary px-4 py-3.5 text-base font-semibold text-white shadow-[0px_12px_32px_rgba(52,47,43,0.06)] transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
         />
       </form>

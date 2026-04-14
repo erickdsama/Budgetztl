@@ -10,6 +10,7 @@ import {
   removeMember,
   type SettingsMember,
 } from "@/app/settings/actions";
+import { useTranslation } from "@/lib/i18n";
 
 type BudgetSettingsProps = {
   budgetId: string;
@@ -38,6 +39,7 @@ export function BudgetSettings({
   isOwner,
   currentUserId,
 }: BudgetSettingsProps) {
+  const t = useTranslation();
   const [isEditingName, setIsEditingName] = useState(false);
   const [name, setName] = useState(budgetName);
   const [saving, setSaving] = useState(false);
@@ -71,7 +73,7 @@ export function BudgetSettings({
     if (result.success) {
       setIsEditingName(false);
     } else {
-      setNameError(result.error ?? "Failed to update.");
+      setNameError(result.error ?? t.common.error);
     }
   }
 
@@ -99,7 +101,7 @@ export function BudgetSettings({
       setInviteCode(result.inviteCode);
       setShowInvite(true);
     } else {
-      setInviteError(result.error ?? "Failed to load code.");
+      setInviteError(result.error ?? t.common.error);
     }
   }
 
@@ -112,7 +114,7 @@ export function BudgetSettings({
     if (result.inviteCode) {
       setInviteCode(result.inviteCode);
     } else {
-      setInviteError(result.error ?? "Failed to regenerate.");
+      setInviteError(result.error ?? t.common.error);
     }
   }
 
@@ -144,7 +146,7 @@ export function BudgetSettings({
     if (result.success) {
       setIsEditingBalance(false);
     } else {
-      setBalanceError(result.error ?? "Failed to update.");
+      setBalanceError(result.error ?? t.common.error);
     }
   }
 
@@ -176,7 +178,7 @@ export function BudgetSettings({
           <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
           </svg>
-          <span className="text-xs font-bold uppercase tracking-wider">Budget Name</span>
+          <span className="text-xs font-bold uppercase tracking-wider">{t.settings.budgetName}</span>
         </div>
         {isEditingName ? (
           <div className="flex items-center gap-2">
@@ -197,14 +199,14 @@ export function BudgetSettings({
               disabled={saving}
               className="rounded-xl bg-primary px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-primary-hover disabled:opacity-50"
             >
-              {saving ? "..." : "Save"}
+              {saving ? "..." : t.common.save}
             </button>
             <button
               onClick={handleCancelEditName}
               disabled={saving}
               className="rounded-xl bg-surface-container px-3 py-1.5 text-xs font-semibold text-outline transition-colors hover:text-on-surface disabled:opacity-50"
             >
-              Cancel
+              {t.common.cancel}
             </button>
           </div>
         ) : (
@@ -215,7 +217,7 @@ export function BudgetSettings({
                 onClick={handleStartEditName}
                 className="text-xs font-medium text-primary transition-colors hover:text-primary-hover"
               >
-                Edit
+                {t.common.edit}
               </button>
             )}
           </div>
@@ -229,7 +231,7 @@ export function BudgetSettings({
           <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
           </svg>
-          <span className="text-xs font-bold uppercase tracking-wider">Currency</span>
+          <span className="text-xs font-bold uppercase tracking-wider">{t.settings.currency}</span>
         </div>
         <p className="text-lg font-semibold text-on-surface">{currency}</p>
       </div>
@@ -240,7 +242,7 @@ export function BudgetSettings({
           <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span className="text-xs font-bold uppercase tracking-wider">Initial Balance</span>
+          <span className="text-xs font-bold uppercase tracking-wider">{t.settings.initialBalance}</span>
         </div>
         {isEditingBalance ? (
           <div className="flex items-center gap-2">
@@ -263,14 +265,14 @@ export function BudgetSettings({
               disabled={savingBalance}
               className="rounded-xl bg-primary px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-primary-hover disabled:opacity-50"
             >
-              {savingBalance ? "..." : "Save"}
+              {savingBalance ? "..." : t.common.save}
             </button>
             <button
               onClick={handleCancelEditBalance}
               disabled={savingBalance}
               className="rounded-xl bg-surface-container px-3 py-1.5 text-xs font-semibold text-outline transition-colors hover:text-on-surface disabled:opacity-50"
             >
-              Cancel
+              {t.common.cancel}
             </button>
           </div>
         ) : (
@@ -279,14 +281,14 @@ export function BudgetSettings({
               <p className="text-lg font-semibold text-on-surface">
                 {currency} {initialBalance.toFixed(2)}
               </p>
-              <p className="text-xs text-outline mt-0.5">Starting savings before this app</p>
+              <p className="text-xs text-outline mt-0.5">{t.settings.initialBalanceDesc}</p>
             </div>
             {isOwner && (
               <button
                 onClick={handleStartEditBalance}
                 className="text-xs font-medium text-primary transition-colors hover:text-primary-hover"
               >
-                Edit
+                {t.common.edit}
               </button>
             )}
           </div>
@@ -301,7 +303,7 @@ export function BudgetSettings({
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
             </svg>
-            <span className="text-xs font-bold uppercase tracking-wider">Shared Members</span>
+            <span className="text-xs font-bold uppercase tracking-wider">{t.settings.sharedMembers}</span>
           </div>
           {isOwner && (
             <button
@@ -309,7 +311,7 @@ export function BudgetSettings({
               disabled={inviteLoading}
               className="text-xs font-bold text-tertiary transition-colors hover:opacity-70 disabled:opacity-50"
             >
-              {inviteLoading ? "Loading..." : "+ Add Partner"}
+              {inviteLoading ? t.common.loading : t.settings.addPartner}
             </button>
           )}
         </div>
@@ -382,7 +384,7 @@ export function BudgetSettings({
                   disabled={inviteLoading}
                   className="rounded-xl bg-surface-container px-3 py-1.5 text-xs font-semibold text-outline transition-colors hover:text-on-surface disabled:opacity-50"
                 >
-                  {inviteLoading ? "..." : "New"}
+                  {inviteLoading ? "..." : t.settings.regenerate}
                 </button>
               </div>
             </div>

@@ -4,10 +4,12 @@ import { useActionState } from "react";
 import { SubmitButton } from "@/components/submit-button";
 import Link from "next/link";
 import { signIn, signInWithOAuth, type AuthState } from "@/app/(auth)/actions";
+import { useTranslation } from "@/lib/i18n";
 
 const initialState: AuthState = {};
 
 export function LoginForm() {
+  const t = useTranslation();
   const [state, formAction, pending] = useActionState(signIn, initialState);
 
   return (
@@ -20,10 +22,10 @@ export function LoginForm() {
 
         {/* Heading */}
         <h2 className="font-heading mt-8 text-3xl font-bold tracking-tight text-on-surface">
-          Welcome Home
+          {t.auth.welcomeHome}
         </h2>
         <p className="mt-2 text-sm text-on-surface-variant">
-          Please enter your details to sign in.
+          {t.auth.enterDetails}
         </p>
 
         {/* OAuth Buttons */}
@@ -50,7 +52,7 @@ export function LoginForm() {
         <div className="mt-6 flex items-center gap-3">
           <div className="h-px flex-1 bg-outline-variant/15" />
           <span className="text-xs font-medium tracking-wider text-outline uppercase">
-            Or Email
+            {t.auth.orEmail}
           </span>
           <div className="h-px flex-1 bg-outline-variant/15" />
         </div>
@@ -70,7 +72,7 @@ export function LoginForm() {
               htmlFor="email"
               className="block text-xs font-semibold tracking-wider text-on-surface uppercase"
             >
-              Email Address
+              {t.auth.emailAddress}
             </label>
             <input
               id="email"
@@ -93,13 +95,13 @@ export function LoginForm() {
                 htmlFor="password"
                 className="block text-xs font-semibold tracking-wider text-on-surface uppercase"
               >
-                Password
+                {t.auth.password}
               </label>
               <Link
                 href="/auth/reset-password"
                 className="text-xs font-medium text-primary hover:text-primary-hover"
               >
-                Forgot?
+                {t.auth.forgotPassword}
               </Link>
             </div>
             <input
@@ -126,27 +128,27 @@ export function LoginForm() {
               className="h-4 w-4 rounded text-primary focus:ring-primary"
             />
             <label htmlFor="rememberDevice" className="text-sm text-on-surface-variant">
-              Remember our device
+              {t.auth.rememberDevice}
             </label>
           </div>
 
           {/* Submit */}
           <SubmitButton
-            label="Sign In"
+            label={t.auth.signIn}
             pending={pending}
-            pendingLabel="Signing In..."
+            pendingLabel={t.auth.signInPending}
             className="w-full rounded-full bg-primary px-4 py-3.5 text-base font-semibold text-white shadow-[0px_12px_32px_rgba(52,47,43,0.06)] transition-colors hover:bg-primary-hover disabled:opacity-50 disabled:cursor-not-allowed"
           />
         </form>
 
         {/* Register Link */}
         <p className="mt-8 text-center text-sm text-on-surface-variant">
-          New to Our Sanctuary?{" "}
+          {t.auth.newToSanctuary}{" "}
           <Link
             href="/register"
             className="font-semibold text-on-surface hover:text-primary"
           >
-            Create an Account
+            {t.auth.createAccount}
           </Link>
         </p>
 

@@ -4,6 +4,7 @@ import { useSettings } from "@/lib/hooks/use-settings";
 import { ProfileSection } from "@/app/settings/components/profile-section";
 import { BudgetSettings } from "@/app/settings/components/budget-settings";
 import { PreferencesSection } from "@/app/settings/components/preferences-section";
+import { useTranslation } from "@/lib/i18n";
 
 function SettingsSkeleton() {
   return (
@@ -31,17 +32,23 @@ function SettingsSkeleton() {
 }
 
 export function SettingsContent() {
+  const t = useTranslation();
   const { data, error, isLoading } = useSettings();
 
   if (isLoading) return <SettingsSkeleton />;
 
   if (error || !data) {
     return (
-      <p className="text-sm text-error">Failed to load settings. Please refresh.</p>
+      <p className="text-sm text-error">{t.common.error}</p>
     );
   }
 
   const { profile, budget, members, isOwner } = data;
+
+  const partnerNames = members
+    .filter((m) => m.userId !== profile.id)
+    .map((m) => m.fullName.split(" ")[0])
+    .join(", ");
 
   return (
     <>
@@ -56,14 +63,11 @@ export function SettingsContent() {
       <section className="space-y-4">
         <div className="flex items-end justify-between px-1">
           <h3 className="text-lg font-bold tracking-tight text-on-surface">
-            Budget Settings
+            {t.settings.budget}
           </h3>
           <span className="text-[10px] font-bold uppercase tracking-widest text-secondary">
-            Shared with{" "}
-            {members
-              .filter((m) => m.userId !== profile.id)
-              .map((m) => m.fullName.split(" ")[0])
-              .join(", ") || "No partner yet"}
+            {t.settings.sharedWith}{" "}
+            {partnerNames || t.settings.noPartner}
           </span>
         </div>
         <BudgetSettings
@@ -80,7 +84,7 @@ export function SettingsContent() {
       {/* Preferences */}
       <section className="space-y-4">
         <h3 className="px-1 text-lg font-bold tracking-tight text-on-surface">
-          Preferences
+          {t.settings.preferences}
         </h3>
         <PreferencesSection preferences={profile.preferences} />
       </section>

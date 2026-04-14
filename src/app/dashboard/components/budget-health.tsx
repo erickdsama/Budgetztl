@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { formatCurrency } from "@/lib/format";
+import { useTranslation } from "@/lib/i18n";
 
 interface BudgetHealthProps {
   remaining: number;
@@ -20,6 +21,7 @@ export function BudgetHealth({
   percentage,
   currency,
 }: BudgetHealthProps) {
+  const t = useTranslation();
   const [view, setView] = useState<DonutView>("percent");
 
   // SVG math: viewBox 0 0 100 100, r=40, circumference ≈ 251.2
@@ -38,10 +40,10 @@ export function BudgetHealth({
       <div className="mb-6 flex items-end justify-between">
         <div>
           <p className="mb-1 text-[11px] font-bold tracking-widest text-secondary opacity-70 uppercase">
-            Monthly Spending
+            {t.dashboard.monthlySpending}
           </p>
           <h2 className="font-heading text-4xl font-extrabold tracking-tighter text-on-surface">
-            Budget Health
+            {t.dashboard.budgetHealth}
           </h2>
         </div>
         <div className="text-right">
@@ -49,7 +51,7 @@ export function BudgetHealth({
             {formatCurrency(remaining, currency)}
           </p>
           <p className="text-[10px] font-bold tracking-wider text-secondary uppercase">
-            Remaining
+            {t.dashboard.remaining}
           </p>
         </div>
       </div>
@@ -70,7 +72,7 @@ export function BudgetHealth({
                 view === v ? "bg-primary text-white" : "text-secondary"
               }`}
             >
-              {v}
+              {t.dashboard[v as "percent" | "amount"]}
             </button>
           ))}
         </div>
@@ -110,13 +112,13 @@ export function BudgetHealth({
           {/* Center text */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
             <span className="mb-1 text-[10px] font-bold tracking-[0.2em] text-outline uppercase">
-              Spent
+              {t.dashboard.spent}
             </span>
             <span className={`font-heading font-black text-on-surface max-w-[7rem] truncate ${view === "amount" ? "text-2xl" : "text-4xl"}`}>
               {centerValue}
             </span>
             <span className="mt-1 text-[10px] tracking-wider text-outline opacity-70 max-w-[8rem] truncate">
-              of {formatCurrency(totalBudgeted, currency)}
+              {t.dashboard.of} {formatCurrency(totalBudgeted, currency)}
             </span>
           </div>
         </div>

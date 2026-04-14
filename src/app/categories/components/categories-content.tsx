@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useCategories } from "@/lib/hooks/use-categories";
 import { CategoryList } from "./category-list";
+import { useTranslation } from "@/lib/i18n";
 
 function Skeleton() {
   return (
@@ -31,6 +32,7 @@ function TabContent({ activeTab }: { activeTab: "expense" | "income" }) {
 
 // Tab toggle is client state — switching is instant, no page reload
 export function CategoriesContent() {
+  const t = useTranslation();
   const [activeTab, setActiveTab] = useState<"expense" | "income">("expense");
 
   // Pre-fetch both tabs so switching is instant after first load
@@ -49,7 +51,7 @@ export function CategoriesContent() {
               activeTab === "expense" ? "bg-surface-container-lowest text-primary shadow-sm" : "text-secondary"
             }`}
           >
-            Expense
+            {t.categories.expense}
           </button>
           <button
             type="button"
@@ -58,7 +60,7 @@ export function CategoriesContent() {
               activeTab === "income" ? "bg-surface-container-lowest text-primary shadow-sm" : "text-secondary"
             }`}
           >
-            Income
+            {t.categories.income}
           </button>
         </div>
       </div>

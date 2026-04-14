@@ -123,7 +123,7 @@ export async function createTransaction(
 
     // Calculate next_due_date based on frequency and date
     const txDate = new Date(date + "T00:00:00");
-    let nextDue = new Date(txDate);
+    const nextDue = new Date(txDate);
     if (frequency === "weekly") {
       nextDue.setDate(nextDue.getDate() + 7);
     } else if (frequency === "monthly") {

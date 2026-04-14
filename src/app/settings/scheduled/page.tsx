@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getAuthSession } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { ScheduledContent } from "@/app/settings/scheduled/components/scheduled-content";
+import { getT } from "@/lib/i18n/server";
 
 export const metadata: Metadata = {
   title: "Scheduled Transactions | Our Sanctuary",
@@ -13,6 +14,8 @@ export default async function ScheduledTransactionsPage() {
   // Fast cookie check for shell
   const { user } = await getAuthSession();
   if (!user) redirect("/login");
+
+  const t = await getT();
 
   return (
     <div className="flex min-h-dvh flex-col bg-background pb-12">
@@ -39,10 +42,10 @@ export default async function ScheduledTransactionsPage() {
         </Link>
         <div>
           <h1 className="font-heading text-xl font-bold text-primary">
-            Scheduled Transactions
+            {t.scheduled.title}
           </h1>
           <p className="text-xs text-secondary">
-            Manage your recurring expenses and income.
+            {t.scheduled.description}
           </p>
         </div>
       </header>

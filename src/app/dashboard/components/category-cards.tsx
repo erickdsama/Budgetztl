@@ -4,6 +4,7 @@ import Link from "next/link";
 import { IconDisplay } from "@/app/categories/components/category-modal";
 import { formatCurrency } from "@/lib/format";
 import type { DashboardCategory } from "@/app/dashboard/actions";
+import { useTranslation } from "@/lib/i18n";
 
 // Vibrant colors matching the Stitch design (from Stitch HTML tailwind.config)
 const VIBRANT = [
@@ -55,15 +56,17 @@ interface CategoryCardsProps {
 }
 
 export function CategoryCards({ categories, currency }: CategoryCardsProps) {
+  const t = useTranslation();
+
   if (categories.length === 0) {
     return (
       <div className="rounded-3xl bg-surface-container-low px-6 py-8 text-center">
-        <p className="text-sm text-on-surface-variant">No categories set up yet.</p>
+        <p className="text-sm text-on-surface-variant">{t.categories.noCategories}</p>
         <Link
           href="/categories"
           className="mt-2 inline-block text-sm font-medium text-primary hover:text-primary-hover"
         >
-          Set up categories
+          {t.categories.addNew}
         </Link>
       </div>
     );
@@ -73,14 +76,14 @@ export function CategoryCards({ categories, currency }: CategoryCardsProps) {
     <div>
       <div className="flex items-center justify-between">
         <h3 className="font-heading text-2xl font-bold tracking-tight text-on-surface">
-          By Category
+          {t.dashboard.byCategory}
         </h3>
         <Link
           href="/categories"
           className="rounded-full bg-primary/5 px-4 py-2 text-xs font-bold text-primary transition-colors hover:bg-primary/10"
           style={{ fontSize: "0.75rem" }}
         >
-          View Analysis
+          {t.dashboard.viewAnalysis}
         </Link>
       </div>
 
@@ -107,6 +110,7 @@ function CategoryCard({
   currency: string;
   accent: (typeof VIBRANT)[number];
 }) {
+  const t = useTranslation();
   const isPaid = category.percentage >= 100;
   const barWidth = `${Math.min(category.percentage, 100)}%`;
 
@@ -114,12 +118,12 @@ function CategoryCard({
     <Link
       href="/categories"
       className="group relative block overflow-hidden rounded-3xl bg-white p-5 shadow-sm transition-all cursor-pointer touch-manipulation border hover:border-[var(--hover-color)]"
-      style={{ 
+      style={{
         borderColor: accent.border,
-        ["--hover-color" as any]: accent.borderHover 
+        ["--hover-color" as string]: accent.borderHover
       }}
     >
-      {/* 
+      {/*
         This transparent overlay is a foolproof fix for iOS Safari.
         It sits on top of everything and captures the tap, ensuring that
         internal decorative elements or flex-children don't swallow the event.
@@ -153,7 +157,7 @@ function CategoryCard({
                 className="text-[10px] font-bold uppercase tracking-widest"
                 style={{ color: accent.color }}
               >
-                {isPaid ? "Paid" : `${category.percentage}% Utilized`}
+                {isPaid ? t.dashboard.paid : `${category.percentage}% ${t.dashboard.utilized}`}
               </p>
             </div>
           </div>
@@ -164,7 +168,7 @@ function CategoryCard({
               {formatCurrency(category.spent, currency)}
             </p>
             <p className="text-[10px] font-semibold text-secondary opacity-60">
-              of {formatCurrency(category.budgeted, currency)}
+              {t.dashboard.of} {formatCurrency(category.budgeted, currency)}
             </p>
           </div>
         </div>

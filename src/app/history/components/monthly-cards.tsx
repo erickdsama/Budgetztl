@@ -4,6 +4,8 @@ import { useState } from "react";
 import type { MonthData, MonthStatus } from "@/app/history/actions";
 import { formatCurrency } from "@/lib/format";
 import { RingChart } from "@/app/history/components/ring-chart";
+import { useTranslation } from "@/lib/i18n";
+import type { Translations } from "@/lib/i18n/en";
 
 interface MonthlyCardsProps {
   months: MonthData[];
@@ -35,25 +37,25 @@ function formatCurrencyCompact(amount: number, currency: string): string {
   }).format(amount);
 }
 
-function statusSubtitle(status: MonthStatus): string {
+function statusSubtitle(status: MonthStatus, t: Translations): string {
   switch (status) {
     case "under_budget":
-      return "Healthy balance maintained";
+      return t.history.healthyBalance;
     case "over_budget":
-      return "Budget exceeded";
+      return t.history.overBudget;
     case "on_track":
-      return "On track";
+      return t.history.onTrack;
   }
 }
 
-function statusBadgeText(status: MonthStatus): string {
+function statusBadgeText(status: MonthStatus, t: Translations): string {
   switch (status) {
     case "under_budget":
-      return "Under Budget";
+      return t.history.underBudget;
     case "over_budget":
-      return "Budget exceeded";
+      return t.history.overBudget;
     case "on_track":
-      return "On track";
+      return t.history.onTrack;
   }
 }
 
@@ -78,6 +80,7 @@ function ExpandedMonthCard({
   currency: string;
   onCollapse: () => void;
 }) {
+  const t = useTranslation();
   const monthName = MONTH_NAMES[month.month] ?? "";
   const percentage =
     month.budgeted > 0
@@ -98,7 +101,7 @@ function ExpandedMonthCard({
               {monthName} {month.year}
             </h3>
             <p className="text-sm font-light italic text-on-surface-variant">
-              {statusSubtitle(month.status)}
+              {statusSubtitle(month.status, t)}
             </p>
           </div>
           <RingChart
@@ -112,14 +115,14 @@ function ExpandedMonthCard({
         <div className="mt-8 flex items-end justify-between border-b border-outline-variant/10 pb-6">
           <div className="space-y-1">
             <p className="text-[10px] uppercase tracking-widest text-outline/50">
-              Total Shared Spent
+              {t.history.totalSharedSpent}
             </p>
             <p className="text-3xl font-light text-on-surface">
               {formatCurrencyCompact(month.spent, currency)}
             </p>
           </div>
           <p className="text-[10px] uppercase tracking-widest text-outline/50">
-            of {formatCurrencyCompact(month.budgeted, currency)} budget
+            {t.dashboard.of} {formatCurrencyCompact(month.budgeted, currency)} budget
           </p>
         </div>
       </div>
@@ -128,25 +131,25 @@ function ExpandedMonthCard({
       <div className="px-10 pb-6 pointer-events-none">
         <div className="space-y-2 rounded-2xl bg-surface-container-low p-4">
           <div className="flex items-center justify-between text-xs">
-            <span className="text-outline/60">Opened with</span>
+            <span className="text-outline/60">{t.history.openingBalance}</span>
             <span className="font-medium text-on-surface">
               {formatCurrency(month.opening_balance, currency)}
             </span>
           </div>
           <div className="flex items-center justify-between text-xs">
-            <span className="text-outline/60">+ Income</span>
+            <span className="text-outline/60">+ {t.history.incomeThisMonth}</span>
             <span className="font-medium text-primary">
               + {formatCurrency(month.income, currency)}
             </span>
           </div>
           <div className="flex items-center justify-between text-xs">
-            <span className="text-outline/60">- Spent</span>
+            <span className="text-outline/60">- {t.history.spentThisMonth}</span>
             <span className="font-medium text-error">
               - {formatCurrency(month.spent, currency)}
             </span>
           </div>
           <div className="flex items-center justify-between pt-2 border-t border-outline-variant/10">
-            <span className="text-xs font-bold uppercase tracking-wider text-outline/60">Closed at</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-outline/60">{t.history.closingBalance}</span>
             <span className={`text-sm font-bold ${month.closing_balance >= 0 ? "text-primary" : "text-error"}`}>
               {formatCurrency(month.closing_balance, currency)}
             </span>
@@ -159,7 +162,7 @@ function ExpandedMonthCard({
         <div className="px-10 pb-10 pointer-events-none">
           <div className="flex items-center justify-between mb-6">
             <p className="text-[10px] font-bold uppercase tracking-widest text-outline/50">
-              Top Shared Categories
+              {t.history.topCategories}
             </p>
           </div>
           <div className="space-y-6">
@@ -198,6 +201,7 @@ function CollapsedMonthCard({
   currency: string;
   onExpand: () => void;
 }) {
+  const t = useTranslation();
   const monthName = MONTH_NAMES[month.month] ?? "";
   const percentage =
     month.budgeted > 0
@@ -227,7 +231,7 @@ function CollapsedMonthCard({
             <p
               className={`text-[10px] font-bold uppercase tracking-widest ${statusBadgeColor(month.status)}`}
             >
-              {statusBadgeText(month.status)}
+              {statusBadgeText(month.status, t)}
             </p>
           </div>
         </div>
@@ -240,6 +244,7 @@ function CollapsedMonthCard({
 }
 
 export function MonthlyCards({ months, currency }: MonthlyCardsProps) {
+  const t = useTranslation();
   // The most recent month starts expanded; others start collapsed
   const [expandedIndex, setExpandedIndex] = useState<number>(0);
 
@@ -260,10 +265,10 @@ export function MonthlyCards({ months, currency }: MonthlyCardsProps) {
           />
         </svg>
         <p className="mt-3 text-sm text-on-surface-variant">
-          No spending data for this year yet.
+          {t.history.noData}
         </p>
         <p className="mt-1 text-xs text-outline">
-          Start adding transactions to see your monthly breakdown here.
+          {t.history.noDataSub}
         </p>
       </div>
     );

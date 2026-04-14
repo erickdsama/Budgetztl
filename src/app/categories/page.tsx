@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getAuthSession } from "@/lib/supabase/server";
 import { CategoriesContent } from "@/app/categories/components/categories-content";
 import { BottomNav } from "@/components/bottom-nav";
+import { getT } from "@/lib/i18n/server";
 
 export const metadata: Metadata = {
   title: "Categories | Our Sanctuary",
@@ -13,6 +14,8 @@ export default async function CategoriesPage() {
   const { user } = await getAuthSession();
   if (!user) redirect("/login");
 
+  const t = await getT();
+
   return (
     <div className="flex min-h-dvh flex-col bg-background pb-32">
       {/* Top App Bar */}
@@ -21,7 +24,7 @@ export default async function CategoriesPage() {
           <div className="h-10 w-10 overflow-hidden rounded-full border-2 border-primary/20 bg-primary/10">
             <div className="flex h-full w-full items-center justify-center text-xs font-bold text-primary">S</div>
           </div>
-          <h1 className="font-heading text-xl font-bold tracking-tight text-primary">Our Shared Sanctuary</h1>
+          <h1 className="font-heading text-xl font-bold tracking-tight text-primary">{t.dashboard.ourSharedSanctuary}</h1>
         </div>
         <button type="button" aria-label="Notifications" className="text-primary pointer-events-auto">
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -32,8 +35,8 @@ export default async function CategoriesPage() {
 
       {/* Page header */}
       <div className="pt-32 px-6 pb-6">
-        <h2 className="font-heading text-3xl font-extrabold tracking-tight text-primary mb-2">Category Setup</h2>
-        <p className="max-w-[80%] text-sm leading-relaxed text-secondary">Define the monthly boundaries for our shared life.</p>
+        <h2 className="font-heading text-3xl font-extrabold tracking-tight text-primary mb-2">{t.categories.setup}</h2>
+        <p className="max-w-[80%] text-sm leading-relaxed text-secondary">{t.categories.define}</p>
       </div>
 
       {/* Tab toggle + content — all client-side, instant switching */}

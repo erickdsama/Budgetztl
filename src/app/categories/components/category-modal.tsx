@@ -8,6 +8,7 @@ import {
   type CategoryActionState,
 } from "@/app/categories/actions";
 import type { Database } from "@/lib/supabase/types";
+import { useTranslation } from "@/lib/i18n";
 
 type CategoryRow = Database["public"]["Tables"]["categories"]["Row"];
 
@@ -52,6 +53,7 @@ function IconDisplay({ icon, size = "md" }: { icon: string; size?: "sm" | "md" }
 export { IconDisplay };
 
 function ModalSubmitButton({ isEditing, pending }: { isEditing: boolean; pending: boolean }) {
+  const t = useTranslation();
   return (
     <button
       type="submit"
@@ -60,13 +62,13 @@ function ModalSubmitButton({ isEditing, pending }: { isEditing: boolean; pending
       className="flex w-full items-center justify-center gap-3 rounded-full bg-primary py-5 text-lg font-black text-white shadow-[0px_16px_32px_rgba(52,47,43,0.15)] transition-all active:scale-95 disabled:opacity-50"
     >
       {pending ? (
-        "Saving..."
+        t.transaction.saving
       ) : (
         <>
           <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
             <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z" clipRule="evenodd" />
           </svg>
-          {isEditing ? "Update Category" : "Save Category"}
+          {isEditing ? t.categories.updateCategory : t.categories.saveCategory}
         </>
       )}
     </button>
@@ -83,6 +85,7 @@ interface CategoryModalProps {
 const initialState: CategoryActionState = {};
 
 export function CategoryModal({ isOpen, onClose, category, transactionType = "expense" }: CategoryModalProps) {
+  const t = useTranslation();
   const isEditing = !!category;
 
   const [createState, createAction, createPending] = useActionState(
@@ -130,13 +133,13 @@ export function CategoryModal({ isOpen, onClose, category, transactionType = "ex
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <h2 className="font-heading text-2xl font-black text-primary">
-            {isEditing ? "Edit Category" : "New Category"}
+            {isEditing ? t.categories.editCategory : t.categories.newCategory}
           </h2>
           <button
             type="button"
             onClick={onClose}
             className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-container-low text-outline transition-colors hover:bg-surface-container hover:text-on-surface"
-            aria-label="Close"
+            aria-label={t.common.close}
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -167,7 +170,7 @@ export function CategoryModal({ isOpen, onClose, category, transactionType = "ex
             {/* Icon Grid Selector */}
             <div className="space-y-4" key={`${formKey}-icons`}>
               <label className="text-[10px] font-black uppercase tracking-[0.2em] text-outline">
-                Choose an Icon
+                {t.categories.chooseIcon}
               </label>
               <div className="grid grid-cols-5 gap-3">
                 {ICON_OPTIONS.map((opt) => (
@@ -196,7 +199,7 @@ export function CategoryModal({ isOpen, onClose, category, transactionType = "ex
                 htmlFor="cat-name"
                 className="text-[10px] font-black uppercase tracking-[0.2em] text-outline"
               >
-                Category Name
+                {t.categories.categoryName}
               </label>
               <input
                 id="cat-name"
@@ -218,7 +221,7 @@ export function CategoryModal({ isOpen, onClose, category, transactionType = "ex
                 htmlFor="cat-type"
                 className="text-[10px] font-black uppercase tracking-[0.2em] text-outline"
               >
-                Category Type
+                {t.categories.categoryType}
               </label>
               <div className="relative">
                 <select
@@ -227,9 +230,9 @@ export function CategoryModal({ isOpen, onClose, category, transactionType = "ex
                   defaultValue={isEditing ? (category?.type ?? "") : (transactionType === "income" ? "Income" : "Household")}
                   className="w-full appearance-none rounded-2xl border-0 bg-surface-container-low px-6 py-4 font-heading text-lg font-bold text-on-surface focus:bg-surface-container focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all"
                 >
-                  {TYPE_OPTIONS.map((t) => (
-                    <option key={t} value={t}>
-                      {t}
+                  {TYPE_OPTIONS.map((tp) => (
+                    <option key={tp} value={tp}>
+                      {tp}
                     </option>
                   ))}
                 </select>
@@ -247,14 +250,14 @@ export function CategoryModal({ isOpen, onClose, category, transactionType = "ex
                 htmlFor="cat-suboptions"
                 className="text-[10px] font-black uppercase tracking-[0.2em] text-outline"
               >
-                Sub-options (optional)
+                {t.categories.subOptions}
               </label>
               <input
                 id="cat-suboptions"
                 name="subcategory_options"
                 type="text"
                 defaultValue={existingSubOptions}
-                placeholder="e.g. luz, agua, teléfono"
+                placeholder={t.categories.subOptionsPlaceholder}
                 className="w-full rounded-2xl border-0 bg-surface-container-low px-6 py-4 font-heading text-base font-bold text-on-surface placeholder:text-outline/30 focus:bg-surface-container focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all"
               />
               <p className="text-[10px] text-outline/60">Comma-separated options shown as chips in the transaction form.</p>
@@ -266,7 +269,7 @@ export function CategoryModal({ isOpen, onClose, category, transactionType = "ex
                 htmlFor="cat-budget"
                 className="text-[10px] font-black uppercase tracking-[0.2em] text-outline"
               >
-                Monthly Plan Amount
+                {t.categories.monthlyPlanAmount}
               </label>
               <div className="relative">
                 <span className="absolute left-6 top-1/2 -translate-y-1/2 font-heading text-lg font-black text-outline/40">

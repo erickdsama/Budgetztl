@@ -2,42 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-type NavItem = {
-  label: string;
-  href: string;
-  icon: string;
-  isCenter?: boolean;
-};
-
-const NAV_ITEMS: NavItem[] = [
-  {
-    label: "Dashboard",
-    href: "/dashboard",
-    icon: "grid_view",
-  },
-  {
-    label: "History",
-    href: "/history",
-    icon: "history",
-  },
-  {
-    label: "Add",
-    href: "/transactions/new",
-    icon: "add",
-    isCenter: true,
-  },
-  {
-    label: "Categories",
-    href: "/categories",
-    icon: "category",
-  },
-  {
-    label: "Settings",
-    href: "/settings",
-    icon: "settings",
-  },
-];
+import { useTranslation } from "@/lib/i18n";
 
 function NavIcon({ icon, isActive }: { icon: string; isActive: boolean }) {
   const color = isActive ? "text-primary" : "text-[#576060]";
@@ -81,7 +46,16 @@ function NavIcon({ icon, isActive }: { icon: string; isActive: boolean }) {
 }
 
 export function BottomNav() {
+  const t = useTranslation();
   const pathname = usePathname();
+
+  const NAV_ITEMS = [
+    { label: t.nav.dashboard, href: "/dashboard", icon: "grid_view" },
+    { label: t.nav.history, href: "/history", icon: "history" },
+    { label: t.nav.add, href: "/transactions/new", icon: "add", isCenter: true },
+    { label: t.nav.categories, href: "/categories", icon: "category" },
+    { label: t.nav.settings, href: "/settings", icon: "settings" },
+  ];
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 flex items-end justify-around rounded-t-[2.5rem] bg-background/90 px-4 pb-[env(safe-area-inset-bottom,2rem)] pt-4 backdrop-blur-2xl shadow-[0px_-8px_32px_rgba(52,47,43,0.1)] border-t border-outline-variant/20 pointer-events-none">
@@ -102,14 +76,14 @@ export function BottomNav() {
         }
 
         return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`flex flex-col items-center justify-center py-2 px-1 transition-all active:scale-95 touch-manipulation cursor-pointer pointer-events-auto ${
-                isActive ? "text-primary scale-110" : "text-[#576060] opacity-70 hover:opacity-100"
-              }`}
-              aria-label={item.label}
-            >
+          <Link
+            key={item.href}
+            href={item.href}
+            className={`flex flex-col items-center justify-center py-2 px-1 transition-all active:scale-95 touch-manipulation cursor-pointer pointer-events-auto ${
+              isActive ? "text-primary scale-110" : "text-[#576060] opacity-70 hover:opacity-100"
+            }`}
+            aria-label={item.label}
+          >
             <NavIcon icon={item.icon} isActive={isActive} />
             <span
               className={`mt-1.5 text-[9px] font-black uppercase tracking-[0.1em] ${
