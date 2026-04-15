@@ -34,9 +34,17 @@ export function RecentActivity({
 
   return (
     <div>
-      <h3 className="font-heading text-2xl font-bold tracking-tight text-on-surface">
-        {t.dashboard.recentActivity}
-      </h3>
+      <div className="flex items-center justify-between">
+        <h3 className="font-heading text-2xl font-bold tracking-tight text-on-surface">
+          {t.dashboard.recentActivity}
+        </h3>
+        <Link
+          href="/transactions"
+          className="text-sm font-medium text-primary hover:opacity-80 transition-opacity"
+        >
+          {t.common.seeAll}
+        </Link>
+      </div>
 
       <div className="mt-4 space-y-3">
         {transactions.map((tx) => (

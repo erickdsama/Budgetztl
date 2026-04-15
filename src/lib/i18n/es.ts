@@ -143,6 +143,8 @@ export const es: Translations = {
     loading: "Cargando...",
     error: "Ocurrió un error",
     dismiss: "Descartar",
+    noMore: "Todo cargado",
+    seeAll: "Ver todo",
   },
   scheduled: {
     title: "Transacciones Programadas",

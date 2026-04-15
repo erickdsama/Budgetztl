@@ -1,3 +1,5 @@
+import { BottomNav } from "@/components/bottom-nav";
+
 export default function DashboardLoading() {
   return (
     <div className="flex min-h-dvh flex-col bg-background pb-32">
@@ -31,6 +33,7 @@ export default function DashboardLoading() {
           ))}
         </div>
       </main>
+      <BottomNav />
     </div>
   );
 }

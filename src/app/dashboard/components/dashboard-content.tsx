@@ -3,6 +3,7 @@
 import { useDashboard } from "@/lib/hooks/use-dashboard";
 import { BudgetHealth } from "./budget-health";
 import { CategoryCards } from "./category-cards";
+import { CategoryDonutChart } from "./category-donut-chart";
 import { RecentActivity } from "./recent-activity";
 
 function Skeleton() {
@@ -37,6 +38,10 @@ export function DashboardContent() {
         spent={data.monthlySpending.spent}
         totalBudgeted={data.budget.totalBudgeted}
         percentage={data.monthlySpending.percentage}
+        currency={data.budget.currency}
+      />
+      <CategoryDonutChart
+        categories={data.spendingBreakdown}
         currency={data.budget.currency}
       />
       <CategoryCards categories={data.topCategories} currency={data.budget.currency} />

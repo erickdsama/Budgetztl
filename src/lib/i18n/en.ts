@@ -141,6 +141,8 @@ const en = {
     loading: "Loading...",
     error: "An error occurred",
     dismiss: "Dismiss",
+    noMore: "All loaded",
+    seeAll: "See all",
   },
   scheduled: {
     title: "Scheduled Transactions",

@@ -1,7 +1,9 @@
+import { BottomNav } from "@/components/bottom-nav";
+
 export default function SettingsLoading() {
   return (
     <div className="flex min-h-dvh flex-col bg-surface pb-32 text-on-surface">
-      {/* Header */}
+      {/* Header — same structure as settings/page.tsx */}
       <header className="flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-4">
           <div className="h-6 w-6 rounded-full bg-surface-container animate-pulse" />
@@ -34,6 +36,7 @@ export default function SettingsLoading() {
           <div className="h-32 rounded-3xl bg-surface-container animate-pulse" />
         </div>
       </main>
+      <BottomNav />
     </div>
   );
 }

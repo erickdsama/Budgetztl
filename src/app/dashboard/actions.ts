@@ -37,6 +37,7 @@ export type DashboardData = {
     percentage: number;
   };
   topCategories: DashboardCategory[];
+  spendingBreakdown: DashboardCategory[];
   recentTransactions: DashboardTransaction[];
 };
 
@@ -140,7 +141,7 @@ export async function getDashboardData(): Promise<DashboardResult> {
       (spendingByCategory[t.category_id] ?? 0) + t.amount;
   }
 
-  const categoryData: DashboardCategory[] = categories
+  const allCategoryData: DashboardCategory[] = categories
     .map((cat) => {
       const spent = spendingByCategory[cat.id] ?? 0;
       const catBudgeted = cat.monthly_budget ?? 0;
@@ -156,8 +157,10 @@ export async function getDashboardData(): Promise<DashboardResult> {
       };
     })
     .filter((cat) => cat.spent > 0 || cat.budgeted > 0)
-    .sort((a, b) => b.spent - a.spent)
-    .slice(0, 3);
+    .sort((a, b) => b.spent - a.spent);
+
+  const categoryData = allCategoryData.slice(0, 3);
+  const spendingBreakdown = allCategoryData.filter((cat) => cat.spent > 0).slice(0, 8);
 
   // 8. Build members list
   const members = (membersResult.data ?? []).map((m) => {
@@ -219,6 +222,7 @@ export async function getDashboardData(): Promise<DashboardResult> {
         percentage,
       },
       topCategories: categoryData,
+      spendingBreakdown,
       recentTransactions,
     },
   };
